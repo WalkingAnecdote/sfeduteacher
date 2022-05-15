@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import {
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
+import { AuthProvider, useAuth } from "./auth";
+import MainPage from "./routes/Main";
 
-function App() {
+import ProfilePage from "./routes/Profile";
+import SignInPage from "./routes/SignIn";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/signin" element={<SignInPage />} />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <ProfilePage />
+              </RequireAuth>
+            }
+          />
+      </Routes>
+    </AuthProvider>
   );
 }
 
-export default App;
+function RequireAuth({ children }) {
+  let auth = useAuth();
+  let location = useLocation();
+  console.log(auth)
+  if (!auth.user) {
+    // Redirect them to the /login page, but save the current location they were
+    // trying to go to when they were redirected. This allows us to send them
+    // along to that page after they login, which is a nicer user experience
+    // than dropping them off on the home page.
+    return <Navigate to="/signin" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
