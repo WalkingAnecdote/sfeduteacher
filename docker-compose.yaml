@@ -1,0 +1,71 @@
+version: "3"
+
+services:
+  appbackend:
+    container_name: app-backend
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./backend
+      dockerfile: backend/docker/php/Dockerfile
+    volumes:
+      - ./:/app
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+    depends_on:
+      - mysqlapp
+    ports:
+      - 6024:6001
+    env_file:
+      - .env
+    networks:
+      - app-sfeduteacher-network
+
+  nginxsfeduteacher:
+    container_name: nginx-sfeduteacher
+    image: nginx:1.15.6-alpine
+    # image: 1.21.1-alpine
+    ports:
+      - 885:80
+    volumes:
+      - ./:/app
+      - ./docker/nginx/vhost.conf:/etc/nginx/conf.d/vhost.conf
+    depends_on:
+      - appbackend
+    networks:
+      - app-sfeduteacher-network
+
+  mysqlapp:
+    image: mysql:5.7.22
+    command: --max_allowed_packet=325058560
+    container_name: mysql-backend
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3312:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: your_mysql_root_password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdatasfeduteacherapp:/var/lib/mysql/
+    networks:
+      - app-sfeduteacher-network
+
+  redis:
+    image: redis:6.2.4
+    container_name: redis-backend
+    ports:
+      - "6384:6379"
+    networks:
+      - app-sfeduteacher-network
+
+#Docker Networks
+networks:
+  app-sfeduteacher-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdatasfeduteacherapp:
+    driver: local
