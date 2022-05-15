@@ -21,6 +21,19 @@ services:
     networks:
       - app-sfeduteacher-network
 
+  appfrontend:
+    container_name: app-frontend
+    build:
+      context: ./frontend 
+    ports:
+      - 3000:3000
+    volumes:
+      - ./appfrontend:/app
+    depends_on:
+      - appbackend
+    networks:
+      - app-sfeduteacher-network
+
   nginxsfeduteacher:
     container_name: nginx-sfeduteacher
     image: nginx:1.15.6-alpine
