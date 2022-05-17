@@ -8,18 +8,18 @@ services:
         user: sammy
         uid: 1000
       context: ./backend
-      dockerfile: backend/docker/php/Dockerfile
+      dockerfile: ./docker/php/Dockerfile
     volumes:
-      - ./:/app
+      - ./backend:/app
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
     depends_on:
       - mysqlapp
     ports:
       - 6024:6001
     env_file:
-      - .env
+      - ./backend/.env
     networks:
-      - app-sfeduteacher-network
+      - app-network
 
   appfrontend:
     container_name: app-frontend
@@ -32,21 +32,21 @@ services:
     depends_on:
       - appbackend
     networks:
-      - app-sfeduteacher-network
+      - app-network
 
-  nginxsfeduteacher:
-    container_name: nginx-sfeduteacher
+  nginxapp:
+    container_name: nginx-backend
     image: nginx:1.15.6-alpine
     # image: 1.21.1-alpine
     ports:
       - 885:80
     volumes:
       - ./:/app
-      - ./docker/nginx/vhost.conf:/etc/nginx/conf.d/vhost.conf
+      - ./backend/docker/nginx/vhost.conf:/etc/nginx/conf.d/vhost.conf
     depends_on:
       - appbackend
     networks:
-      - app-sfeduteacher-network
+      - app-network
 
   mysqlapp:
     image: mysql:5.7.22
@@ -62,9 +62,9 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - dbdatasfeduteacherapp:/var/lib/mysql/
+      - dbdataapp:/var/lib/mysql/
     networks:
-      - app-sfeduteacher-network
+      - app-network
 
   redis:
     image: redis:6.2.4
@@ -72,13 +72,13 @@ services:
     ports:
       - "6384:6379"
     networks:
-      - app-sfeduteacher-network
+      - app-network
 
 #Docker Networks
 networks:
-  app-sfeduteacher-network:
+  app-network:
     driver: bridge
 #Volumes
 volumes:
-  dbdatasfeduteacherapp:
+  dbdataapp:
     driver: local

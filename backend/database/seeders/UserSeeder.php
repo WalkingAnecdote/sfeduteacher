@@ -24,21 +24,18 @@ class UserSeeder extends Seeder
         // gets all permissions via Gate::before rule; see AuthServiceProvider
 
         $admin = User::factory()->create([
-            'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => \Illuminate\Support\Facades\Hash::make(env('ADMIN_PASSWORD', '123123123'))
         ]);
         $admin->assignRole($roleAdmin);
 
         $teacher = User::factory()->create([
-            'name' => 'Teacher',
             'email' => 'teacher@sfedu.com',
             'password' => \Illuminate\Support\Facades\Hash::make(env('TEACHER_PASSWORD', '123123123'))
         ]);
         $teacher->assignRole($roleTeacher);
 
         $student = User::factory()->create([
-            'name' => 'Student',
             'email' => 'student@sfedu.com',
             'password' => \Illuminate\Support\Facades\Hash::make(env('STUDENT_PASSWORD', '123123123'))
         ]);

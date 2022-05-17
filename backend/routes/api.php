@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\UserAuthApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/register', [UserAuthApiController::class, 'register']);
+Route::post('/login', [UserAuthApiController::class, 'login']);
+Route::post('/refresh', [UserAuthApiController::class, 'refreshToken']);
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::get('/me', [UserAuthApiController::class, 'me']);
+    Route::post('/logout', [UserAuthApiController::class, 'logout']);
 });

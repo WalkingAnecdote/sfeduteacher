@@ -30,8 +30,13 @@ class AuthServiceProvider extends ServiceProvider
             Passport::routes();
         }
 
-        Passport::tokensExpireIn(now()->addDays(15));
-        Passport::refreshTokensExpireIn(now()->addDays(30));
-        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+        Passport::tokensExpireIn(now()->addMinutes(config('passport.tokens_lifetime.minutes_for_access')));
+        Passport::refreshTokensExpireIn(now()->addDays(config('passport.tokens_lifetime.days_for_refresh')));
+
+        Passport::tokensCan([
+            'admin' => 'Admin User Type',
+            'teacher' => "Teacher user type",
+            'student' => "Student user type",
+        ]);
     }
 }
