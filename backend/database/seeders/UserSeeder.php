@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\StudentProfile;
+use App\Models\TeacherProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -33,12 +35,18 @@ class UserSeeder extends Seeder
             'email' => 'teacher@sfedu.com',
             'password' => \Illuminate\Support\Facades\Hash::make(env('TEACHER_PASSWORD', '123123123'))
         ]);
+
+        $profile = TeacherProfile::create();
+        $profile->user()->save($teacher);
         $teacher->assignRole($roleTeacher);
 
         $student = User::factory()->create([
             'email' => 'student@sfedu.com',
             'password' => \Illuminate\Support\Facades\Hash::make(env('STUDENT_PASSWORD', '123123123'))
         ]);
+
+        $profile = StudentProfile::create();
+        $profile->user()->save($student);
         $student->assignRole($roleStudent);
     }
 

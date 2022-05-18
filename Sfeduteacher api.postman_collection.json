@@ -1,0 +1,743 @@
+{
+	"info": {
+		"_postman_id": "176d1907-a71b-436d-bd4f-3eb7f3c9f967",
+		"name": "Sfeduteacher api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNjViZjhlMzJhNTA5NDAyZTEyZTQ0MGNmMzI2MTIzNzdjNDI0MjhhNDVmNDVkNjg4OTU4NGNiOTMyNDJhMWI4NzVhOWI5MjM4YmQ5ODU1ZDAiLCJpYXQiOjE2NTI4NjgwMTcuNTQ3MjA2LCJuYmYiOjE2NTI4NjgwMTcuNTQ3MjI2LCJleHAiOjE2NTI5MjgwMTcuNTMyMDk5LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.kBWygu-7uJCmf193QnWe2FED2o7151Ewhzaw9a-WXOBz6MfuQGvdL9qOoAy3G4ys8ncp93mV_-T9ZDRpXZ0RvHDSyePYvBwN3tHsaGrChLV1kWPxgetV1RJgH5diCDLghxQioOTwaFTAcXi4zBIEvKpUHywVyLMcCkdO04dVBXeWuue0ITtSujbr5uyL9y3nk0HTHiJFuE63av5fHpo0LOwiYE-oa9ocTqZgc7uqzgEPxGOTA-eJTbIF46z5mDBXv8PbfrC-rirNtNlyzSIy1lZiWYzgx1AlLGa2IkU9-L07F8nz6jnxeMQEYEFGGxayepHdZBCYwDcFoQ86B7FxKjmrPGny8E0dhxTcO639G5bCMp_xR9d6emhITb1hCOP98vnIrDbmlhL1ZWIryEm62vErpfkLHic91yUyBDh1tfZErMk2ymHMlCqDvxOhecmdG__Flw77LAK6h1TcXLWuRIg2X796pNJELYxF9H4-dTKyanFbLOt-kxAaoxJnUp0TclvZF2HRFLfr2zqkjRnc3P4aJWRieMQ00kG4QrhTgmvE4Rz4Lrm0AyDTJrsPNwNLlP2faA7Jcw6-Pv8ShEFyUT4febLG7qwOR2HdZFIr6lkvKOMp7tHhApWhBRitFDkf7UIPzZSWrtfsdejTajhJ1laudzCcfu4SiyZr9M0jhAo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_route}}/me",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success me / admin",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "0.0.0.0:885/api/me",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "885",
+									"path": [
+										"api",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.15.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.19"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 18 May 2022 09:42:17 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"first_name\": \"Euna\",\n    \"last_name\": \"Kassulke\",\n    \"middle_name\": \"schneider.com\",\n    \"email\": \"admin@admin.com\",\n    \"email_verified_at\": \"2022-05-17T23:50:39.000000Z\",\n    \"approved\": 0,\n    \"banned\": 0,\n    \"roles\": [\n        \"admin\"\n    ],\n    \"created_at\": \"2022-05-17T23:50:39.000000Z\",\n    \"profile\": null\n}"
+						},
+						{
+							"name": "Success me / teacher",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{api_route}}/me",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.15.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.19"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 18 May 2022 10:04:27 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 7,\n    \"first_name\": \"Иван\",\n    \"last_name\": \"Иванов\",\n    \"middle_name\": \"Иванов\",\n    \"email\": \"teacher1@sfedu.ru\",\n    \"email_verified_at\": null,\n    \"approved\": 0,\n    \"banned\": 0,\n    \"roles\": [\n        \"teacher\"\n    ],\n    \"created_at\": \"2022-05-18T10:03:29.000000Z\",\n    \"profile\": {\n        \"id\": 1,\n        \"rank\": null,\n        \"created_at\": \"2022-05-18T10:03:29.000000Z\",\n        \"updated_at\": \"2022-05-18T10:03:29.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{login_email}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{login_password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/login",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success login / admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "admin@admin.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123123123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "0.0.0.0:885/api/login",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "885",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.15.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.19"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 18 May 2022 09:39:03 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 60000,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYzI2ZDI5MDU5YmYzZmQ2MTIwNWUzMmQ1M2JiZjcyZjY2MWNmZjJmODBhM2JhZTViMzgzN2U3YmJmZjI1ZjU0ZmU5ZGE4ODEzMDM3OTdiYjEiLCJpYXQiOjE2NTI4NjY3NDMuMzQxMjAzLCJuYmYiOjE2NTI4NjY3NDMuMzQxMjA3LCJleHAiOjE2NTI5MjY3NDMuMjcyMDIsInN1YiI6IjIiLCJzY29wZXMiOltdfQ.nDWDvDvY-hU8jznctvhwsEf8Jaxu0edrFMzlybSPbokpNTnFVxWu6hnTP0z2K8sIhE22wFt5GQba3zl_ioPbdBeTqbyh3rqRFqUh0KH_3Z9n4QUOAaQCPO71nZI5-ReV_7Qd9-SDw89O2LR_nKU21MqQipkz412abQQRUWKQmSk_byNK6MLkHyqOSAuErxQLcahnKFfDFewWKbLOEaLhHmlEkHYaAAmA240cEujRPfIuyGDl5ZReh1G_BtkaiRyc6EFg6gWLwRATlBX_BKOyK5pymj-aoQitWUubbRS24j8jFM6HLyF7B17qgjUKmXW-1ibXACK-3IHBQ9VQlKqUjxzYTWWiNlHheUYlOLrKVNfVxVw6pOiflIODn_-sK3Ah9knK0BZKzBFDekJgZJX17-vhT-iFThkUGWET0ugRmvUj4BY7FZdGkluacxhPzkFsmGTTdpYIATFAnJANJdnpoxyytZ5HB0p0KMKqumgfFPIrZF68OiYzOoL5AP9EL-51cMBeuLnIthFOr5xtV2tSFF0xPsqtB3MEtp6vffz0CEL8e-AB0ucDiZcngzh6rbAuXpYYoyCKqiSquB6hggDpCgDa0u89_eBLFoym4jbpOpXUu_y_FH1_BwPKWa1V7OaOK3xKsgWJjfDJfthv6Itp6MHfYrXQyCMtqCYiGiIkOKY\",\n    \"refresh_token\": \"def50200d2137fda139226147d938353e01eb9f8c95a291d1b08d871e37b2feacdc3786c4f9c8494b2c589c56991999c2312224b88158f77bc2dc90cb012faf93cd63c4016623bc12da83ea882bc9609268d9fab5e889bab5cc3509cdf5c7effe501ab27b6ed852384437512140b3ed77fb2cb898e70d3c94ec0870630798fb0d105d8e3d202c65c659501c8012fe6de6656e4a3e7ebaf6234908f09d09f82ce580c132ca902efe83f6dbb6cca037461f018264b2b3a608df0778833763d6f65707bd84c26a48b743f4e61c291105bbc30ffcbbeb25e55274366b3bd79e652143df269ff5e6f63d2b2768a91daa627a64d2766f7ce82ecda8e605f882e3493794c43f9a9b0a03b022dd3bc327435672fe55e8d5adee32c549a0b50183dd348b8111a16508f246b44b86452d4c58ea82da9f1034b7ef1e70569092ac494fffa6cd0e8800a7d9cdb9f53bc15d0feeef66d8ba60649cc511f0a435c13b22120120926\"\n}"
+						},
+						{
+							"name": "Success login / student",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "student@sfedu.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123123123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/login",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.15.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.19"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 18 May 2022 09:59:06 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 60000,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiY2E2ZmRjYjUxYTAzN2MxNzZmOWZkYTkxZmNhZTFjNWEyNWY2ZmM0ZjFlYmE1MzE5Mzk3ODJkZmJkOWRiYmYxOGYzODg2N2U4MjU3OWUyZWIiLCJpYXQiOjE2NTI4Njc5NDYuNTc0MTM4LCJuYmYiOjE2NTI4Njc5NDYuNTc0MTY1LCJleHAiOjE2NTI5Mjc5NDYuNTYxNTEzLCJzdWIiOiI0Iiwic2NvcGVzIjpbXX0.Vca2SBPDCnlxcOuIBJqLA2hy-ylIkXr7-DyZiCI_bdQAqqedCMiDCUNdh0dmj4hzPRF_nMQ2ceZUr9ZHRoHi3yxzGCa8IkT_FTEZh96mhr5sBoI5Pn0_SybugXk1CgK3nfWZafjcPyBArExn3O8YLuZ3V9uzRf-QXg9OCcNVybnaoSf_TjH8U3SB6M0wmL0KZyLEaukF0qsq3OE2v63_kZ0Sv3Dfk49R_Pj-gMcP8Y6zK7dov3qjtr-MOey6WV2UjDC33bAjRPmeaP1QnSvXGWKg-5RqiyyEQIfcrdnNrBrN4HmVhZme04KJQxJ7D4xkSQTTSYQd18JvZtYTxG3pZXFTA7C95kaIeFIxYxvDL0J7XMQuYNEdYsRrLA1M1M_SSWWyfiBT12hfejEezfAbvUtk26zsrkwTvOrbveRnFWjbge4ZMubr7VonRS9FUABNMGJ5qrhWujkI5fPIK2N03aPQUPeki4tD4uqFF_xs1nhBUIrhUIN6WPptBZZyJqhkE-3kcQIn8sD756jWi8ZJ2C1MYhZ0nz-qInBIX2DmWMlnZw45zi5dFPKcesIzSJqhK51sOhrBxCpqg4DMb_J0rCB5A0LJ60eFaN-dU-7YzlqJOeFk36mygEWm0M3SugkZIbhkI-ljIAV-y1V5ekONd7MwGZwTht9Of-dQAe5ra4E\",\n    \"refresh_token\": \"def502000752e55791299960d86284b37a6c66500f2a58b0249cbb67afefe36113ec499442ddb744580ee51bf242e47cb7a215421518d9a4800bc00c973d38aeac465d389ef21d67e59d7743d851cf12442d38c78c82479463434ff421fa0f67460b2023e57c6215d34ce5714f7754f3c932a9fb3985456cabbba79b685b85bfd1322c8b6e297f3beb68739abbeb292ccc0882dee6afaeb56aa78e114dc9a615b8a8fd0a3a600e9dcbe522c7bcd0057fb10a36fd693aade02f2d072f74c4bc3337c3ea517a4bb731bcbb2e40442943855caa958f54e407c5a21b9d8b27474c4e6d2ebbae8f918922bce547427d9b13a6709132821795f7ec2c15063ff7b6d10b66c74d1d9530295d3422d99609281f03e243ab4f1e1b1f4547739f68b7262ae720395d113678e23339b23f691abdc5a9bb9d85df3e95893312b290c5e2f7142ee0a60ceb6282502f45a77be0bee98bbdfd0368f9921a2cc72113e6a580643a0883\"\n}"
+						},
+						{
+							"name": "Success login / teacher",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "teacher@sfedu.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123123123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/login",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.15.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.19"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 18 May 2022 10:00:17 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 60000,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNjViZjhlMzJhNTA5NDAyZTEyZTQ0MGNmMzI2MTIzNzdjNDI0MjhhNDVmNDVkNjg4OTU4NGNiOTMyNDJhMWI4NzVhOWI5MjM4YmQ5ODU1ZDAiLCJpYXQiOjE2NTI4NjgwMTcuNTQ3MjA2LCJuYmYiOjE2NTI4NjgwMTcuNTQ3MjI2LCJleHAiOjE2NTI5MjgwMTcuNTMyMDk5LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.kBWygu-7uJCmf193QnWe2FED2o7151Ewhzaw9a-WXOBz6MfuQGvdL9qOoAy3G4ys8ncp93mV_-T9ZDRpXZ0RvHDSyePYvBwN3tHsaGrChLV1kWPxgetV1RJgH5diCDLghxQioOTwaFTAcXi4zBIEvKpUHywVyLMcCkdO04dVBXeWuue0ITtSujbr5uyL9y3nk0HTHiJFuE63av5fHpo0LOwiYE-oa9ocTqZgc7uqzgEPxGOTA-eJTbIF46z5mDBXv8PbfrC-rirNtNlyzSIy1lZiWYzgx1AlLGa2IkU9-L07F8nz6jnxeMQEYEFGGxayepHdZBCYwDcFoQ86B7FxKjmrPGny8E0dhxTcO639G5bCMp_xR9d6emhITb1hCOP98vnIrDbmlhL1ZWIryEm62vErpfkLHic91yUyBDh1tfZErMk2ymHMlCqDvxOhecmdG__Flw77LAK6h1TcXLWuRIg2X796pNJELYxF9H4-dTKyanFbLOt-kxAaoxJnUp0TclvZF2HRFLfr2zqkjRnc3P4aJWRieMQ00kG4QrhTgmvE4Rz4Lrm0AyDTJrsPNwNLlP2faA7Jcw6-Pv8ShEFyUT4febLG7qwOR2HdZFIr6lkvKOMp7tHhApWhBRitFDkf7UIPzZSWrtfsdejTajhJ1laudzCcfu4SiyZr9M0jhAo\",\n    \"refresh_token\": \"def502004c36d2f2ce027fd5d56a7d760ef4949bed9909a628c93797a87581bed039debee09d8bddb8a8f6f09c57479a380526b75c778ef1a2617e440c8feab8fa1bb888491295c12c9f52a51414df9cd63b1f0e08fcf17914572f3ae5dbf8da9340d24d28d7c804da13343f5d0e5c212216e4f98504fc1d3026c8149e028da58d5486393ebe7a51905fb26a8a536b2e5799094e29feaebf7f24de716197947145b77e96ddcca27fe608d7b9e2cae9a35f64f973c85f40c7ee5cfe4ffc1fadd88b244052b6fb5aa6048238c40c7b24294344a25ab8769ab997020f6ace193f90417a90ce364bf8626507eff6e06e6c2ca0020089bc855d649cb0da7417dcd2c50c93ff5b247ff3269e201e1b90fdca881037f43b6d4da424b13b67ff49853b88a2546e64789a09ba90f6ef634a1cb36a1b29930bbb454630e9bd6ac246b0fca2d7eac8069dba1ecaf58cb578e95706cdf404bddc8caa6c2d1ddff90cca2a74c5df\"\n}"
+						}
+					]
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Success register / admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "first_name",
+											"value": "Иван",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "Иванов",
+											"type": "text"
+										},
+										{
+											"key": "middle_name",
+											"value": "Иванов",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "admin123@admin.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123123123",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "123123123",
+											"type": "text"
+										},
+										{
+											"key": "user_type",
+											"value": "admin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "0.0.0.0:885/api/register",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "885",
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.15.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.19"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 18 May 2022 09:51:48 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 60000,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiM2QyYzA2OGQyMjAwMDVjMDUwMWQxY2RkNjIwOWEyNDI5ZjA3ZThlODc0NzcyZDA2MDI2YWE2OWRlNDk5ZGI1MWJmYjAwOTAyYzZhMjQ2ODIiLCJpYXQiOjE2NTI4Njc1MDguMjE0NDU4LCJuYmYiOjE2NTI4Njc1MDguMjE0NDcxLCJleHAiOjE2NTI5Mjc1MDguMTgzMzU0LCJzdWIiOiI2Iiwic2NvcGVzIjpbXX0.VOpio4h60hzdmBXag0GisKShz9DqPqm4ZYB_TbdWDrd1AQ3-Ck2M2_0N78dcsENkVLyXjXLarLrZ_XpWaI7xuoq_stubaU0pyfRCAZsOdMRpSBX4dG9_YErSAB9i0K_FS8AlbBhaLZrAXMCjP6t_Hroxw1h7MGklUGWN6u28v5bscz97lAMMC6hTGDS7TOv0fvUykihMeMFkhXCQ-vE2qO2oOJJ3dNIIhcdW3JSZbewAXH6SbX8ZCbnC_MJzKTXovNYM8Kvz3vRZPkRCFE3bXZFZw8YFneYfg0rWAR4CGpPEdCPX1e6539feBMJm_CE1qzSiIQuaqw5YSIBOnglEVq29GcS-FoNRnrNYk7pk1uXuT3pTPESNXT8mQrs-tSeYf4xEQvfizvEiaKtb9c06uCwbAWwDobvuTMl1O0Xo6fC7RYNH459SEDSFeMLtZamscxo6_CexpD1aHBpNN-yYgGrVSDNTlMclUUfJmBeoaC_zcQH17lLMRHQ7txgRzw5G7Q8tJNsGWGovM-BZTVXLruwaPcWndgYZX9OP-OTzHw2ATnLE6tIfMtZqFREJsoA6tmcmfH2SeqcAlK4jNcZJ0B6LChU0gFvzgD1JsDnQdM4wCt4QaJWTs2-y1SWPmAf1d_rLGJML3Qc5OerEP5liF-l7Q7Qyf8QIzmWfBdB6B1k\",\n    \"refresh_token\": \"def50200ce58afa6a8af4c7a61ed9db8744241e3d1e46d759653817b44536d5e18a3f2df7a630855af29344936bc7524fe0370f5aa58a4f455ec3140f972194671b3ddcddb74a6cde557acee059e1acd377a1fe375b327517485fd0947012bca0455c0682fa18c7699e7ab756c02a92f65817a4e28b48a0945782512c294b91689bc4f2e592485cd48a701a62d7dace2a6d11aeb82f2781b8cfae523c7fadb65ec2e053efd3628f80ef42300101a0b6c0a81eed9def5dde7a88b1bc2cd001c5dbfd3dbfcde9b58c5eae4ff23c447af718b05c18500f594152a3c418d46d82a71fc2a06de961909880ba3ebf55167be3f593ab0548b86de9606284fc13f88b0a92cf0bd99bf36fe1ce6fcb7a84832ec39e69056cc752b8092b9cc801272de72a8fe89896e08f4179c907d389114fbc0850b67c5ee79d25dfcdfbba68ea85e998e491d02166d7ac4cc044ebc32cb0e31721b7f35eff6900931980aa6ba002d575649\"\n}"
+						},
+						{
+							"name": "Success register / teacher",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "first_name",
+											"value": "{{register_first_name}}",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "{{register_last_name}}",
+											"type": "text"
+										},
+										{
+											"key": "middle_name",
+											"value": "{{register_middle_name}}",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "teacher1@sfedu.ru",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{register_password}}",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "{{register_password}}",
+											"type": "text"
+										},
+										{
+											"key": "user_type",
+											"value": "{{register_user_type_teacher}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/register",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.15.6"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.19"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 18 May 2022 10:03:30 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 60000,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTlmYzBmYmNmZDUwMzBkZjA3NTUzNjAwOWZjMDUxZDczZDcxOTk5NjJjODE5ZGIwM2NkZDk2MTU1MjdjMjljNTk2NTI4ZmE4ODZlZDdmNzYiLCJpYXQiOjE2NTI4NjgyMDkuOTI5NTQ2LCJuYmYiOjE2NTI4NjgyMDkuOTI5NTU4LCJleHAiOjE2NTI5MjgyMDkuOTE3OTIyLCJzdWIiOiI3Iiwic2NvcGVzIjpbXX0.llByGMONA1l3sEECRjVlh-nTOK0ApiV6oIo3MO7UsqF20Sua9ryi52VGvMt9rVeLi6YxZdum11RHXgLta0tbX965BD2EJZvUi6uCD8OG9BPX6h_0Tx0P_hT-npHECxbNt9_R03iKto-E3wlbt3ekCdEbJSsOi5_cHVqHxWqliajgVk-HtGDE0ELdwW9WSHiNHayHH58BwKBfDEQNMK0Tgtl4J4-YGMMQa6B_87WhRxJkmjt7N4eDwnkwlutgA0djcEVvjoYyw7QOk-2Bvy1tfd3Tf9_xlVqxNJJwTJPt2WppkLNqE_Veope5YUFKQ55uGaR3QnTcdbIzIsxd0OSEXchvJnUtLW2JIFtt_7LJ8nk-2MK7fDpCJHZEZMdGjyiz0sSYktR53HTV1gkG97cyDpuCAfAu2255XA9ssowzhjCFD_eHUsVkHIjzdHBMCCBIFuToEPKOD5ftgxuIXvdjPjKASbkWRCpgNnujlgDc5BSQq_8vuqHfvAMPFUHH1ZhQhM21plQn91EuP7pBV_NfS2w-ri8GHtPjZ3eMm5EyRMP1fWx35bIM_CNnpIow24mPSapq4SlzbEguNKwntrxghCsjzHWB6LVGmZLeKDMf9aUKJHLpMHsroOzsc4EA9UcIC6eMeqOrFbByllrrWzqWmwpUvjxTQ6ZW7YkbrbZuEBI\",\n    \"refresh_token\": \"def50200ea269ccd6f885d515cb99ce522156842e3443554224d3cebbaef51fa560c388f8a89213a3bdaedca54dbf47a98b22b1ade336257a3cbac4875e8d114f8aa104e28c0d6d9c87f791e8eaa69611067b803a7e594e9c31164ddc7b6086192b765e1b026dc09e06801e91d8b73ff689e2f7716b4093db3bb877d4d727506723c42f6c985fb4848a1783eb8d29e9475349a465756e1781b25d647486d78a65979bcab5b0068776a225acba93e513f2d175f8fc49f8d919b3f27dea7946769d73d9d94b63dbd9eb77f7ddb3337d14fe62c9521efca216cc5bfa133444f00c14f738241809dcef3907a579548e3bda6d4ba9a393a8bf2b3b7de0bd17c05a1efb0ae9a7b10f741787c950ffc4067d4486527758a09304b7fd9097530c958c3a795cfc84393cfcecf4add0b7b9ecb1c0e108bde70bf8a0f35b6bf9769de2fd4240e09af04e7afa05b137a8558368ceda6f5902e88554f3635eab8837124d9581909\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "register_first_name",
+			"value": "Иван"
+		},
+		{
+			"key": "register_user_type",
+			"value": "admin"
+		},
+		{
+			"key": "register_password",
+			"value": "123123123"
+		},
+		{
+			"key": "register_email",
+			"value": "admin123@admin.com"
+		},
+		{
+			"key": "register_middle_name",
+			"value": "Иванов"
+		},
+		{
+			"key": "register_last_name",
+			"value": "Иванов"
+		},
+		{
+			"key": "register_user_type_teacher",
+			"value": "teacher"
+		}
+	]
+}
