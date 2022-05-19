@@ -5,6 +5,7 @@
 - `cd backend`
 - copy .env.example to .env `cp .env.example .env`
 - run docker compose `docker-compose up -d`
+- install composer `docker exec app-backend sh -c 'composer install'`
 - make migration `docker exec app-backend sh -c 'php artisan migrate --force'`
 - gen auth keys `docker exec app-backend sh -c 'php artisan passport:install'`
 - get and set GRANT_PASSWORD_CLIENT_ID to PASSPORT_GRANT_PASSWORD_CLIENT_ID in .env
