@@ -31,4 +31,9 @@ class TeacherProfile extends Model
     {
         return $this->morphOne(User::class, 'profile');
     }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class, 'teacher_id');
+    }
 }

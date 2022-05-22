@@ -31,4 +31,9 @@ class StudentProfile extends Model
     {
         return $this->morphOne(User::class, 'profile');
     }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

@@ -4,14 +4,14 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class Users extends ResourceCollection
+class UsersResource extends ResourceCollection
 {
     /**
      * The resource that this resource collects.
      *
      * @var string
      */
-    public $collects = 'App\Http\Resources\User';
+    public $collects = 'App\Http\Resources\UserResource';
 
     /**
      * Transform the resource collection into an array.

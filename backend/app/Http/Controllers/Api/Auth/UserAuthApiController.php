@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Exceptions\ValidationError;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User as UserResource;
+use App\Http\Resources\UserResource as UserResource;
 use App\Models\StudentProfile;
 use App\Models\TeacherProfile;
 use App\Models\User;
