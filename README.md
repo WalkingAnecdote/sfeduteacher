@@ -43,7 +43,7 @@ docker exec app-backend sh -c 'php artisan passport:install'
 6. Скопировать значения, выведенные в терминал после выполнения п.5 в файл `.env`:
 
 ```
-- GRANT_PASSWORD_CLIENT_ID в поле PASSPORT_GRANT_PASSWORD_CLIENT_ID in .env
+- GRANT_PASSWORD_CLIENT_ID в поле PASSPORT_GRANT_PASSWORD_CLIENT_ID
 - GRANT_PASSWORD_CLIENT_SECRET в поле PASSPORT_GRANT_PASSWORD_CLIENT_SECRET
 ```
 
