@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Semester;
+namespace App\Http\Requests\Group;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,9 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'number' => "sometimes|integer",
+            "name" => "sometimes|string",
+            "type" => "sometimes|string|in_array:master,bachelor",
+            "recruitment_date" => "sometimes|date",
         ];
     }
 }

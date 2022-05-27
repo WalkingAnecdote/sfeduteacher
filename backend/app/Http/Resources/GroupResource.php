@@ -21,7 +21,7 @@ class GroupResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'type' => $this->type,
-            'recruitment_date' => $this->recruitment_date,
+            'recruitment_date' => $this?->recruitment_date?->toDateString(),
         ];
     }
 }

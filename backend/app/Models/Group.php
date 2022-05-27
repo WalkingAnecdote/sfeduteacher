@@ -18,6 +18,10 @@ class Group extends Model
         'recruitment_date',
     ];
 
+    protected $casts = [
+        "recruitment_date" => "date"
+    ];
+
     public function semesters()
     {
         return $this->hasMany(Semester::class);
