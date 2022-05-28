@@ -1,23 +1,15 @@
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
-import Box from '@mui/material/Box';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import {Chart, Deposits, Orders, mainListItems, secondaryListItems} from '../components';
+import {
+    CssBaseline, Drawer, Box, AppBar, Toolbar, List,
+    Typography, Divider, IconButton, Badge, Container, Grid,
+    Paper, Link, ListItemButton, ListItemIcon,
+    ListItemText
+} from '@mui/material';
+import {
+    ChevronLeft, Notifications, People, Layers, Menu
+} from '@mui/icons-material';
+import {Chart, Deposits, Orders } from '../components';
 
 function Copyright(props) {
   return (
@@ -34,7 +26,7 @@ function Copyright(props) {
 
 const drawerWidth = 240;
 
-const AppBar = styled(MuiAppBar, {
+const CustomAppBar = styled(AppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -52,7 +44,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+const CustomDrawer = styled(Drawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     '& .MuiDrawer-paper': {
       position: 'relative',
@@ -80,17 +72,39 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
+function switchContent(category) {
+    switch (category) {
+        case 'users':
+            return <Typography>Users</Typography>;
+        case 'semesters':
+            return <Typography>Semesters</Typography>;
+        case 'groups':
+            return <Typography>Groups</Typography>;
+        case 'subjects':
+            return <Typography>Subjects</Typography>;
+        case 'lessons':
+            return <Typography>Lessons</Typography>;
+        default:
+            return <Typography>Null</Typography>;
+    }
+}
+
 function DashboardContent() {
+  const [selectedCategory, setSelectedCategory] = React.useState('users');
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  const handleCategory = (category) => () => {
+    setSelectedCategory(category)
+  }
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <CustomAppBar position="absolute" open={open}>
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
@@ -106,7 +120,7 @@ function DashboardContent() {
                 ...(open && { display: 'none' }),
               }}
             >
-              <MenuIcon />
+              <Menu />
             </IconButton>
             <Typography
               component="h1"
@@ -115,16 +129,16 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Admin dashboard
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
+                <Notifications />
               </Badge>
             </IconButton>
           </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
+        </CustomAppBar>
+        <CustomDrawer variant="permanent" open={open}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -134,16 +148,43 @@ function DashboardContent() {
             }}
           >
             <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
+              <ChevronLeft />
             </IconButton>
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            <ListItemButton onClick={handleCategory('users')}>
+                <ListItemIcon>
+                    <People />
+                </ListItemIcon>
+                <ListItemText primary="Users" />
+            </ListItemButton>
+            <ListItemButton onClick={handleCategory('semesters')}>
+                <ListItemIcon>
+                    <Layers />
+                </ListItemIcon>
+                <ListItemText primary="Semesters" />
+            </ListItemButton>
+            <ListItemButton onClick={handleCategory('groups')}>
+                <ListItemIcon>
+                    <Layers />
+                </ListItemIcon>
+                <ListItemText primary="Groups" />
+            </ListItemButton>
+            <ListItemButton onClick={handleCategory('subjects')}>
+                <ListItemIcon>
+                    <Layers />
+                </ListItemIcon>
+                <ListItemText primary="Subjects" />
+            </ListItemButton>
+            <ListItemButton onClick={handleCategory('lessons')}>
+                <ListItemIcon>
+                    <Layers />
+                </ListItemIcon>
+                <ListItemText primary="Lessons" />
+            </ListItemButton>
           </List>
-        </Drawer>
+        </CustomDrawer>
         <Box
           component="main"
           sx={{
@@ -158,8 +199,8 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
+            {switchContent(selectedCategory)}
+            {/* <Grid container spacing={3}>
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
@@ -172,7 +213,6 @@ function DashboardContent() {
                   <Chart />
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -185,13 +225,12 @@ function DashboardContent() {
                   <Deposits />
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <Orders />
                 </Paper>
               </Grid>
-            </Grid>
+            </Grid> */}
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
@@ -203,16 +242,3 @@ function DashboardContent() {
 export default function Dashboard() {
   return <DashboardContent />;
 }
-
-
-// export default function AdminPage() {
-//     const dispatch = useDispatch()
-
-//     const handleSignout = () => {
-//         dispatch.token.asyncLogout()
-//     }
-//     return <>
-//         <h3>Admin</h3>
-//         <button onClick={handleSignout}>Signout</button>
-//     </>;
-//   }
