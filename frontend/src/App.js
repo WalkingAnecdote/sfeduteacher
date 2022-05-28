@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
+import { Provider, useSelector } from 'react-redux'
+import { init } from '@rematch/core'
+import { tokenModel, userModel } from './models'
+import {useRedirect} from './hooks'
+import MainPage from "./routes/Main";
+import ProfilePage from "./routes/Profile";
+import SignInPage from "./routes/SignIn";
+import AdminPage from './routes/Admin';
 
-function App() {
+const store = init({
+  models: {
+    token: tokenModel,
+    user: userModel
+  }
+})
+
+const AppRoutes = () => {
+  useRedirect()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/signin" element={<SignInPage />} />
+        <Route path="/profile" element={<RequireAuth><ProfilePage /></RequireAuth>} />
+        <Route path="/admin" element={<RequireAuth><AdminPage /></RequireAuth>} />
+    </Routes>
+  )
+}
+
+export default function App() {
+  return (
+      <Provider store={store}>
+        <AppRoutes />
+      </Provider>
   );
 }
 
-export default App;
+function RequireAuth({ children }) {
+  const location = useLocation();
+  const token = useSelector((state) => state.token)
+  if (!token.access_token) {
+    return <Navigate to="/signin" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
