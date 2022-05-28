@@ -14,5 +14,26 @@ class Lesson extends Model
         "theme",
         "type",
         "teacher_id",
+        "semester_id",
+        "subject_id"
     ];
+
+    protected $casts = [
+        'date' => 'datetime'
+    ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(TeacherProfile::class);
+    }
+
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }

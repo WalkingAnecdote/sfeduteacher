@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("semester_id");
+            $table->unsignedBigInteger("subject_id");
             $table->dateTime("date")->nullable();
             $table->text("theme")->nullable();
             $table->string("type")->default('practice');

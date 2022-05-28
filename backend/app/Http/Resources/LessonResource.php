@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JsonSerializable;
 
-class TeacherProfileResource extends JsonResource
+class LessonResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,8 +19,12 @@ class TeacherProfileResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'rank' => $this->rank,
-            'user' => (new UserResource($this->user))
+            'date' => $this->date,
+            'theme' => $this->theme,
+            'type' => $this->type,
+            "semester_id"  => $this->semester_id,
+            "subject_id"  => $this->subject_id,
+            'teacher' => (new TeacherProfileResource($this->teacher)),
         ];
     }
 }

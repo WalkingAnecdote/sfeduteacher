@@ -20,6 +20,12 @@ Route::post('/login', [UserAuthApiController::class, 'login']);
 Route::post('/refresh', [UserAuthApiController::class, 'refreshToken']);
 Route::apiResource('groups', \App\Http\Controllers\Api\GroupController::class);
 Route::apiResource('subjects', \App\Http\Controllers\Api\SubjectController::class);
+Route::get('semesters/{semester}/subjects', [\App\Http\Controllers\Api\SubjectController::class, "getSubjectsBySemester"])
+    ->name('groups.semesters.list');
+Route::post('semesters/{semester}/subjects/attach', [\App\Http\Controllers\Api\SemesterController::class, "addSubjects"])
+    ->name('semesters.subjects.attach');
+Route::post('semesters/{semester}/subjects/detach', [\App\Http\Controllers\Api\SemesterController::class, "removeSubjects"])
+    ->name('semesters.subjects.detach');
 Route::apiResource('semesters', \App\Http\Controllers\Api\SemesterController::class);
 
 
@@ -34,6 +40,30 @@ Route::delete('groups/{group}/semesters/{semester}', [\App\Http\Controllers\Api\
 Route::put('groups/{group}/semesters/{semester}', [\App\Http\Controllers\Api\SemesterController::class, "update"])
     ->name('groups.semesters.update');
 
+
+Route::get('students', [\App\Http\Controllers\Api\StudentController::class, "index"])
+    ->name('students.get');
+Route::get('students/{student}', [\App\Http\Controllers\Api\StudentController::class, "show"])
+    ->name('students.show');
+Route::get('groups/{group}/students', [\App\Http\Controllers\Api\StudentController::class, "getStudentsByGroup"])
+    ->name('groups.students.get');
+Route::post('students', [\App\Http\Controllers\Api\StudentController::class, "store"])
+    ->name('students.create');
+Route::post('students/{student}', [\App\Http\Controllers\Api\StudentController::class, "update"])
+    ->name('students.update');
+
+Route::get('teachers', [\App\Http\Controllers\Api\TeacherController::class, "index"])
+    ->name('teachers.get');
+Route::get('teachers/{teacher}', [\App\Http\Controllers\Api\TeacherController::class, "show"])
+    ->name('teachers.show');
+Route::post('teachers', [\App\Http\Controllers\Api\TeacherController::class, "store"])
+    ->name('teachers.create');
+Route::post('teachers/{teacher}', [\App\Http\Controllers\Api\TeacherController::class, "update"])
+    ->name('teachers.update');
+
+Route::apiResource('lessons', \App\Http\Controllers\Api\LessonController::class);
+Route::get('semesters/{semester}/subjects/{subject}/lessons', [\App\Http\Controllers\Api\LessonController::class, "getLessonsBySemesterAndSubject"])
+    ->name('semesters.subject.lessons.list');
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/me', [UserAuthApiController::class, 'me']);

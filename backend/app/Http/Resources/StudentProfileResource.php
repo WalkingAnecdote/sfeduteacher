@@ -17,7 +17,7 @@ class StudentProfileResource extends JsonResource
         return [
             'id' => $this->id,
             'user' => (new UserResource($this->user)),
-//            'group' => (new UserResource($this->user))
+            'group' => (new GroupResource($this->group))
         ];
     }
 }

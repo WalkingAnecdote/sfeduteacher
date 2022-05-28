@@ -7,6 +7,7 @@ use App\Http\Requests\Subject\StoreRequest;
 use App\Http\Requests\Subject\UpdateRequest;
 use App\Http\Resources\SubjectResource;
 use App\Http\Resources\SubjectsResource;
+use App\Models\Semester;
 use App\Models\Subject;
 use App\Repositories\SubjectRepository;
 use Illuminate\Http\JsonResponse;
@@ -27,6 +28,17 @@ class SubjectController extends Controller
     public function index()
     {
         return response()->json(new SubjectsResource($this->subjectRepository->paginate()));
+    }
+
+    /**
+     * Get Subjects By Semester
+     *
+     * @param Semester $semester
+     * @return JsonResponse
+     */
+    public function getSubjectsBySemester(Semester $semester): JsonResponse
+    {
+        return response()->json(new SubjectsResource($semester->subjects()->paginate()));
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class UserWithProfileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -25,6 +25,7 @@ class UserResource extends JsonResource
             'banned' => $this->banned,
             'roles' => $this->getRoleNames(),
             'created_at' => $this->created_at,
+            'profile' => $this->profile,
         ];
     }
 }

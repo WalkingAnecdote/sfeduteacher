@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Semester\AddSubjectsRequest;
+use App\Http\Requests\Semester\RemoveSubjectsRequest;
 use App\Http\Requests\Semester\StoreRequest;
 use App\Http\Requests\Semester\UpdateRequest;
 use App\Http\Resources\SemestersResource;
@@ -44,6 +46,32 @@ class SemesterController extends Controller
     public function store(StoreRequest $request, Group $group): JsonResponse
     {
         return response()->json(new SemesterResource($this->semesterRepository->create($request->input() + ['group_id' => $group->id])));
+    }
+
+    public function addSubjects(AddSubjectsRequest $request, Semester $semester): JsonResponse
+    {
+        try {
+            $ids = explode(",", $request->subjects);
+            $semester->subjects()->attach($ids);
+
+            return response()->json(true);
+        }
+        catch(\Exception $exception) {
+            return response()->json(false, 400);
+        }
+    }
+
+    public function removeSubjects(RemoveSubjectsRequest $request, Semester $semester): JsonResponse
+    {
+        try {
+            $ids = explode(",", $request->subjects);
+            $semester->subjects()->detach($ids);
+
+            return response()->json(true);
+        }
+        catch(\Exception $exception) {
+            return response()->json(false, 400);
+        }
     }
 
     /**
