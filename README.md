@@ -50,8 +50,8 @@ docker exec app-backend sh -c 'php artisan passport:install'
 7. Перезапустить `docker` контейнеры:
 
 ```bash
-docker-compose stop
-docker-compose start
+docker-compose down
+docker-compose up -d
 ```
 
 8. Создать записи в БД:
@@ -65,6 +65,15 @@ docker exec app-backend sh -c 'php artisan db:seed --force'
 * http://localhost/
 * http://127.0.0.1/
 
+### Возможные ошибки
+
+#### Ошибка с неправильными ключами Laravel:
+
+```bash
+docker exec app-backend sh -c 'php artisan key:generate'
+docker exec app-backend sh -c 'php artisan config:cache'
+docker exec app-backend sh -c 'php artisan optimize:clear'
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
