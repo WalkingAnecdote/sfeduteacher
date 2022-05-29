@@ -7,6 +7,7 @@ use App\Http\Requests\Semester\AddSubjectsRequest;
 use App\Http\Requests\Semester\RemoveSubjectsRequest;
 use App\Http\Requests\Semester\StoreRequest;
 use App\Http\Requests\Semester\UpdateRequest;
+use App\Http\Resources\SemestersPaginateResource;
 use App\Http\Resources\SemestersResource;
 use App\Http\Resources\SemesterResource;
 use App\Models\Group;
@@ -32,7 +33,7 @@ class SemesterController extends Controller
     public function index(Group $group)
     {
         return response()->json(
-            new SemestersResource($group->semesters()->paginate())
+            new SemestersPaginateResource($group->semesters()->paginate())
         );
     }
 

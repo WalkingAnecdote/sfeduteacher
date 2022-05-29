@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\StoreRequest;
 use App\Http\Requests\Subject\UpdateRequest;
 use App\Http\Resources\SubjectResource;
+use App\Http\Resources\SubjectsPaginateResource;
 use App\Http\Resources\SubjectsResource;
 use App\Models\Semester;
 use App\Models\Subject;
@@ -27,7 +28,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return response()->json(new SubjectsResource($this->subjectRepository->paginate()));
+        return response()->json(new SubjectsPaginateResource($this->subjectRepository->paginate()));
     }
 
     /**
@@ -38,7 +39,7 @@ class SubjectController extends Controller
      */
     public function getSubjectsBySemester(Semester $semester): JsonResponse
     {
-        return response()->json(new SubjectsResource($semester->subjects()->paginate()));
+        return response()->json(new SubjectsPaginateResource($semester->subjects()->paginate()));
     }
 
     /**
