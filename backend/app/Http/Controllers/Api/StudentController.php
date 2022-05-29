@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Student\StoreRequest;
 use App\Http\Requests\Student\UpdateRequest;
 use App\Http\Resources\StudentProfileResource;
+use App\Http\Resources\StudentProfilesPaginateResource;
 use App\Http\Resources\StudentProfilesResource;
 use App\Models\Group;
 use App\Models\StudentProfile;
@@ -27,7 +28,7 @@ class StudentController
      */
     public function index(): JsonResponse
     {
-        return response()->json(new StudentProfilesResource($this->studentRepository->paginate()));
+        return response()->json(new StudentProfilesPaginateResource($this->studentRepository->paginate()));
     }
 
     /**

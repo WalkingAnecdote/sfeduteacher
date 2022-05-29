@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Teacher\StoreRequest;
 use App\Http\Requests\Teacher\UpdateRequest;
 use App\Http\Resources\TeacherProfileResource;
+use App\Http\Resources\TeachersProfilePaginateResource;
 use App\Http\Resources\TeachersProfileResource;
 use App\Models\TeacherProfile;
 use App\Repositories\TeacherRepository;
@@ -26,7 +27,7 @@ class TeacherController
      */
     public function index(): JsonResponse
     {
-        return response()->json(new TeachersProfileResource($this->teacherRepository->paginate()));
+        return response()->json(new TeachersProfilePaginateResource($this->teacherRepository->paginate()));
     }
 
     /**
