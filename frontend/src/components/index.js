@@ -1,6 +1,4 @@
 import { Copyright } from './Copyright'
-import { Chart } from './Chart'
-import { Deposits } from './Deposits'
-import { Orders } from './Orders'
+import { Users } from './Users'
 
-export { Copyright, Chart, Deposits, Orders }
+export { Copyright, Users }
