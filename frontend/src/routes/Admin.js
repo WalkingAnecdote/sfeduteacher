@@ -2,27 +2,14 @@ import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import {
     CssBaseline, Drawer, Box, AppBar, Toolbar, List,
-    Typography, Divider, IconButton, Badge, Container, Grid,
-    Paper, Link, ListItemButton, ListItemIcon,
-    ListItemText
+    Typography, Divider, IconButton, Badge, Container,
+    ListItemButton, ListItemIcon, ListItemText
 } from '@mui/material';
 import {
     ChevronLeft, Notifications, People, Layers, Menu
 } from '@mui/icons-material';
-import {Chart, Deposits, Orders } from '../components';
+import { Copyright, Users } from '../components';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -75,7 +62,7 @@ const mdTheme = createTheme();
 function switchContent(category) {
     switch (category) {
         case 'users':
-            return <Typography>Users</Typography>;
+            return <Users />;
         case 'semesters':
             return <Typography>Semesters</Typography>;
         case 'groups':
