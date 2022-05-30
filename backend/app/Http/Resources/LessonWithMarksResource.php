@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JsonSerializable;
 
-class ActivityWithMarksResource extends JsonResource
+class LessonWithMarksResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,10 +19,13 @@ class ActivityWithMarksResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            "description" => $this->description,
-            "max_mark" => $this->max_mark,
-            "lesson_id" => $this->lesson_id,
-            "marks" => (new MarksResource($this->marks)),
+            'date' => $this->date,
+            'theme' => $this->theme,
+            'type' => $this->type,
+            "semester_id"  => $this->semester_id,
+            "subject_id"  => $this->subject_id,
+            'teacher_id' => $this->teacher_id,
+            'activities' => (new ActivitiesWithMarksResource($this->activities)),
         ];
     }
 }

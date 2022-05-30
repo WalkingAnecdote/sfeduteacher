@@ -10,8 +10,10 @@ use App\Http\Resources\ActivityResource;
 use App\Http\Resources\ActivityWithMarksResource;
 use App\Http\Resources\LessonsPaginateResource;
 use App\Http\Resources\MarkResource;
+use App\Http\Resources\MarksResource;
 use App\Models\Activity;
 use App\Models\Lesson;
+use App\Models\Mark;
 use App\Models\StudentProfile;
 use App\Repositories\ActivityRepository;
 use Illuminate\Http\JsonResponse;
@@ -64,6 +66,14 @@ class ActivityController extends Controller
     public function show(Activity $activity): JsonResponse
     {
         return response()->json(new ActivityResource($activity));
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function marks(): JsonResponse
+    {
+        return response()->json(new MarksResource(Mark::get()));
     }
 
     public function showWithMarks(Activity $activity): JsonResponse

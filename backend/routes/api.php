@@ -68,6 +68,8 @@ Route::post('teachers/{teacher}', [\App\Http\Controllers\Api\TeacherController::
 Route::apiResource('lessons', \App\Http\Controllers\Api\LessonController::class);
 Route::get('semesters/{semester}/subjects/{subject}/lessons', [\App\Http\Controllers\Api\LessonController::class, "getLessonsBySemesterAndSubject"])
     ->name('semesters.subject.lessons.list');
+Route::get('semesters/{semester}/subjects/{subject}/lessons/marks', [\App\Http\Controllers\Api\LessonController::class, "getLessonsBySemesterAndSubjectWithMarks"])
+    ->name('semesters.subject.lessons.list.marks');
 
 Route::apiResource('activities', \App\Http\Controllers\Api\ActivityController::class);
 Route::get('lessons/{lesson}/activities', [\App\Http\Controllers\Api\ActivityController::class, "getActivitiesByLesson"])
@@ -77,6 +79,7 @@ Route::post('activities/{activity}/students/{student}/mark', [\App\Http\Controll
 Route::put('activities/{activity}/students/{student}/mark', [\App\Http\Controllers\Api\ActivityController::class, "updateMarkToStudent"])
     ->name('activities.students.update-mark');
 Route::get('activities/{activity}/marks', [\App\Http\Controllers\Api\ActivityController::class, "showWithMarks"]);
+Route::get('activities/marks/all', [\App\Http\Controllers\Api\ActivityController::class, "marks"]);
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/me', [UserAuthApiController::class, 'me']);
