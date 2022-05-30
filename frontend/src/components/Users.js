@@ -41,9 +41,11 @@ export const Users = () => {
     // Edit/create entity modal.
     const [open, setOpen] = React.useState(false)
     const [modalData, setModalData] = React.useState(initialModalData)
+    const [entityID, setEntityID] = React.useState(null)
     const [modalMode, setModalMode] = React.useState('add')
-    const onEditClick = (data) => () => {
+    const onEditClick = (id, data) => () => {
       setModalMode('edit')
+      setEntityID(id)
       setModalData(data)
       setOpen(true)
     }
@@ -68,10 +70,10 @@ export const Users = () => {
       if (modalMode === 'add') {
         dispatch.users.asyncCreateTeacher(formData)
       } else {
-        console.log('UPDATE')
+        dispatch.users.asyncUpdateTeacher({id: entityID, formData})
       }
       setOpen(false)
-    }, [modalMode, modalData])
+    }, [modalMode, modalData, entityID])
     // Fired on page render.
     React.useEffect(() => {
         if (teachersList === null) {
@@ -89,26 +91,28 @@ export const Users = () => {
                 <TableCell align="center">Фамилия</TableCell>
                 <TableCell align="center">Отчество</TableCell>
                 <TableCell align="center">Почта</TableCell>
+                <TableCell align="center">Должность</TableCell>
                 <TableCell align="center">Верифицирован</TableCell>
                 <TableCell align="center">Забанен</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {teachersList?.data?.map(({ user }) => (
+              {teachersList?.data?.map((profile) => (
                 <TableRow
-                  key={user.email}
+                  key={profile.user.email}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {user.first_name}
+                    {profile.user.first_name}
                   </TableCell>
-                  <TableCell align="center">{user.middle_name}</TableCell>
-                  <TableCell align="center">{user.last_name}</TableCell>
-                  <TableCell align="center">{user.email}</TableCell>
-                  <TableCell align="center">{user.approved}</TableCell>
-                  <TableCell align="center">{user.banned}</TableCell>
+                  <TableCell align="center">{profile.user.middle_name}</TableCell>
+                  <TableCell align="center">{profile.user.last_name}</TableCell>
+                  <TableCell align="center">{profile.user.email}</TableCell>
+                  <TableCell align="center">{profile.rank}</TableCell>
+                  <TableCell align="center">{profile.user.approved}</TableCell>
+                  <TableCell align="center">{profile.user.banned}</TableCell>
                   <TableCell align="center">
-                  <IconButton aria-label="edit" onClick={onEditClick({first_name: user.first_name, middle_name: user.middle_name, last_name: user.last_name, rank: user.rank})}>
+                  <IconButton aria-label="edit" onClick={onEditClick(profile.id, {first_name: profile.user.first_name, middle_name: profile.user.middle_name, last_name: profile.user.last_name, rank: profile.rank})}>
                     <Create />
                   </IconButton>
                   </TableCell>

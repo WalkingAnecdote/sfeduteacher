@@ -28,14 +28,23 @@ export const usersModel = {
 			this.setTeachersList(result)
 		},
         async asyncCreateTeacher(formData, rootState) {
-            const result = await fetch(TEACHERS_URL, {
+            await fetch(TEACHERS_URL, {
                 method: 'POST',
                 body: formData,
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            console.log(result)
+            await dispatch.users.asyncGetTeachersList()
+		},
+        async asyncUpdateTeacher(payload, rootState) {
+            await fetch(`${TEACHERS_URL}/${payload.id}`, {
+                method: 'POST',
+                body: payload.formData,
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
             await dispatch.users.asyncGetTeachersList()
 		},
 	}),
