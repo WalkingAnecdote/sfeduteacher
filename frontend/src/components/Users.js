@@ -25,7 +25,7 @@ export const Users = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {teachersList?.map(({ user }) => (
+            {teachersList?.data?.map(({ user }) => (
               <TableRow
                 key={user.email}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
