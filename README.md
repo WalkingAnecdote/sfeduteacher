@@ -65,6 +65,26 @@ docker exec app-backend sh -c 'php artisan db:seed --force'
 * http://localhost/
 * http://127.0.0.1/
 
+### Обновление контейнеров
+
+При изменении кодовой базы нужно остановить запущеннные контейнеры:
+
+```bash
+docker-compose down
+```
+
+И поднять из снова с ключем `--build`
+
+```bash
+docker-compose up -d --build
+```
+
+Если таблицы в БД были изменены запустить миграции:
+
+```bash
+docker exec app-backend sh -c 'php artisan migrate'
+```
+
 ### Возможные ошибки
 
 #### Ошибка с неправильными ключами Laravel:
