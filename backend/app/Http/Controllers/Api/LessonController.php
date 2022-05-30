@@ -8,6 +8,7 @@ use App\Http\Requests\Lesson\UpdateRequest;
 use App\Http\Resources\LessonResource;
 use App\Http\Resources\LessonsPaginateResource;
 use App\Http\Resources\LessonsResource;
+use App\Http\Resources\LessonsWithMarksPaginateResource;
 use App\Models\Lesson;
 use App\Models\Semester;
 use App\Models\Subject;
@@ -40,6 +41,13 @@ class LessonController extends Controller
     public function getLessonsBySemesterAndSubject(Semester $semester, Subject $subject): JsonResponse
     {
         return response()->json(new LessonsPaginateResource($this->lessonRepository
+            ->where('semester_id', $semester->id)
+            ->where('subject_id', $subject->id)
+            ->paginate()));
+    }
+    public function getLessonsBySemesterAndSubjectWithMarks(Semester $semester, Subject $subject): JsonResponse
+    {
+        return response()->json(new LessonsWithMarksPaginateResource($this->lessonRepository
             ->where('semester_id', $semester->id)
             ->where('subject_id', $subject->id)
             ->paginate()));

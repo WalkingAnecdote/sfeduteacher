@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Lesson extends Model
 {
@@ -22,18 +24,23 @@ class Lesson extends Model
         'date' => 'datetime'
     ];
 
-    public function teacher()
+    public function teacher(): BelongsTo
     {
         return $this->belongsTo(TeacherProfile::class);
     }
 
-    public function semester()
+    public function semester(): BelongsTo
     {
         return $this->belongsTo(Semester::class);
     }
 
-    public function subject()
+    public function subject(): BelongsTo
     {
         return $this->belongsTo(Subject::class);
+    }
+
+    public function activities(): HasMany
+    {
+        return $this->hasMany(Activity::class);
     }
 }
