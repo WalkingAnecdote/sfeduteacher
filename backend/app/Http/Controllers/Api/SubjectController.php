@@ -8,7 +8,9 @@ use App\Http\Requests\Subject\UpdateRequest;
 use App\Http\Resources\SubjectResource;
 use App\Http\Resources\SubjectsPaginateResource;
 use App\Http\Resources\SubjectsResource;
+use App\Http\Resources\SubjectsWithMarksResource;
 use App\Models\Semester;
+use App\Models\StudentProfile;
 use App\Models\Subject;
 use App\Repositories\SubjectRepository;
 use Illuminate\Http\JsonResponse;
@@ -40,6 +42,23 @@ class SubjectController extends Controller
     public function getSubjectsBySemester(Semester $semester): JsonResponse
     {
         return response()->json(new SubjectsPaginateResource($semester->subjects()->paginate()));
+    }
+
+    public function getSubjectsBySemesterWithMarks(Semester $semester): JsonResponse
+    {
+        foreach ($semester->subjects as $subject) {
+            $subject->semester_id = $semester->id;
+        }
+        return response()->json(new SubjectsWithMarksResource($semester->subjects));
+    }
+
+    public function getSubjectsBySemesterWithMarksByStudent(Semester $semester, StudentProfile $student): JsonResponse
+    {
+        foreach ($semester->subjects as $subject) {
+            $subject->semester_id = $semester->id;
+            $subject->student_id = $student->id;
+        }
+        return response()->json(new SubjectsWithMarksResource($semester->subjects));
     }
 
     /**
