@@ -11,22 +11,11 @@ const initialModalData = {
   recruitment_date: ''
 }
 
-const types = [
-  {
-    value: 'master',
-    label: 'магистры',
-  },
-  {
-    value: 'bachelor',
-    label: 'бакалавры',
-  }
-];
-
 export const Subjects = () => {
     // Get data from the store.
     const dispatch = useDispatch()
     const subjectsList = useSelector(state => state.subjects.subjectsList)
-
+    const teachersList = useSelector(state => state.users.teachersList)
     // Edit/create entity modal.
     const [open, setOpen] = React.useState(false)
     const [modalData, setModalData] = React.useState(initialModalData)
@@ -47,7 +36,7 @@ export const Subjects = () => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       if (modalMode === 'add') {
-        dispatch.groups.asyncCreateGroup(formData)
+        dispatch.subjects.asyncCreateSubject(formData)
       } else {
         const name = formData.get('name')
         dispatch.groups.asyncUpdateGroup({id: entityID, name})
@@ -59,7 +48,7 @@ export const Subjects = () => {
         if (subjectsList === null) {
             dispatch.subjects.asyncGetSubjectsList()
         }
-    }, [dispatch.grosubjectsups, subjectsList])
+    }, [subjectsList])
 
     return (
         <>
@@ -68,25 +57,25 @@ export const Subjects = () => {
             <TableHead>
               <TableRow>
                 <TableCell>Название</TableCell>
-                <TableCell align="center">Тип</TableCell>
-                <TableCell align="center">Дата набора</TableCell>
+                <TableCell align="center">Преподаватель</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {subjectsList?.data?.map((group) => (
+              {subjectsList?.data?.map((subj) => (
                 <TableRow
-                  key={group.id}
+                  key={subj.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {group.name}
+                    {subj.name}
                   </TableCell>
-                  <TableCell align="center">{group.type}</TableCell>
-                  <TableCell align="center">{group.recruitment_date}</TableCell>
                   <TableCell align="center">
-                  <IconButton aria-label="edit" onClick={onEditClick(group.id)}>
+                      {`${subj?.teacher?.user?.first_name} ${subj?.teacher?.user?.middle_name} ${subj?.teacher?.user?.last_name}`}
+                  </TableCell>
+                  <TableCell align="center">
+                  {/* <IconButton aria-label="edit" onClick={onEditClick(subj.id)}>
                     <Create />
-                  </IconButton>
+                  </IconButton> */}
                   </TableCell>
                 </TableRow>
               ))}
@@ -115,28 +104,17 @@ export const Subjects = () => {
                   margin="normal"
                   required
                   fullWidth
-                  label='Тип'
+                  label='Преподаватель'
                   select
-                  name='type'
+                  name='teacher_id'
                   autoFocus
                 >
-                  {types.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
+                  {teachersList?.data?.map((teacehr) => (
+                    <MenuItem key={teacehr.user.email} value={teacehr.id}>
+                      {`${teacehr.user.first_name} ${teacehr.user.middle_name} ${teacehr.user.last_name}`}
                     </MenuItem>
                   ))}
                 </TextField>
-                <TextField
-                  id="date"
-                  label="Дата набора"
-                  type="date"
-                  name='recruitment_date'
-                  defaultValue="2017-05-24"
-                  sx={{ width: 220 }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
               </>
               :
               <TextField
