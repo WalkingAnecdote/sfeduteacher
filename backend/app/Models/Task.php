@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Task extends Model
 {
@@ -12,8 +14,18 @@ class Task extends Model
     protected $fillable = [
         "test_id",
         "text",
-        "value"
+        "value",
+        "correct_answer_id",
+        "type", //quiz, mono
     ];
 
-    //answer
+    public function correct_answer(): BelongsTo
+    {
+        return $this->belongsTo(Answer::class, 'correct_answer_id');
+    }
+
+    public function questions(): HasMany
+    {
+        return $this->hasMany(Question::class);
+    }
 }

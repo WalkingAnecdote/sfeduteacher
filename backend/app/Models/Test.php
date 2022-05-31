@@ -17,6 +17,9 @@ class Test extends Model
         'max_value'
     ];
 
-    //questions (List<question_id>)
-    //tasks (List<task_id>)
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

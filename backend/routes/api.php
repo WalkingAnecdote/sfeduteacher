@@ -81,7 +81,13 @@ Route::put('activities/{activity}/students/{student}/mark', [\App\Http\Controlle
 Route::get('activities/{activity}/marks', [\App\Http\Controllers\Api\ActivityController::class, "showWithMarks"]);
 Route::get('activities/marks/all', [\App\Http\Controllers\Api\ActivityController::class, "marks"]);
 
+
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/me', [UserAuthApiController::class, 'me']);
     Route::post('/logout', [UserAuthApiController::class, 'logout']);
+
+    Route::get('chats', [\App\Http\Controllers\Api\ChatController::class, "getByParticipants"]);
+    Route::get('chats/{chat}', [\App\Http\Controllers\Api\ChatController::class, "show"]);
+    Route::put('chats/{chat}', [\App\Http\Controllers\Api\ChatController::class, "readChat"]);
+    Route::post('chats', [\App\Http\Controllers\Api\ChatController::class, "createMessage"]);
 });

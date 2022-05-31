@@ -10,11 +10,19 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
-        "test_id",
+        "task_id",
         "text",
         "value"
     ];
 
-    //answers (List<answer_id>)
-    //correct_answers (List<answer_id>)
+    public function task(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Task::class);
+    }
+
+    public function answers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Answer::class, 'question_answers');
+    }
+
 }
