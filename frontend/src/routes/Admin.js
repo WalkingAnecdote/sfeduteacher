@@ -8,7 +8,7 @@ import {
 import {
     ChevronLeft, Notifications, People, Layers, Menu
 } from '@mui/icons-material';
-import { Copyright, Users, Semesters, Groups } from '../components';
+import { Copyright, Users, Semesters, Groups, Subjects } from '../components';
 
 
 const drawerWidth = 240;
@@ -68,7 +68,7 @@ function switchContent(category) {
         case 'groups':
             return <Groups />;
         case 'subjects':
-            return <Typography>Subjects</Typography>;
+            return <Subjects />;
         case 'lessons':
             return <Typography>Lessons</Typography>;
         default:
@@ -146,12 +146,12 @@ function DashboardContent() {
                 </ListItemIcon>
                 <ListItemText primary="Пользователи" />
             </ListItemButton>
-            <ListItemButton onClick={handleCategory('semesters')}>
+            {/* <ListItemButton onClick={handleCategory('semesters')}>
                 <ListItemIcon>
                     <Layers />
                 </ListItemIcon>
                 <ListItemText primary="Семестры" />
-            </ListItemButton>
+            </ListItemButton> */}
             <ListItemButton onClick={handleCategory('groups')}>
                 <ListItemIcon>
                     <Layers />
