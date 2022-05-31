@@ -6,3 +6,6 @@ export const API_PATH = 'api'
 // API routes.
 export const API_SIGNIN = 'login'
 export const API_SELF = 'me'
+export const API_TEACHERS = 'teachers'
+export const API_GROUPS = 'groups'
+export const API_SUBJECTS = 'subjects'

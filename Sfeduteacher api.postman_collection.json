@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "176d1907-a71b-436d-bd4f-3eb7f3c9f967",
 		"name": "Sfeduteacher api",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21035697"
 	},
 	"item": [
 		{
@@ -52,16 +53,11 @@
 									}
 								],
 								"url": {
-									"raw": "0.0.0.0:885/api/me",
+									"raw": "{{api_route}}/me",
 									"host": [
-										"0",
-										"0",
-										"0",
-										"0"
+										"{{api_route}}"
 									],
-									"port": "885",
 									"path": [
-										"api",
 										"me"
 									]
 								}
@@ -243,16 +239,11 @@
 									]
 								},
 								"url": {
-									"raw": "0.0.0.0:885/api/login",
+									"raw": "{{api_route}}/login",
 									"host": [
-										"0",
-										"0",
-										"0",
-										"0"
+										"{{api_route}}"
 									],
-									"port": "885",
 									"path": [
-										"api",
 										"login"
 									]
 								}
@@ -478,8 +469,57 @@
 				{
 					"name": "register",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "{{register_first_name}}",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "{{register_last_name}}",
+									"type": "text"
+								},
+								{
+									"key": "middle_name",
+									"value": "{{register_middle_name}}",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "{{register_email}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{register_password}}",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "{{register_password}}",
+									"type": "text"
+								},
+								{
+									"key": "user_type",
+									"value": "{{register_user_type}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/register",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"register"
+							]
+						}
 					},
 					"response": [
 						{
@@ -498,52 +538,47 @@
 									"formdata": [
 										{
 											"key": "first_name",
-											"value": "Иван",
+											"value": "{{register_first_name}}",
 											"type": "text"
 										},
 										{
 											"key": "last_name",
-											"value": "Иванов",
+											"value": "{{register_last_name}}",
 											"type": "text"
 										},
 										{
 											"key": "middle_name",
-											"value": "Иванов",
+											"value": "{{register_middle_name}}",
 											"type": "text"
 										},
 										{
 											"key": "email",
-											"value": "admin123@admin.com",
+											"value": "{{register_email}}",
 											"type": "text"
 										},
 										{
 											"key": "password",
-											"value": "123123123",
+											"value": "{{register_password}}",
 											"type": "text"
 										},
 										{
 											"key": "password_confirmation",
-											"value": "123123123",
+											"value": "{{register_password}}",
 											"type": "text"
 										},
 										{
 											"key": "user_type",
-											"value": "admin",
+											"value": "{{register_user_type}}",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "0.0.0.0:885/api/register",
+									"raw": "{{api_route}}/register",
 									"host": [
-										"0",
-										"0",
-										"0",
-										"0"
+										"{{api_route}}"
 									],
-									"port": "885",
 									"path": [
-										"api",
 										"register"
 									]
 								}
@@ -704,6 +739,3035 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 60000,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTlmYzBmYmNmZDUwMzBkZjA3NTUzNjAwOWZjMDUxZDczZDcxOTk5NjJjODE5ZGIwM2NkZDk2MTU1MjdjMjljNTk2NTI4ZmE4ODZlZDdmNzYiLCJpYXQiOjE2NTI4NjgyMDkuOTI5NTQ2LCJuYmYiOjE2NTI4NjgyMDkuOTI5NTU4LCJleHAiOjE2NTI5MjgyMDkuOTE3OTIyLCJzdWIiOiI3Iiwic2NvcGVzIjpbXX0.llByGMONA1l3sEECRjVlh-nTOK0ApiV6oIo3MO7UsqF20Sua9ryi52VGvMt9rVeLi6YxZdum11RHXgLta0tbX965BD2EJZvUi6uCD8OG9BPX6h_0Tx0P_hT-npHECxbNt9_R03iKto-E3wlbt3ekCdEbJSsOi5_cHVqHxWqliajgVk-HtGDE0ELdwW9WSHiNHayHH58BwKBfDEQNMK0Tgtl4J4-YGMMQa6B_87WhRxJkmjt7N4eDwnkwlutgA0djcEVvjoYyw7QOk-2Bvy1tfd3Tf9_xlVqxNJJwTJPt2WppkLNqE_Veope5YUFKQ55uGaR3QnTcdbIzIsxd0OSEXchvJnUtLW2JIFtt_7LJ8nk-2MK7fDpCJHZEZMdGjyiz0sSYktR53HTV1gkG97cyDpuCAfAu2255XA9ssowzhjCFD_eHUsVkHIjzdHBMCCBIFuToEPKOD5ftgxuIXvdjPjKASbkWRCpgNnujlgDc5BSQq_8vuqHfvAMPFUHH1ZhQhM21plQn91EuP7pBV_NfS2w-ri8GHtPjZ3eMm5EyRMP1fWx35bIM_CNnpIow24mPSapq4SlzbEguNKwntrxghCsjzHWB6LVGmZLeKDMf9aUKJHLpMHsroOzsc4EA9UcIC6eMeqOrFbByllrrWzqWmwpUvjxTQ6ZW7YkbrbZuEBI\",\n    \"refresh_token\": \"def50200ea269ccd6f885d515cb99ce522156842e3443554224d3cebbaef51fa560c388f8a89213a3bdaedca54dbf47a98b22b1ade336257a3cbac4875e8d114f8aa104e28c0d6d9c87f791e8eaa69611067b803a7e594e9c31164ddc7b6086192b765e1b026dc09e06801e91d8b73ff689e2f7716b4093db3bb877d4d727506723c42f6c985fb4848a1783eb8d29e9475349a465756e1781b25d647486d78a65979bcab5b0068776a225acba93e513f2d175f8fc49f8d919b3f27dea7946769d73d9d94b63dbd9eb77f7ddb3337d14fe62c9521efca216cc5bfa133444f00c14f738241809dcef3907a579548e3bda6d4ba9a393a8bf2b3b7de0bd17c05a1efb0ae9a7b10f741787c950ffc4067d4486527758a09304b7fd9097530c958c3a795cfc84393cfcecf4add0b7b9ecb1c0e108bde70bf8a0f35b6bf9769de2fd4240e09af04e7afa05b137a8558368ceda6f5902e88554f3635eab8837124d9581909\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "List groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/groups",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List groups",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/groups?perPage=1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"groups"
+									],
+									"query": [
+										{
+											"key": "perPage",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:55:03 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:55:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Ktbo4\",\n            \"type\": \"master\",\n            \"recruitment_date\": null\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Ктбо1\",\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        },\n        {\n            \"id\": 3,\n            \"name\": null,\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Ктбо1\",\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"УэБО1\",\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        }\n    ],\n    \"pagination_info\": {\n        \"total\": 5,\n        \"count\": 5,\n        \"per_page\": 25,\n        \"current_page\": 1,\n        \"total_pages\": 1,\n        \"has_more_pages\": false\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Group",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/groups/1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"groups",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Ктбо1",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "master",
+									"type": "text"
+								},
+								{
+									"key": "recruitment_date",
+									"value": "2022-09-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/groups",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create group",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Ктбо1",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "master",
+											"type": "text"
+										},
+										{
+											"key": "recruitment_date",
+											"value": "2022-09-01",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/groups",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"groups"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 18:38:26 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 18:38:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"name\": \"Ктбо1\",\n    \"type\": \"master\",\n    \"recruitment_date\": \"2022-09-01\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Group",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_route}}/groups/5?name=УэБО1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"groups",
+								"5"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "УэБО1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Group",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{api_route}}/groups/5?name=УэБО1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"groups",
+										"5"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "УэБО1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 18:51:12 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 18:51:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"name\": \"УэБО1\",\n    \"type\": \"master\",\n    \"recruitment_date\": \"2022-09-01\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete group",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Semesters",
+			"item": [
+				{
+					"name": "List Semesters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/groups/1/semesters",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"semesters"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Semesters",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/groups/1/semesters",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"groups",
+										"1",
+										"semesters"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:55:45 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:55:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "56"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"number\": 7,\n            \"group\": {\n                \"id\": 1,\n                \"name\": \"Ktbo4\",\n                \"type\": \"master\",\n                \"recruitment_date\": null\n            }\n        },\n        {\n            \"id\": 3,\n            \"number\": 2,\n            \"group\": {\n                \"id\": 1,\n                \"name\": \"Ktbo4\",\n                \"type\": \"master\",\n                \"recruitment_date\": null\n            }\n        }\n    ],\n    \"pagination_info\": {\n        \"total\": 2,\n        \"count\": 2,\n        \"per_page\": 15,\n        \"current_page\": 1,\n        \"total_pages\": 1,\n        \"has_more_pages\": false\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Semester",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/groups/1/semesters/1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"semesters",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Semester",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "number",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/groups/1/semesters",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"semesters"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Semester",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "number",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/groups/1/semesters",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"groups",
+										"1",
+										"semesters"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 19:16:23 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 19:16:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 3,\n    \"number\": \"2\",\n    \"group\": {\n        \"id\": 1,\n        \"name\": \"Ktbo4\",\n        \"type\": \"master\",\n        \"recruitment_date\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Semester",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/groups/1/semesters/2?number=3",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"semesters",
+								"2"
+							],
+							"query": [
+								{
+									"key": "number",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Semester",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/groups/1/semesters/2?number=3",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"groups",
+										"1",
+										"semesters",
+										"2"
+									],
+									"query": [
+										{
+											"key": "number",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 19:17:45 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 19:17:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"number\": \"3\",\n    \"group\": {\n        \"id\": 1,\n        \"name\": \"Ktbo4\",\n        \"type\": \"master\",\n        \"recruitment_date\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Semester",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/groups/1/semesters/2",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"groups",
+								"1",
+								"semesters",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Semester",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/groups/1/semesters/2",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"groups",
+										"1",
+										"semesters",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 19:19:39 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 19:19:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "true"
+						}
+					]
+				},
+				{
+					"name": "Attach subjects to semester",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "subjects",
+									"value": "1,2,3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/semesters/1/subjects/attach",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"semesters",
+								"1",
+								"subjects",
+								"attach"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Attach subjects to semester",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "subjects",
+											"value": "1,2,3",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/semesters/1/subjects/attach",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"semesters",
+										"1",
+										"subjects",
+										"attach"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:59:14 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:59:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "true"
+						}
+					]
+				},
+				{
+					"name": "Detach subjects to semester Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "subjects",
+									"value": "1,2,3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/semesters/1/subjects/detach",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"semesters",
+								"1",
+								"subjects",
+								"detach"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Detach subjects to semester Copy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "subjects",
+											"value": "1,2,3",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/semesters/1/subjects/detach",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"semesters",
+										"1",
+										"subjects",
+										"detach"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 10:01:29 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 10:01:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "true"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Subjects",
+			"item": [
+				{
+					"name": "List subjects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/subjects",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"subjects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List subjects",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/subjects",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"subjects"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:55:56 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:55:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "55"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"Test1\",\n            \"teacher\": {\n                \"id\": 2,\n                \"rank\": \"ст.Преподаватель\",\n                \"user\": {\n                    \"id\": 13,\n                    \"first_name\": \"Test\",\n                    \"last_name\": \"Иванов\",\n                    \"middle_name\": \"Иванов\",\n                    \"email\": \"teacher@mail.ru\",\n                    \"email_verified_at\": null,\n                    \"approved\": 0,\n                    \"banned\": 0,\n                    \"roles\": [\n                        \"teacher\"\n                    ],\n                    \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n                }\n            }\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Русский\",\n            \"teacher\": {\n                \"id\": 1,\n                \"rank\": null,\n                \"user\": {\n                    \"id\": 2,\n                    \"first_name\": \"Hassie\",\n                    \"last_name\": \"Kautzer\",\n                    \"middle_name\": \"bradtke.com\",\n                    \"email\": \"teacher@sfedu.com\",\n                    \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n                    \"approved\": 0,\n                    \"banned\": 0,\n                    \"roles\": [\n                        \"teacher\"\n                    ],\n                    \"created_at\": \"2022-05-22T12:13:01.000000Z\"\n                }\n            }\n        }\n    ],\n    \"pagination_info\": {\n        \"total\": 2,\n        \"count\": 2,\n        \"per_page\": 25,\n        \"current_page\": 1,\n        \"total_pages\": 1,\n        \"has_more_pages\": false\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Subjects by semester",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/semesters/1/subjects",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"semesters",
+								"1",
+								"subjects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subject",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/subjects/1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"subjects",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Subject",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/subjects/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"subjects",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 18:56:28 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 18:56:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Test\",\n    \"teacher\": {\n        \"id\": 1,\n        \"user\": {\n            \"id\": 2,\n            \"first_name\": \"Hassie\",\n            \"last_name\": \"Kautzer\",\n            \"middle_name\": \"bradtke.com\",\n            \"email\": \"teacher@sfedu.com\",\n            \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"teacher\"\n            ],\n            \"created_at\": \"2022-05-22T12:13:01.000000Z\",\n            \"profile\": {\n                \"id\": 1,\n                \"rank\": null,\n                \"created_at\": \"2022-05-22T12:13:01.000000Z\",\n                \"updated_at\": \"2022-05-22T12:13:01.000000Z\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Subject",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Математика ",
+									"type": "text"
+								},
+								{
+									"key": "teacher_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/subjects",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"subjects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Subject",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Математика ",
+											"type": "text"
+										},
+										{
+											"key": "teacher_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/subjects",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"subjects"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 18:57:18 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 18:57:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"name\": \"Математика\",\n    \"teacher\": {\n        \"id\": 1,\n        \"user\": {\n            \"id\": 2,\n            \"first_name\": \"Hassie\",\n            \"last_name\": \"Kautzer\",\n            \"middle_name\": \"bradtke.com\",\n            \"email\": \"teacher@sfedu.com\",\n            \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"teacher\"\n            ],\n            \"created_at\": \"2022-05-22T12:13:01.000000Z\",\n            \"profile\": {\n                \"id\": 1,\n                \"rank\": null,\n                \"created_at\": \"2022-05-22T12:13:01.000000Z\",\n                \"updated_at\": \"2022-05-22T12:13:01.000000Z\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Subject",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Update Subject",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/subjects/1?name=Test1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"subjects",
+										"1"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Test1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 18:57:41 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 May 2022 18:57:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Test1\",\n    \"teacher\": {\n        \"id\": 1,\n        \"user\": {\n            \"id\": 2,\n            \"first_name\": \"Hassie\",\n            \"last_name\": \"Kautzer\",\n            \"middle_name\": \"bradtke.com\",\n            \"email\": \"teacher@sfedu.com\",\n            \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"teacher\"\n            ],\n            \"created_at\": \"2022-05-22T12:13:01.000000Z\",\n            \"profile\": {\n                \"id\": 1,\n                \"rank\": null,\n                \"created_at\": \"2022-05-22T12:13:01.000000Z\",\n                \"updated_at\": \"2022-05-22T12:13:01.000000Z\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Subject",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/subjects/1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"subjects",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Students",
+			"item": [
+				{
+					"name": "Get Students by Group",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Get Students by Group",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/groups/3/students",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"groups",
+										"3",
+										"students"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:56:05 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:56:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 5,\n        \"user\": {\n            \"id\": 11,\n            \"first_name\": \"Иван\",\n            \"last_name\": \"Иванов\",\n            \"middle_name\": \"Иванов\",\n            \"email\": \"student2@mail.ru\",\n            \"email_verified_at\": null,\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"student\"\n            ],\n            \"created_at\": \"2022-05-28T09:24:40.000000Z\"\n        },\n        \"group\": {\n            \"id\": 3,\n            \"name\": null,\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Student profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/students/3",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"students",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Student profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/students/3",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"students",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:21:57 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:21:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 3,\n    \"user\": {\n        \"id\": 9,\n        \"first_name\": \"Иван\",\n        \"last_name\": \"Иванов\",\n        \"middle_name\": \"Иванов\",\n        \"email\": \"studentTest@mail.ru233\",\n        \"email_verified_at\": null,\n        \"approved\": 0,\n        \"banned\": 0,\n        \"roles\": [\n            \"student\"\n        ],\n        \"created_at\": \"2022-05-28T09:15:42.000000Z\"\n    },\n    \"group\": {\n        \"id\": 2,\n        \"name\": \"Ктбо1\",\n        \"type\": \"master\",\n        \"recruitment_date\": \"2022-09-01\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Students",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/students?page=1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"students"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Students",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/students?page=1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"students"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:25:25 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:25:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "54"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"user\": {\n            \"id\": 3,\n            \"first_name\": \"Geoffrey\",\n            \"last_name\": \"Stokes\",\n            \"middle_name\": \"klocko.biz\",\n            \"email\": \"student@sfedu.com\",\n            \"email_verified_at\": \"2022-05-22T12:13:02.000000Z\",\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"student\"\n            ],\n            \"created_at\": \"2022-05-22T12:13:02.000000Z\"\n        },\n        \"group\": {\n            \"id\": 2,\n            \"name\": \"Ктбо1\",\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        }\n    },\n    {\n        \"id\": 2,\n        \"user\": null,\n        \"group\": {\n            \"id\": 2,\n            \"name\": \"Ктбо1\",\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        }\n    },\n    {\n        \"id\": 3,\n        \"user\": {\n            \"id\": 9,\n            \"first_name\": \"Иван\",\n            \"last_name\": \"Иванов\",\n            \"middle_name\": \"Иванов\",\n            \"email\": \"studentTest@mail.ru233\",\n            \"email_verified_at\": null,\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"student\"\n            ],\n            \"created_at\": \"2022-05-28T09:15:42.000000Z\"\n        },\n        \"group\": {\n            \"id\": 2,\n            \"name\": \"Ктбо1\",\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        }\n    },\n    {\n        \"id\": 4,\n        \"user\": {\n            \"id\": 10,\n            \"first_name\": \"Иван\",\n            \"last_name\": \"Иванов\",\n            \"middle_name\": \"Иванов\",\n            \"email\": \"student1@mail.ru\",\n            \"email_verified_at\": null,\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"student\"\n            ],\n            \"created_at\": \"2022-05-28T09:16:06.000000Z\"\n        },\n        \"group\": {\n            \"id\": 2,\n            \"name\": \"Ктбо1\",\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        }\n    },\n    {\n        \"id\": 5,\n        \"user\": {\n            \"id\": 11,\n            \"first_name\": \"Иван\",\n            \"last_name\": \"Иванов\",\n            \"middle_name\": \"Иванов\",\n            \"email\": \"student2@mail.ru\",\n            \"email_verified_at\": null,\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"student\"\n            ],\n            \"created_at\": \"2022-05-28T09:24:40.000000Z\"\n        },\n        \"group\": {\n            \"id\": 3,\n            \"name\": null,\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        }\n    },\n    {\n        \"id\": 6,\n        \"user\": {\n            \"id\": 12,\n            \"first_name\": \"Иван\",\n            \"last_name\": \"Иванов\",\n            \"middle_name\": \"Иванов\",\n            \"email\": \"student3@mail.ru\",\n            \"email_verified_at\": null,\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"student\"\n            ],\n            \"created_at\": \"2022-05-28T09:24:51.000000Z\"\n        },\n        \"group\": {\n            \"id\": 4,\n            \"name\": \"Ктбо1\",\n            \"type\": \"master\",\n            \"recruitment_date\": \"2022-09-01\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create Student User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user[first_name]",
+									"value": "{{register_first_name}}",
+									"type": "text"
+								},
+								{
+									"key": "user[last_name]",
+									"value": "{{register_last_name}}",
+									"type": "text"
+								},
+								{
+									"key": "user[middle_name]",
+									"value": "{{register_middle_name}}",
+									"type": "text"
+								},
+								{
+									"key": "user[email]",
+									"value": "student1@mail.ru",
+									"type": "text"
+								},
+								{
+									"key": "user[password]",
+									"value": "{{register_password}}",
+									"type": "text"
+								},
+								{
+									"key": "profile[group_id]",
+									"value": "{{group_id}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/students",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Student User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user[first_name]",
+											"value": "{{register_first_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[last_name]",
+											"value": "{{register_last_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[middle_name]",
+											"value": "{{register_middle_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[email]",
+											"value": "student1@mail.ru",
+											"type": "text"
+										},
+										{
+											"key": "user[password]",
+											"value": "{{register_password}}",
+											"type": "text"
+										},
+										{
+											"key": "profile[group_id]",
+											"value": "{{group_id}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/students",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:16:06 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:16:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"user\": {\n        \"id\": 10,\n        \"first_name\": \"Иван\",\n        \"last_name\": \"Иванов\",\n        \"middle_name\": \"Иванов\",\n        \"email\": \"student1@mail.ru\",\n        \"email_verified_at\": null,\n        \"approved\": 0,\n        \"banned\": 0,\n        \"roles\": [\n            \"student\"\n        ],\n        \"created_at\": \"2022-05-28T09:16:06.000000Z\"\n    },\n    \"group\": {\n        \"id\": 2,\n        \"name\": \"Ктбо1\",\n        \"type\": \"master\",\n        \"recruitment_date\": \"2022-09-01\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update student profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user[first_name]",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "user[last_name]",
+									"value": "{{register_last_name}}",
+									"type": "text"
+								},
+								{
+									"key": "user[middle_name]",
+									"value": "{{register_middle_name}}",
+									"type": "text"
+								},
+								{
+									"key": "profile[group_id]",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/students/1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"students",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update student profile",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user[first_name]",
+											"value": "Test",
+											"type": "text"
+										},
+										{
+											"key": "user[last_name]",
+											"value": "{{register_last_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[middle_name]",
+											"value": "{{register_middle_name}}",
+											"type": "text"
+										},
+										{
+											"key": "profile[group_id]",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/students/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"students",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:37:00 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:37:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"user\": {\n        \"id\": 3,\n        \"first_name\": \"Test\",\n        \"last_name\": \"Иванов\",\n        \"middle_name\": \"Иванов\",\n        \"email\": \"student@sfedu.com\",\n        \"email_verified_at\": \"2022-05-22T12:13:02.000000Z\",\n        \"approved\": 0,\n        \"banned\": 0,\n        \"roles\": [\n            \"student\"\n        ],\n        \"created_at\": \"2022-05-22T12:13:02.000000Z\"\n    },\n    \"group\": {\n        \"id\": 2,\n        \"name\": \"Ктбо1\",\n        \"type\": \"master\",\n        \"recruitment_date\": \"2022-09-01\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Teachers",
+			"item": [
+				{
+					"name": "List Teachers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/teachers",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"teachers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Teachers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/teachers",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"teachers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:56:21 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:56:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"rank\": null,\n            \"user\": {\n                \"id\": 2,\n                \"first_name\": \"Hassie\",\n                \"last_name\": \"Kautzer\",\n                \"middle_name\": \"bradtke.com\",\n                \"email\": \"teacher@sfedu.com\",\n                \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"teacher\"\n                ],\n                \"created_at\": \"2022-05-22T12:13:01.000000Z\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"rank\": \"ст.Преподаватель\",\n            \"user\": {\n                \"id\": 13,\n                \"first_name\": \"Test\",\n                \"last_name\": \"Иванов\",\n                \"middle_name\": \"Иванов\",\n                \"email\": \"teacher@mail.ru\",\n                \"email_verified_at\": null,\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"teacher\"\n                ],\n                \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n            }\n        },\n        {\n            \"id\": 3,\n            \"rank\": \"доцент\",\n            \"user\": {\n                \"id\": 14,\n                \"first_name\": \"Иван\",\n                \"last_name\": \"Иванов\",\n                \"middle_name\": \"Иванов\",\n                \"email\": \"teacher2@mail.ru\",\n                \"email_verified_at\": null,\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"teacher\"\n                ],\n                \"created_at\": \"2022-05-28T10:53:51.000000Z\"\n            }\n        }\n    ],\n    \"pagination_info\": {\n        \"total\": 3,\n        \"count\": 3,\n        \"per_page\": 25,\n        \"current_page\": 1,\n        \"total_pages\": 1,\n        \"has_more_pages\": false\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Teacher profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/teachers/1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"teachers",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Teacher profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/teachers/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"teachers",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 10:22:23 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 10:22:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"rank\": null,\n    \"user\": {\n        \"id\": 2,\n        \"first_name\": \"Hassie\",\n        \"last_name\": \"Kautzer\",\n        \"middle_name\": \"bradtke.com\",\n        \"email\": \"teacher@sfedu.com\",\n        \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n        \"approved\": 0,\n        \"banned\": 0,\n        \"roles\": [\n            \"teacher\"\n        ],\n        \"created_at\": \"2022-05-22T12:13:01.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Teacher profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user[first_name]",
+									"value": "{{register_first_name}}",
+									"type": "text"
+								},
+								{
+									"key": "user[last_name]",
+									"value": "{{register_last_name}}",
+									"type": "text"
+								},
+								{
+									"key": "user[middle_name]",
+									"value": "{{register_middle_name}}",
+									"type": "text"
+								},
+								{
+									"key": "user[email]",
+									"value": "teacher@mail.ru",
+									"type": "text"
+								},
+								{
+									"key": "user[password]",
+									"value": "{{register_password}}",
+									"type": "text"
+								},
+								{
+									"key": "profile[rank]",
+									"value": "доцент",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/teachers",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"teachers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Teacher profile",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user[first_name]",
+											"value": "{{register_first_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[last_name]",
+											"value": "{{register_last_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[middle_name]",
+											"value": "{{register_middle_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[email]",
+											"value": "teacher2@mail.ru",
+											"type": "text"
+										},
+										{
+											"key": "user[password]",
+											"value": "{{register_password}}",
+											"type": "text"
+										},
+										{
+											"key": "profile[rank]",
+											"value": "доцент",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/teachers",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"teachers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 10:53:51 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 10:53:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 3,\n    \"rank\": \"доцент\",\n    \"user\": {\n        \"id\": 14,\n        \"first_name\": \"Иван\",\n        \"last_name\": \"Иванов\",\n        \"middle_name\": \"Иванов\",\n        \"email\": \"teacher2@mail.ru\",\n        \"email_verified_at\": null,\n        \"approved\": 0,\n        \"banned\": 0,\n        \"roles\": [\n            \"teacher\"\n        ],\n        \"created_at\": \"2022-05-28T10:53:51.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Create Teacher profile",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user[first_name]",
+											"value": "{{register_first_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[last_name]",
+											"value": "{{register_last_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[middle_name]",
+											"value": "{{register_middle_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[email]",
+											"value": "teacher@mail.ru",
+											"type": "text"
+										},
+										{
+											"key": "user[password]",
+											"value": "{{register_password}}",
+											"type": "text"
+										},
+										{
+											"key": "profile[rank]",
+											"value": "доцент",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/teachers",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"teachers"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 10:53:34 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 10:53:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": \"Sorry, something went wrong.\",\n    \"message\": \"The user.email has already been taken.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update teacher profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user[first_name]",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "user[last_name]",
+									"value": "{{register_last_name}}",
+									"type": "text"
+								},
+								{
+									"key": "user[middle_name]",
+									"value": "{{register_middle_name}}",
+									"type": "text"
+								},
+								{
+									"key": "profile[rank]",
+									"value": "ст.Преподаватель",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/teachers/2",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"teachers",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update teacher profile",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user[first_name]",
+											"value": "Test",
+											"type": "text"
+										},
+										{
+											"key": "user[last_name]",
+											"value": "{{register_last_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[middle_name]",
+											"value": "{{register_middle_name}}",
+											"type": "text"
+										},
+										{
+											"key": "profile[rank]",
+											"value": "ст.Преподаватель",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/teachers/2",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"teachers",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 10:53:12 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 10:53:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"rank\": \"ст.Преподаватель\",\n    \"user\": {\n        \"id\": 13,\n        \"first_name\": \"Test\",\n        \"last_name\": \"Иванов\",\n        \"middle_name\": \"Иванов\",\n        \"email\": \"teacher@mail.ru\",\n        \"email_verified_at\": null,\n        \"approved\": 0,\n        \"banned\": 0,\n        \"roles\": [\n            \"teacher\"\n        ],\n        \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Lessons",
+			"item": [
+				{
+					"name": "Get lessons",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Get lessons",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/lessons",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"lessons"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:56:37 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 29 May 2022 11:56:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"date\": \"2022-10-10T14:40:00.000000Z\",\n            \"theme\": \"урок\",\n            \"type\": \"practice\",\n            \"semester_id\": 1,\n            \"subject_id\": 1,\n            \"teacher\": {\n                \"id\": 2,\n                \"rank\": \"ст.Преподаватель\",\n                \"user\": {\n                    \"id\": 13,\n                    \"first_name\": \"Test\",\n                    \"last_name\": \"Иванов\",\n                    \"middle_name\": \"Иванов\",\n                    \"email\": \"teacher@mail.ru\",\n                    \"email_verified_at\": null,\n                    \"approved\": 0,\n                    \"banned\": 0,\n                    \"roles\": [\n                        \"teacher\"\n                    ],\n                    \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n                }\n            }\n        },\n        {\n            \"id\": 2,\n            \"date\": \"2022-10-10T16:20:00.000000Z\",\n            \"theme\": \"Название темы урока\",\n            \"type\": \"practice\",\n            \"semester_id\": 1,\n            \"subject_id\": 2,\n            \"teacher\": {\n                \"id\": 2,\n                \"rank\": \"ст.Преподаватель\",\n                \"user\": {\n                    \"id\": 13,\n                    \"first_name\": \"Test\",\n                    \"last_name\": \"Иванов\",\n                    \"middle_name\": \"Иванов\",\n                    \"email\": \"teacher@mail.ru\",\n                    \"email_verified_at\": null,\n                    \"approved\": 0,\n                    \"banned\": 0,\n                    \"roles\": [\n                        \"teacher\"\n                    ],\n                    \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n                }\n            }\n        },\n        {\n            \"id\": 3,\n            \"date\": \"2022-10-10T16:20:00.000000Z\",\n            \"theme\": \"урок\",\n            \"type\": \"practice\",\n            \"semester_id\": 1,\n            \"subject_id\": 1,\n            \"teacher\": {\n                \"id\": 2,\n                \"rank\": \"ст.Преподаватель\",\n                \"user\": {\n                    \"id\": 13,\n                    \"first_name\": \"Test\",\n                    \"last_name\": \"Иванов\",\n                    \"middle_name\": \"Иванов\",\n                    \"email\": \"teacher@mail.ru\",\n                    \"email_verified_at\": null,\n                    \"approved\": 0,\n                    \"banned\": 0,\n                    \"roles\": [\n                        \"teacher\"\n                    ],\n                    \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n                }\n            }\n        }\n    ],\n    \"pagination_info\": {\n        \"total\": 3,\n        \"count\": 3,\n        \"per_page\": 25,\n        \"current_page\": 1,\n        \"total_pages\": 1,\n        \"has_more_pages\": false\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get lessons by semester and subject",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/semesters/1/subjects/2/lessons",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"semesters",
+								"1",
+								"subjects",
+								"2",
+								"lessons"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get lessons by semester and subject",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/semesters/1/subjects/2/lessons",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"semesters",
+										"1",
+										"subjects",
+										"2",
+										"lessons"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:39:12 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:39:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 2,\n        \"date\": \"2022-10-10T16:20:00.000000Z\",\n        \"theme\": \"Название темы урока\",\n        \"type\": \"practice\",\n        \"semester_id\": 1,\n        \"subject_id\": 2,\n        \"teacher\": {\n            \"id\": 2,\n            \"rank\": \"ст.Преподаватель\",\n            \"user\": {\n                \"id\": 13,\n                \"first_name\": \"Test\",\n                \"last_name\": \"Иванов\",\n                \"middle_name\": \"Иванов\",\n                \"email\": \"teacher@mail.ru\",\n                \"email_verified_at\": null,\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"teacher\"\n                ],\n                \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n            }\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get lesson",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/lessons/4",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"lessons",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get lesson",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/lessons/4",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"lessons",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:27:48 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:27:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"date\": \"2022-10-10T16:20:00.000000Z\",\n    \"theme\": \"урок\",\n    \"type\": \"practice\",\n    \"teacher\": {\n        \"id\": 2,\n        \"rank\": \"ст.Преподаватель\",\n        \"user\": {\n            \"id\": 13,\n            \"first_name\": \"Test\",\n            \"last_name\": \"Иванов\",\n            \"middle_name\": \"Иванов\",\n            \"email\": \"teacher@mail.ru\",\n            \"email_verified_at\": null,\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"teacher\"\n            ],\n            \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create lesson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "date",
+									"value": " 2022-10-10 16:20:00",
+									"type": "text"
+								},
+								{
+									"key": "theme",
+									"value": " урок",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": " practice",
+									"type": "text"
+								},
+								{
+									"key": "teacher_id",
+									"value": " 2",
+									"type": "text"
+								},
+								{
+									"key": "semester_id",
+									"value": " 1",
+									"type": "text"
+								},
+								{
+									"key": "subject_id",
+									"value": " 1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/lessons",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"lessons"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create lesson",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "date",
+											"value": " 2022-10-10 16:20:00",
+											"type": "text"
+										},
+										{
+											"key": "theme",
+											"value": " урок",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": " practice",
+											"type": "text"
+										},
+										{
+											"key": "teacher_id",
+											"value": " 2",
+											"type": "text"
+										},
+										{
+											"key": "semester_id",
+											"value": " 1",
+											"type": "text"
+										},
+										{
+											"key": "subject_id",
+											"value": " 1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/lessons",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"lessons"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:26:38 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:26:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"date\": \"2022-10-10T16:20:00.000000Z\",\n    \"theme\": \"урок\",\n    \"type\": \"practice\",\n    \"teacher\": {\n        \"id\": 2,\n        \"rank\": \"ст.Преподаватель\",\n        \"user\": {\n            \"id\": 13,\n            \"first_name\": \"Test\",\n            \"last_name\": \"Иванов\",\n            \"middle_name\": \"Иванов\",\n            \"email\": \"teacher@mail.ru\",\n            \"email_verified_at\": null,\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"teacher\"\n            ],\n            \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update lesson",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/lessons/2?theme=Название темы урока&subject_id=2",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"lessons",
+								"2"
+							],
+							"query": [
+								{
+									"key": "theme",
+									"value": "Название темы урока"
+								},
+								{
+									"key": "subject_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update lesson",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/lessons/4?theme=Название темы урока",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"lessons",
+										"4"
+									],
+									"query": [
+										{
+											"key": "theme",
+											"value": "Название темы урока"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:29:58 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:29:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"date\": \"2022-10-10T16:20:00.000000Z\",\n    \"theme\": \"Название темы урока\",\n    \"type\": \"practice\",\n    \"semester_id\": 1,\n    \"subject_id\": 1,\n    \"teacher\": {\n        \"id\": 2,\n        \"rank\": \"ст.Преподаватель\",\n        \"user\": {\n            \"id\": 13,\n            \"first_name\": \"Test\",\n            \"last_name\": \"Иванов\",\n            \"middle_name\": \"Иванов\",\n            \"email\": \"teacher@mail.ru\",\n            \"email_verified_at\": null,\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"teacher\"\n            ],\n            \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete lesson",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/lessons/4",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"lessons",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete lesson",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/lessons/4",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"lessons",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:30:19 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:30:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "1"
 						}
 					]
 				}
