@@ -8,7 +8,7 @@ import {
 import {
     ChevronLeft, Notifications, People, Layers, Menu
 } from '@mui/icons-material';
-import { Copyright, Users } from '../components';
+import { Copyright, Users, Semesters, Groups } from '../components';
 
 
 const drawerWidth = 240;
@@ -64,9 +64,9 @@ function switchContent(category) {
         case 'users':
             return <Users />;
         case 'semesters':
-            return <Typography>Semesters</Typography>;
+            return <Semesters />
         case 'groups':
-            return <Typography>Groups</Typography>;
+            return <Groups />;
         case 'subjects':
             return <Typography>Subjects</Typography>;
         case 'lessons':

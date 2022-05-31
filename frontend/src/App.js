@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { Provider, useSelector } from 'react-redux'
 import { init } from '@rematch/core'
-import { tokenModel, userModel, usersModel } from './models'
+import { groupsModel, tokenModel, userModel, usersModel } from './models'
 import {useRedirect} from './hooks'
 import MainPage from "./routes/Main";
 import ProfilePage from "./routes/Profile";
@@ -18,7 +18,8 @@ const store = init({
   models: {
     token: tokenModel,
     user: userModel,
-    users: usersModel
+    users: usersModel,
+    groups: groupsModel
   }
 })
 
