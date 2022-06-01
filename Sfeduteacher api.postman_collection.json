@@ -2098,6 +2098,48 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Subjects with marks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/semesters/1/subjects/marks",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"semesters",
+								"1",
+								"subjects",
+								"marks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subject with marks by student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/semesters/1/students/1/subjects/marks",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"semesters",
+								"1",
+								"students",
+								"1",
+								"subjects",
+								"marks"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2108,7 +2150,18 @@
 					"name": "Get Students by Group",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/groups/3/students",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"groups",
+								"3",
+								"students"
+							]
+						}
 					},
 					"response": [
 						{
@@ -2379,7 +2432,7 @@
 								},
 								{
 									"key": "user[email]",
-									"value": "student1@mail.ru",
+									"value": "student3@mail.ru",
 									"type": "text"
 								},
 								{
@@ -2389,7 +2442,7 @@
 								},
 								{
 									"key": "profile[group_id]",
-									"value": "{{group_id}}",
+									"value": "4",
 									"type": "text"
 								}
 							]
@@ -3356,6 +3409,164 @@
 					]
 				},
 				{
+					"name": "Get lessons by semester and subject with mark",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/semesters/1/subjects/2/lessons/marks",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"semesters",
+								"1",
+								"subjects",
+								"2",
+								"lessons",
+								"marks"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get lessons by semester and subject",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/semesters/1/subjects/2/lessons",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"semesters",
+										"1",
+										"subjects",
+										"2",
+										"lessons"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:39:12 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 11:39:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 2,\n        \"date\": \"2022-10-10T16:20:00.000000Z\",\n        \"theme\": \"Название темы урока\",\n        \"type\": \"practice\",\n        \"semester_id\": 1,\n        \"subject_id\": 2,\n        \"teacher\": {\n            \"id\": 2,\n            \"rank\": \"ст.Преподаватель\",\n            \"user\": {\n                \"id\": 13,\n                \"first_name\": \"Test\",\n                \"last_name\": \"Иванов\",\n                \"middle_name\": \"Иванов\",\n                \"email\": \"teacher@mail.ru\",\n                \"email_verified_at\": null,\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"teacher\"\n                ],\n                \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n            }\n        }\n    }\n]"
+						},
+						{
+							"name": "Get lessons by semester and subject with mark",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/semesters/1/subjects/2/lessons/marks",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"semesters",
+										"1",
+										"subjects",
+										"2",
+										"lessons",
+										"marks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 30 May 2022 23:02:44 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 30 May 2022 23:02:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 2,\n            \"date\": \"2022-10-10T16:20:00.000000Z\",\n            \"theme\": \"Название темы урока\",\n            \"type\": \"practice\",\n            \"semester_id\": 1,\n            \"subject_id\": 2,\n            \"teacher_id\": 2,\n            \"activities\": [\n                {\n                    \"id\": 2,\n                    \"description\": \"Посещение #2\",\n                    \"max_mark\": 1,\n                    \"lesson_id\": 2,\n                    \"marks\": [\n                        {\n                            \"id\": 2,\n                            \"activity_id\": 2,\n                            \"student_id\": 1,\n                            \"value\": 1,\n                            \"reason\": null\n                        }\n                    ]\n                }\n            ]\n        }\n    ],\n    \"pagination_info\": {\n        \"total\": 1,\n        \"count\": 1,\n        \"per_page\": 25,\n        \"current_page\": 1,\n        \"total_pages\": 1,\n        \"has_more_pages\": false\n    }\n}"
+						}
+					]
+				},
+				{
 					"name": "Get lesson",
 					"request": {
 						"method": "GET",
@@ -3770,6 +3981,727 @@
 							"body": "1"
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "List activities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/activities",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List activities by lesson",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/lessons/1/activities",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"lessons",
+								"1",
+								"activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get activity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/activities/1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Activity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "Посещение #2",
+									"type": "text"
+								},
+								{
+									"key": "max_mark",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "lesson_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/activities",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"activities"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Activity",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "description",
+											"value": "Посещение",
+											"type": "text"
+										},
+										{
+											"key": "max_mark",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "lesson_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/activities",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"activities"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 30 May 2022 22:25:12 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 30 May 2022 22:25:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"description\": \"Посещение\",\n    \"max_mark\": \"1\",\n    \"lesson\": {\n        \"id\": 1,\n        \"date\": \"2022-10-10T14:40:00.000000Z\",\n        \"theme\": \"урок\",\n        \"type\": \"practice\",\n        \"semester_id\": 1,\n        \"subject_id\": 1,\n        \"teacher\": {\n            \"id\": 2,\n            \"rank\": \"ст.Преподаватель\",\n            \"user\": {\n                \"id\": 13,\n                \"first_name\": \"Test\",\n                \"last_name\": \"Иванов\",\n                \"middle_name\": \"Иванов\",\n                \"email\": \"teacher@mail.ru\",\n                \"email_verified_at\": null,\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"teacher\"\n                ],\n                \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update activity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/activities/1?description=Посещение 20.10",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"activities",
+								"1"
+							],
+							"query": [
+								{
+									"key": "description",
+									"value": "Посещение 20.10"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update activity",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/activities/1?description=Посещение 20.10",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"activities",
+										"1"
+									],
+									"query": [
+										{
+											"key": "description",
+											"value": "Посещение 20.10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 30 May 2022 22:26:13 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 30 May 2022 22:26:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"description\": \"Посещение 20.10\",\n    \"max_mark\": 1,\n    \"lesson\": {\n        \"id\": 1,\n        \"date\": \"2022-10-10T14:40:00.000000Z\",\n        \"theme\": \"урок\",\n        \"type\": \"practice\",\n        \"semester_id\": 1,\n        \"subject_id\": 1,\n        \"teacher\": {\n            \"id\": 2,\n            \"rank\": \"ст.Преподаватель\",\n            \"user\": {\n                \"id\": 13,\n                \"first_name\": \"Test\",\n                \"last_name\": \"Иванов\",\n                \"middle_name\": \"Иванов\",\n                \"email\": \"teacher@mail.ru\",\n                \"email_verified_at\": null,\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"teacher\"\n                ],\n                \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Activity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/activities/2",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"activities",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add mark for activity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "value",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/activities/2/students/1/mark",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"activities",
+								"2",
+								"students",
+								"1",
+								"mark"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add mark for activity Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{api_route}}/activities/1/students/1/mark?value=1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"activities",
+								"1",
+								"students",
+								"1",
+								"mark"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get activity with marks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/activities/2/marks",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"activities",
+								"2",
+								"marks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all marks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/activities/marks/all",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"activities",
+								"marks",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chats",
+			"item": [
+				{
+					"name": "List chats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/chats",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"chats"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List chats",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/chats",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"chats"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 May 2022 22:00:04 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 May 2022 22:00:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"participants\": [\n            {\n                \"id\": 1,\n                \"first_name\": \"Issac\",\n                \"last_name\": \"Mante\",\n                \"middle_name\": \"waters.org\",\n                \"email\": \"admin@admin.com\",\n                \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"admin\"\n                ],\n                \"created_at\": \"2022-05-22T12:13:01.000000Z\"\n            },\n            {\n                \"id\": 2,\n                \"first_name\": \"Hassie\",\n                \"last_name\": \"Kautzer\",\n                \"middle_name\": \"bradtke.com\",\n                \"email\": \"teacher@sfedu.com\",\n                \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"teacher\"\n                ],\n                \"created_at\": \"2022-05-22T12:13:01.000000Z\"\n            }\n        ],\n        \"messages\": [\n            {\n                \"id\": 1,\n                \"chat_id\": 1,\n                \"message\": \"Hello\",\n                \"from_user_id\": 1,\n                \"to_user_id\": 2,\n                \"viewed\": 0\n            },\n            {\n                \"id\": 2,\n                \"chat_id\": 1,\n                \"message\": \"Hello\",\n                \"from_user_id\": 1,\n                \"to_user_id\": 2,\n                \"viewed\": 0\n            },\n            {\n                \"id\": 3,\n                \"chat_id\": 1,\n                \"message\": \"Hello\",\n                \"from_user_id\": 1,\n                \"to_user_id\": 2,\n                \"viewed\": 0\n            },\n            {\n                \"id\": 4,\n                \"chat_id\": 1,\n                \"message\": \"Hello from Ivan\",\n                \"from_user_id\": 3,\n                \"to_user_id\": 2,\n                \"viewed\": 0\n            },\n            {\n                \"id\": 5,\n                \"chat_id\": 1,\n                \"message\": \"Hello from Ivan\",\n                \"from_user_id\": 3,\n                \"to_user_id\": 1,\n                \"viewed\": 0\n            }\n        ],\n        \"unread\": 1\n    },\n    {\n        \"id\": 2,\n        \"participants\": [\n            {\n                \"id\": 3,\n                \"first_name\": \"Test\",\n                \"last_name\": \"Иванов\",\n                \"middle_name\": \"Иванов\",\n                \"email\": \"student@sfedu.com\",\n                \"email_verified_at\": \"2022-05-22T12:13:02.000000Z\",\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"student\"\n                ],\n                \"created_at\": \"2022-05-22T12:13:02.000000Z\"\n            },\n            {\n                \"id\": 1,\n                \"first_name\": \"Issac\",\n                \"last_name\": \"Mante\",\n                \"middle_name\": \"waters.org\",\n                \"email\": \"admin@admin.com\",\n                \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n                \"approved\": 0,\n                \"banned\": 0,\n                \"roles\": [\n                    \"admin\"\n                ],\n                \"created_at\": \"2022-05-22T12:13:01.000000Z\"\n            }\n        ],\n        \"messages\": [\n            {\n                \"id\": 6,\n                \"chat_id\": 2,\n                \"message\": \"Hello from Ivan\",\n                \"from_user_id\": 3,\n                \"to_user_id\": 1,\n                \"viewed\": 1\n            }\n        ],\n        \"unread\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get chat by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/chats/2",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"chats",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get chat by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/chats/2",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"chats",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 May 2022 22:00:16 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 May 2022 22:00:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"participants\": [\n        {\n            \"id\": 3,\n            \"first_name\": \"Test\",\n            \"last_name\": \"Иванов\",\n            \"middle_name\": \"Иванов\",\n            \"email\": \"student@sfedu.com\",\n            \"email_verified_at\": \"2022-05-22T12:13:02.000000Z\",\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"student\"\n            ],\n            \"created_at\": \"2022-05-22T12:13:02.000000Z\"\n        },\n        {\n            \"id\": 1,\n            \"first_name\": \"Issac\",\n            \"last_name\": \"Mante\",\n            \"middle_name\": \"waters.org\",\n            \"email\": \"admin@admin.com\",\n            \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"admin\"\n            ],\n            \"created_at\": \"2022-05-22T12:13:01.000000Z\"\n        }\n    ],\n    \"messages\": [\n        {\n            \"id\": 6,\n            \"chat_id\": 2,\n            \"message\": \"Hello from Ivan\",\n            \"from_user_id\": 3,\n            \"to_user_id\": 1,\n            \"viewed\": 1\n        }\n    ],\n    \"unread\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Send message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "to_user_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "message",
+									"value": "Hello from Ivan",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/chats",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"chats"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Send message",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "to_user_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "message",
+											"value": "Hello from Ivan",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/chats",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"chats"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 May 2022 22:00:31 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 31 May 2022 22:00:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"participants\": [\n        {\n            \"id\": 1,\n            \"first_name\": \"Issac\",\n            \"last_name\": \"Mante\",\n            \"middle_name\": \"waters.org\",\n            \"email\": \"admin@admin.com\",\n            \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"admin\"\n            ],\n            \"created_at\": \"2022-05-22T12:13:01.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"first_name\": \"Hassie\",\n            \"last_name\": \"Kautzer\",\n            \"middle_name\": \"bradtke.com\",\n            \"email\": \"teacher@sfedu.com\",\n            \"email_verified_at\": \"2022-05-22T12:13:01.000000Z\",\n            \"approved\": 0,\n            \"banned\": 0,\n            \"roles\": [\n                \"teacher\"\n            ],\n            \"created_at\": \"2022-05-22T12:13:01.000000Z\"\n        }\n    ],\n    \"messages\": [\n        {\n            \"id\": 8,\n            \"chat_id\": 4,\n            \"message\": \"Hello from Ivan\",\n            \"from_user_id\": 1,\n            \"to_user_id\": 2,\n            \"viewed\": 0\n        }\n    ],\n    \"unread\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Read chat",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/chats/2",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"chats",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{auth_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
