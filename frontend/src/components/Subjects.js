@@ -38,7 +38,6 @@ export const Subjects = () => {
       if (modalMode === 'add') {
         dispatch.subjects.asyncCreateSubject(formData)
       } else {
-        // const name = formData.get('name')
         const data = {}
         formData.forEach((value, key) => {
           data[key] = value
