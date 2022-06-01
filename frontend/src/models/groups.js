@@ -46,5 +46,14 @@ export const groupsModel = {
             }).then(res => res.json())
             await dispatch.groups.asyncGetGroupsList()
 		},
+        async asyncDeleteGroup(payload, rootState) {
+            await fetch(`${GROUPS_URL}/${payload}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.groups.asyncGetGroupsList()
+		},
 	}),
 }

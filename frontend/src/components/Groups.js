@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Fab, Box, TextField, Button,MenuItem  } from '@mui/material';
-import { Create, Add } from '@mui/icons-material';
+import { Create, Delete, Add } from '@mui/icons-material';
 import { BaseModal } from './Modal'
 
 
@@ -41,6 +41,9 @@ export const Groups = () => {
       setModalMode('add')
       setModalData(initialModalData)
       setOpen(true)
+    }
+    const onDelete = (id) => () => {
+      dispatch.groups.asyncDeleteGroup(id)
     }
 
     const handleSubmit = React.useCallback((event) => {
@@ -84,9 +87,14 @@ export const Groups = () => {
                   <TableCell align="center">{group.type}</TableCell>
                   <TableCell align="center">{group.recruitment_date}</TableCell>
                   <TableCell align="center">
-                  <IconButton aria-label="edit" onClick={onEditClick(group.id)}>
-                    <Create />
-                  </IconButton>
+                    <IconButton aria-label="edit" onClick={onEditClick(group.id)}>
+                      <Create />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell align="center">
+                    <IconButton aria-label="delete" onClick={onDelete(group.id)}>
+                      <Delete />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
