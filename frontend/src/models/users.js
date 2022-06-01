@@ -84,5 +84,15 @@ export const usersModel = {
             }).then(res => res.json())
             await dispatch.users.asyncGetStudentsList()
 		},
+        // async asyncDeleteStudent(payload, rootState) {
+        //     await fetch(`${STUDENTS_URL}/${payload}`, {
+        //         method: 'DELETE',
+        //         // body: payload.formData,
+        //         headers: {
+        //             'Authorization': `Bearer ${rootState.token.access_token}`
+        //         }
+        //     }).then(res => res.json())
+        //     await dispatch.users.asyncGetStudentsList()
+		// },
 	}),
 }

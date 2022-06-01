@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Fab, Box, TextField, Button, Tabs, Tab, MenuItem } from '@mui/material';
-import { Create, Add } from '@mui/icons-material';
+import { Create, Add, Delete } from '@mui/icons-material';
 import { BaseModal } from './Modal'
 
 
@@ -66,6 +66,9 @@ export const Users = () => {
       setModalData(initialData)
       setOpen(true)
     }
+    // const onDeleteClick = (id) => () => {
+    //   dispatch.users.asyncDeleteStudent(id)
+    // }
     const handleSubmit = React.useCallback((event) => {
       event.preventDefault();
       const formData = new FormData();
@@ -115,7 +118,7 @@ export const Users = () => {
     return (
         <>
           <Tabs value={value} onChange={handleChange} aria-label="disabled tabs example">
-            <Tab label="Учитля" />
+            <Tab label="Учителя" />
             <Tab label="СТуденты" />
           </Tabs>
           {value === 0 && (
@@ -124,8 +127,8 @@ export const Users = () => {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Имя</TableCell>
-                    <TableCell align="center">Фамилия</TableCell>
+                    <TableCell>Фамилия</TableCell>
+                    <TableCell align="center">Имя</TableCell>
                     <TableCell align="center">Отчество</TableCell>
                     <TableCell align="center">Почта</TableCell>
                     <TableCell align="center">Должность</TableCell>
@@ -140,9 +143,9 @@ export const Users = () => {
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell component="th" scope="row">
-                        {profile.user.first_name}
+                        {profile.user.middle_name}
                       </TableCell>
-                      <TableCell align="center">{profile.user.middle_name}</TableCell>
+                      <TableCell align="center">{profile.user.first_name}</TableCell>
                       <TableCell align="center">{profile.user.last_name}</TableCell>
                       <TableCell align="center">{profile.user.email}</TableCell>
                       <TableCell align="center">{profile.rank}</TableCell>
@@ -152,6 +155,9 @@ export const Users = () => {
                       <IconButton aria-label="edit" onClick={onEditClick(profile.id, {first_name: profile.user.first_name, middle_name: profile.user.middle_name, last_name: profile.user.last_name, rank: profile.rank})}>
                         <Create />
                       </IconButton>
+                      {/* <IconButton aria-label="delete" onClick={onDeleteClick(profile.id)}>
+                        <Delete />
+                      </IconButton> */}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -197,8 +203,8 @@ export const Users = () => {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Имя</TableCell>
-                    <TableCell align="center">Фамилия</TableCell>
+                    <TableCell>Фамилия</TableCell>
+                    <TableCell align="center">Имя</TableCell>
                     <TableCell align="center">Отчество</TableCell>
                     <TableCell align="center">Почта</TableCell>
                     <TableCell align="center">Группа</TableCell>
@@ -213,9 +219,9 @@ export const Users = () => {
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell component="th" scope="row">
-                        {profile.user.first_name}
+                        {profile.user.middle_name}
                       </TableCell>
-                      <TableCell align="center">{profile.user.middle_name}</TableCell>
+                      <TableCell align="center">{profile.user.first_name}</TableCell>
                       <TableCell align="center">{profile.user.last_name}</TableCell>
                       <TableCell align="center">{profile.user.email}</TableCell>
                       <TableCell align="center">{profile.group?.name}</TableCell>
