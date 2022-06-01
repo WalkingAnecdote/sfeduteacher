@@ -81,7 +81,6 @@ Route::put('activities/{activity}/students/{student}/mark', [\App\Http\Controlle
 Route::get('activities/{activity}/marks', [\App\Http\Controllers\Api\ActivityController::class, "showWithMarks"]);
 Route::get('activities/marks/all', [\App\Http\Controllers\Api\ActivityController::class, "marks"]);
 
-
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/me', [UserAuthApiController::class, 'me']);
     Route::post('/logout', [UserAuthApiController::class, 'logout']);

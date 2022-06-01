@@ -164,12 +164,12 @@ function DashboardContent() {
                 </ListItemIcon>
                 <ListItemText primary="Предметы" />
             </ListItemButton>
-            <ListItemButton onClick={handleCategory('lessons')}>
+            {/* <ListItemButton onClick={handleCategory('lessons')}>
                 <ListItemIcon>
                     <Layers />
                 </ListItemIcon>
                 <ListItemText primary="Занятия" />
-            </ListItemButton>
+            </ListItemButton> */}
           </List>
         </CustomDrawer>
         <Box
