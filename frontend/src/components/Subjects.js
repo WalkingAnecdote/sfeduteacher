@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Fab, Box, TextField, Button,MenuItem  } from '@mui/material';
-import { Create, Add } from '@mui/icons-material';
+import { Edit, Delete, Add } from '@mui/icons-material';
 import { BaseModal } from './Modal'
 
 
@@ -18,28 +18,32 @@ export const Subjects = () => {
     const teachersList = useSelector(state => state.users.teachersList)
     // Edit/create entity modal.
     const [open, setOpen] = React.useState(false)
-    const [modalData, setModalData] = React.useState(initialModalData)
     const [entityID, setEntityID] = React.useState(null)
     const [modalMode, setModalMode] = React.useState('add')
-    const onEditClick = (id) => () => {
+    const onEditClick = (id, data) => () => {
       setModalMode('edit')
       setEntityID(id)
       setOpen(true)
     }
     const onAddClick = () => {
       setModalMode('add')
-      setModalData(initialModalData)
       setOpen(true)
     }
-
+    const handleDelete = (id) => () => {
+      dispatch.subjects.asyncDeleteGroup(id)
+    }
     const handleSubmit = React.useCallback((event) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       if (modalMode === 'add') {
         dispatch.subjects.asyncCreateSubject(formData)
       } else {
-        const name = formData.get('name')
-        dispatch.groups.asyncUpdateGroup({id: entityID, name})
+        // const name = formData.get('name')
+        const data = {}
+        formData.forEach((value, key) => {
+          data[key] = value
+        })
+        dispatch.subjects.asyncUpdateSubject({id: entityID, params: data})
       }
       setOpen(false)
     }, [modalMode, entityID])
@@ -73,9 +77,14 @@ export const Subjects = () => {
                       {`${subj?.teacher?.user?.first_name} ${subj?.teacher?.user?.middle_name} ${subj?.teacher?.user?.last_name}`}
                   </TableCell>
                   <TableCell align="center">
-                  {/* <IconButton aria-label="edit" onClick={onEditClick(subj.id)}>
-                    <Create />
-                  </IconButton> */}
+                    <IconButton aria-label="edit" onClick={onEditClick(subj.id)}>
+                      <Edit />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell align="center">
+                    <IconButton aria-label="delete" onClick={handleDelete(subj.id)}>
+                      <Delete />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
@@ -117,14 +126,33 @@ export const Subjects = () => {
                 </TextField>
               </>
               :
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                label='Название'
-                name='name'
-                autoFocus
-              />
+              <>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  defaultValue={subjectsList?.data?.find(ent => ent.id === entityID)?.name}
+                  label='Название'
+                  name='name'
+                  autoFocus
+                />
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    label='Преподаватель'
+                    select
+                    name='teacher_id'
+                    defaultValue={subjectsList?.data?.find(ent => ent.id === entityID)?.teacher.id}
+                    autoFocus
+                  >
+                    {teachersList?.data?.map((teacehr) => (
+                      <MenuItem key={teacehr.user.email} value={teacehr.id}>
+                        {`${teacehr.user.first_name} ${teacehr.user.middle_name} ${teacehr.user.last_name}`}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </>
             }
             <Button
               type="submit"

@@ -38,8 +38,12 @@ export const subjectsModel = {
             }).then(res => res.json())
             await dispatch.subjects.asyncGetSubjectsList()
 		},
-        async asyncUpdateGroup(payload, rootState) {
-            await fetch(`${SUBJECTS_URL}/${payload.id}?name=${payload.name}`, {
+        async asyncUpdateSubject(payload, rootState) {
+            const query = new URLSearchParams()
+            for (let key in payload.params) {
+                query.append(key, payload.params[key])
+            }
+            await fetch(`${SUBJECTS_URL}/${payload.id}?${query.toString()}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
@@ -47,5 +51,14 @@ export const subjectsModel = {
             }).then(res => res.json())
             await dispatch.subjects.asyncGetSubjectsList()
 		},
+        async asyncDeleteGroup(payload, rootState) {
+            await fetch(`${SUBJECTS_URL}/${payload}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.subjects.asyncGetSubjectsList()
+		}
 	}),
 }
