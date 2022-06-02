@@ -196,4 +196,9 @@ class UserAuthApiController extends Controller
     {
         return response()->json(new UserResource(User::find($request->user()->id)));
     }
+
+    public function deleteMe(Request $request)
+    {
+        return response()->json(User::where('id', $request->user()->id)->delete());
+    }
 }

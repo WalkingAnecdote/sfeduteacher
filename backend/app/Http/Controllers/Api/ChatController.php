@@ -51,9 +51,11 @@ class ChatController extends Controller
         $participants = [];
         $participants[] = auth()->id();
         $participants[] = $input['to_user_id'];
-        $chat = Chat::with('participants')->whereHas('participants', function ($query) use ($participants) {
+        $chat = Chat::with('participants')->where(function ($query)use ($participants) {
             foreach ($participants as $participant) {
-                $query->where('user_id', $participant);
+                $query->whereHas('participants', function ($query) use ($participant) {
+                    $query->where('user_id', $participant);
+                });
             }
         })->first();
 
