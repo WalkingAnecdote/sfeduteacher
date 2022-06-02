@@ -62,12 +62,10 @@ const mdTheme = createTheme();
 
 function switchContent(category) {
     switch (category) {
-        case 'profile':
-            return <Typography>Данный раздел сайта в находится в активной фазе разработки.</Typography>;
         case 'chat':
             return <Chat />;
         default:
-            return <Typography>Null</Typography>;
+            return <Typography>Данный раздел сайта в находится в активной фазе разработки.</Typography>;
     }
 }
 
@@ -151,6 +149,32 @@ function DashboardContent() {
                 </ListItemIcon>
                 <ListItemText primary="Чат" />
             </ListItemButton>
+            {user.roles.includes('student') && (
+              <>
+                <ListItemButton onClick={handleCategory('test')}>
+                  <ListItemIcon>
+                      <ChatIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Тесты" />
+                </ListItemButton>
+              </>
+            )}
+            {user.roles.includes('teacher') && (
+              <>
+                <ListItemButton onClick={handleCategory('subjects')}>
+                  <ListItemIcon>
+                      <ChatIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Предметы" />
+                </ListItemButton>
+                <ListItemButton onClick={handleCategory('rating')}>
+                <ListItemIcon>
+                    <ChatIcon />
+                </ListItemIcon>
+                <ListItemText primary="Успеваемость" />
+              </ListItemButton>
+            </>
+            )}
           </List>
         </CustomDrawer>
         <Box
