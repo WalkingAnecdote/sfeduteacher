@@ -38,8 +38,21 @@ export const groupsModel = {
             await dispatch.groups.asyncGetGroupsList()
 		},
         async asyncUpdateGroup(payload, rootState) {
-            await fetch(`${GROUPS_URL}/${payload.id}?name=${payload.name}`, {
+            const query = new URLSearchParams()
+            for (let key in payload.params) {
+                query.append(key, payload.params[key])
+            }
+            await fetch(`${GROUPS_URL}/${payload.id}?${query.toString()}`, {
                 method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.groups.asyncGetGroupsList()
+		},
+        async asyncDeleteGroup(payload, rootState) {
+            await fetch(`${GROUPS_URL}/${payload}`, {
+                method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }

@@ -1,7 +1,8 @@
-import {TEACHERS_URL} from '../api'
+import {TEACHERS_URL, STUDENTS_URL} from '../api'
 
 const initState =  {
-    teachersList: null
+    teachersList: null,
+    studentsList: null
 }
 
 export const usersModel = {
@@ -11,6 +12,12 @@ export const usersModel = {
 			return {
                 ...state,
                 teachersList: payload
+            }
+		},
+        setStudentsList: (state, payload) => {
+			return {
+                ...state,
+                studentsList: payload
             }
 		},
         resetState: () => {
@@ -47,5 +54,45 @@ export const usersModel = {
             }).then(res => res.json())
             await dispatch.users.asyncGetTeachersList()
 		},
+        async asyncGetStudentsList(payload, rootState) {
+            const result = await fetch(STUDENTS_URL, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+			this.setStudentsList(result)
+            await dispatch.groups.asyncGetGroupsList()
+		},
+        async asyncCreateStudent(formData, rootState) {
+            await fetch(STUDENTS_URL, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.users.asyncGetStudentsList()
+		},
+        async asyncUpdateStudent(payload, rootState) {
+            await fetch(`${STUDENTS_URL}/${payload.id}`, {
+                method: 'POST',
+                body: payload.formData,
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.users.asyncGetStudentsList()
+		},
+        // async asyncDeleteStudent(payload, rootState) {
+        //     await fetch(`${STUDENTS_URL}/${payload}`, {
+        //         method: 'DELETE',
+        //         // body: payload.formData,
+        //         headers: {
+        //             'Authorization': `Bearer ${rootState.token.access_token}`
+        //         }
+        //     }).then(res => res.json())
+        //     await dispatch.users.asyncGetStudentsList()
+		// },
 	}),
 }

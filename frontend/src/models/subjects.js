@@ -26,8 +26,9 @@ export const subjectsModel = {
                 }
             }).then(res => res.json())
 			this.setSubjectsList(result)
+            await dispatch.users.asyncGetTeachersList()
 		},
-        async asyncCreateGroup(formData, rootState) {
+        async asyncCreateSubject(formData, rootState) {
             await fetch(SUBJECTS_URL, {
                 method: 'POST',
                 body: formData,
@@ -35,16 +36,29 @@ export const subjectsModel = {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            await dispatch.groups.asyncGetGroupsList()
+            await dispatch.subjects.asyncGetSubjectsList()
 		},
-        async asyncUpdateGroup(payload, rootState) {
-            await fetch(`${SUBJECTS_URL}/${payload.id}?name=${payload.name}`, {
+        async asyncUpdateSubject(payload, rootState) {
+            const query = new URLSearchParams()
+            for (let key in payload.params) {
+                query.append(key, payload.params[key])
+            }
+            await fetch(`${SUBJECTS_URL}/${payload.id}?${query.toString()}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            await dispatch.groups.asyncGetGroupsList()
+            await dispatch.subjects.asyncGetSubjectsList()
 		},
+        async asyncDeleteGroup(payload, rootState) {
+            await fetch(`${SUBJECTS_URL}/${payload}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.subjects.asyncGetSubjectsList()
+		}
 	}),
 }

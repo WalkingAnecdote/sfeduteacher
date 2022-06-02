@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Fab, Box, TextField, Button,MenuItem  } from '@mui/material';
-import { Create, Add } from '@mui/icons-material';
+import { Create, Delete, Add } from '@mui/icons-material';
 import { BaseModal } from './Modal'
 
 
@@ -26,7 +26,6 @@ export const Groups = () => {
     // Get data from the store.
     const dispatch = useDispatch()
     const groupsList = useSelector(state => state.groups.groupsList)
-
     // Edit/create entity modal.
     const [open, setOpen] = React.useState(false)
     const [modalData, setModalData] = React.useState(initialModalData)
@@ -42,6 +41,9 @@ export const Groups = () => {
       setModalData(initialModalData)
       setOpen(true)
     }
+    const onDelete = (id) => () => {
+      dispatch.groups.asyncDeleteGroup(id)
+    }
 
     const handleSubmit = React.useCallback((event) => {
       event.preventDefault();
@@ -49,8 +51,11 @@ export const Groups = () => {
       if (modalMode === 'add') {
         dispatch.groups.asyncCreateGroup(formData)
       } else {
-        const name = formData.get('name')
-        dispatch.groups.asyncUpdateGroup({id: entityID, name})
+        const data = {}
+        formData.forEach((value, key) => {
+          data[key] = value
+        })
+        dispatch.groups.asyncUpdateGroup({id: entityID, params: data})
       }
       setOpen(false)
     }, [modalMode, entityID])
@@ -84,9 +89,14 @@ export const Groups = () => {
                   <TableCell align="center">{group.type}</TableCell>
                   <TableCell align="center">{group.recruitment_date}</TableCell>
                   <TableCell align="center">
-                  <IconButton aria-label="edit" onClick={onEditClick(group.id)}>
-                    <Create />
-                  </IconButton>
+                    <IconButton aria-label="edit" onClick={onEditClick(group.id)}>
+                      <Create />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell align="center">
+                    <IconButton aria-label="delete" onClick={onDelete(group.id)}>
+                      <Delete />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
@@ -100,54 +110,44 @@ export const Groups = () => {
         </Box>
         <BaseModal open={open} setOpen={setOpen}>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            {
-              modalMode === 'add' ?
-              <>
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  label='Название'
-                  name='name'
-                  autoFocus
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  label='Тип'
-                  select
-                  name='type'
-                  autoFocus
-                >
-                  {types.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <TextField
-                  id="date"
-                  label="Дата набора"
-                  type="date"
-                  name='recruitment_date'
-                  defaultValue="2017-05-24"
-                  sx={{ width: 220 }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </>
-              :
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label='Название'
+              defaultValue={modalMode === 'add' ? '' : groupsList?.data?.find(ent => ent.id === entityID)?.name }
+              name='name'
+              autoFocus
+            />
+            {modalMode === 'add' &&
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                label='Название'
-                name='name'
+                label='Тип'
+                select
+                defaultValue={modalMode === 'add' ? '' : groupsList?.data?.find(ent => ent.id === entityID)?.type }
+                name='type'
                 autoFocus
-              />
+              >
+                {types.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
             }
+            <TextField
+              id="date"
+              label="Дата набора"
+              type="date"
+              name='recruitment_date'
+              defaultValue={modalMode === 'add' ? '' : groupsList?.data?.find(ent => ent.id === entityID)?.recruitment_date }
+              sx={{ width: 220 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
             <Button
               type="submit"
               fullWidth

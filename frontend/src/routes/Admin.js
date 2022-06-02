@@ -2,12 +2,13 @@ import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import {
     CssBaseline, Drawer, Box, AppBar, Toolbar, List,
-    Typography, Divider, IconButton, Badge, Container,
+    Typography, Divider, IconButton, Button, Container,
     ListItemButton, ListItemIcon, ListItemText
 } from '@mui/material';
 import {
-    ChevronLeft, Notifications, People, Layers, Menu
+    ChevronLeft, People, Layers, Menu
 } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
 import { Copyright, Users, Semesters, Groups, Subjects } from '../components';
 
 
@@ -77,6 +78,7 @@ function switchContent(category) {
 }
 
 function DashboardContent() {
+  const dispatch = useDispatch()
   const [selectedCategory, setSelectedCategory] = React.useState('users');
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -85,6 +87,10 @@ function DashboardContent() {
 
   const handleCategory = (category) => () => {
     setSelectedCategory(category)
+  }
+
+  const handleSignout = () => {
+    dispatch.token.asyncLogout()
   }
 
   return (
@@ -118,11 +124,9 @@ function DashboardContent() {
             >
               Панель администратора
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <Notifications />
-              </Badge>
-            </IconButton>
+            <Button color="inherit" onClick={handleSignout}>
+              Выйти
+            </Button>
           </Toolbar>
         </CustomAppBar>
         <CustomDrawer variant="permanent" open={open}>
@@ -164,12 +168,12 @@ function DashboardContent() {
                 </ListItemIcon>
                 <ListItemText primary="Предметы" />
             </ListItemButton>
-            <ListItemButton onClick={handleCategory('lessons')}>
+            {/* <ListItemButton onClick={handleCategory('lessons')}>
                 <ListItemIcon>
                     <Layers />
                 </ListItemIcon>
                 <ListItemText primary="Занятия" />
-            </ListItemButton>
+            </ListItemButton> */}
           </List>
         </CustomDrawer>
         <Box
