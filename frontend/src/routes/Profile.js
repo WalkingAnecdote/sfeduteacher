@@ -2,13 +2,13 @@ import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import {
     CssBaseline, Drawer, Box, AppBar, Toolbar, List,
-    Typography, Divider, IconButton, Badge, Container,
+    Typography, Divider, IconButton, Container,
     ListItemButton, ListItemIcon, ListItemText, Button
 } from '@mui/material';
 import {
-    ChevronLeft, Notifications, People, Layers, Menu
+    ChevronLeft, People, Chat as ChatIcon, Menu
 } from '@mui/icons-material';
-import { Copyright, Users, Semesters, Groups, Subjects } from '../components';
+import { Copyright, Chat } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -64,6 +64,8 @@ function switchContent(category) {
     switch (category) {
         case 'profile':
             return <Typography>Данный раздел сайта в находится в активной фазе разработки.</Typography>;
+        case 'chat':
+            return <Chat />;
         default:
             return <Typography>Null</Typography>;
     }
@@ -115,7 +117,7 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Здравствуйте, {`${user?.first_name} ${user?.middle_name} ${user?.last_name}`}!
+              Здравствуйте, {`${user?.middle_name} ${user?.first_name} ${user?.last_name}`}!
             </Typography>
             <Button color="inherit" onClick={handleSignout}>
               Выйти
@@ -142,6 +144,12 @@ function DashboardContent() {
                     <People />
                 </ListItemIcon>
                 <ListItemText primary="Профиль" />
+            </ListItemButton>
+            <ListItemButton onClick={handleCategory('chat')}>
+                <ListItemIcon>
+                    <ChatIcon />
+                </ListItemIcon>
+                <ListItemText primary="Чат" />
             </ListItemButton>
           </List>
         </CustomDrawer>
