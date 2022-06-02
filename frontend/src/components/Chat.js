@@ -5,12 +5,18 @@ import { Send as SendIcon } from '@mui/icons-material';
 
 export const Chat = () => {
     const dispatch = useDispatch()
+    const sessionUserId = useSelector(state => state.user.id)
     const teachersList = useSelector(state => state.users.teachersList)
     const studentsList = useSelector(state => state.users.studentsList)
+    const chats = useSelector(state => state.chats)
+    const currentChat = useSelector(state => state.chats.currentChat)
+    const [selectedUserId, setSelectedUserId] = React.useState(null)
+    const [message, setMessage] = React.useState('')
     const [filter, setFilter] = React.useState('')
+
     const users = React.useMemo(() => {
-        return [...teachersList?.data || [], ...studentsList?.data || []]
-    }, [studentsList?.data, teachersList?.data])
+        return [...teachersList?.data || [], ...studentsList?.data || []].filter(user => user.user.id !== sessionUserId)
+    }, [sessionUserId, studentsList?.data, teachersList?.data])
 
     React.useEffect(() => {
         if (teachersList === null) {
@@ -23,9 +29,19 @@ export const Chat = () => {
           dispatch.users.asyncGetStudentsList()
       }
     }, [studentsList])
-
+    React.useEffect(() => {
+        if (chats?.chats === null) {
+            dispatch.chats.asyncGetAllChats()
+        }
+      }, [chats?.chats, dispatch.chats, studentsList])
     const onButtonClick = (user_id) => () => {
-        console.log(user_id)
+        setSelectedUserId(user_id)
+        dispatch.chats.setCurrentChatByUSerId(user_id)
+    }
+
+    const sendMessage = () => {
+        dispatch.chats.asyncSendMessage({to_user_id: selectedUserId, message})
+        setMessage('')
     }
 
     return (
@@ -56,7 +72,8 @@ export const Chat = () => {
                     <Typography>KEK</Typography>
                     <Divider />
                     <List>
-                        <ListItem key="1">
+                        {currentChat?.messages?.map(msg => <Typography key={msg.id}>{msg.message}</Typography>)}
+                        {/* <ListItem key="1">
                             <Grid container>
                                 <Grid item xs={12}>
                                     <ListItemText align="right" primary="Hey man, What's up ?"></ListItemText>
@@ -85,15 +102,15 @@ export const Chat = () => {
                                     <ListItemText align="right" secondary="10:30"></ListItemText>
                                 </Grid>
                             </Grid>
-                        </ListItem>
+                        </ListItem> */}
                     </List>
                     <Divider />
                     <Grid container style={{padding: '20px'}}>
                         <Grid item xs={11}>
-                            <TextField id="outlined-basic-email" label="Type Something" fullWidth />
+                            <TextField id="outlined-basic-email" label="Type Something" value={message} onChange={({target}) => setMessage(target.value)} fullWidth />
                         </Grid>
                         <Grid xs={1} align="right">
-                            <Fab color="primary" aria-label="add"><SendIcon /></Fab>
+                            <Fab color="primary" aria-label="add" onClick={sendMessage}><SendIcon /></Fab>
                         </Grid>
                     </Grid>
                 </Grid>
