@@ -55,6 +55,8 @@ Route::post('students', [\App\Http\Controllers\Api\StudentController::class, "st
     ->name('students.create');
 Route::post('students/{student}', [\App\Http\Controllers\Api\StudentController::class, "update"])
     ->name('students.update');
+Route::delete('students/{student}', [\App\Http\Controllers\Api\StudentController::class, "destroy"])
+    ->name('students.delete');
 
 Route::get('teachers', [\App\Http\Controllers\Api\TeacherController::class, "index"])
     ->name('teachers.get');
@@ -64,6 +66,8 @@ Route::post('teachers', [\App\Http\Controllers\Api\TeacherController::class, "st
     ->name('teachers.create');
 Route::post('teachers/{teacher}', [\App\Http\Controllers\Api\TeacherController::class, "update"])
     ->name('teachers.update');
+Route::delete('teachers/{teacher}', [\App\Http\Controllers\Api\TeacherController::class, "destroy"])
+    ->name('teachers.delete');
 
 Route::apiResource('lessons', \App\Http\Controllers\Api\LessonController::class);
 Route::get('semesters/{semester}/subjects/{subject}/lessons', [\App\Http\Controllers\Api\LessonController::class, "getLessonsBySemesterAndSubject"])
@@ -81,9 +85,21 @@ Route::put('activities/{activity}/students/{student}/mark', [\App\Http\Controlle
 Route::get('activities/{activity}/marks', [\App\Http\Controllers\Api\ActivityController::class, "showWithMarks"]);
 Route::get('activities/marks/all', [\App\Http\Controllers\Api\ActivityController::class, "marks"]);
 
+Route::apiResource('tests', \App\Http\Controllers\Api\TestController::class);
+Route::get('activities/{activity}/tests', [\App\Http\Controllers\Api\TestController::class, "getTestsByActivity"]);
+
+Route::apiResource('tasks', \App\Http\Controllers\Api\TaskController::class);
+Route::get('tests/{test}/tasks', [\App\Http\Controllers\Api\TaskController::class, "getTasksByTest"]);
+
+Route::apiResource('questions', \App\Http\Controllers\Api\QuestionController::class);
+Route::post('questions/{question}/answers', [\App\Http\Controllers\Api\QuestionController::class, "syncAnswers"]);
+
+
+Route::apiResource('answers', \App\Http\Controllers\Api\AnswerController::class);
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/me', [UserAuthApiController::class, 'me']);
+    Route::delete('/delete-me', [UserAuthApiController::class, 'deleteMe']);
     Route::post('/logout', [UserAuthApiController::class, 'logout']);
 
     Route::get('chats', [\App\Http\Controllers\Api\ChatController::class, "getByParticipants"]);

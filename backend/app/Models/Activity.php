@@ -27,6 +27,11 @@ class Activity extends Model
         return $this->hasMany(Mark::class);
     }
 
+    public function tests(): HasMany
+    {
+        return $this->hasMany(Test::class);
+    }
+
 
     //marks
 

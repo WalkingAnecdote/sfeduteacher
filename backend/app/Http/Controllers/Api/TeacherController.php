@@ -66,4 +66,9 @@ class TeacherController
         $this->userRepository->updateById($teacher->user->id, $input['user'] ?? []);
         return response()->json(new TeacherProfileResource($this->teacherRepository->updateById($teacher->id, $input['profile'] ?? [])));
     }
+
+    public function destroy(TeacherProfile $teacher): JsonResponse
+    {
+        return response()->json((new UserRepository)->deleteById($teacher->user_id));
+    }
 }
