@@ -94,6 +94,11 @@ Route::get('tests/{test}/tasks', [\App\Http\Controllers\Api\TaskController::clas
 Route::apiResource('questions', \App\Http\Controllers\Api\QuestionController::class);
 Route::post('questions/{question}/answers', [\App\Http\Controllers\Api\QuestionController::class, "syncAnswers"]);
 
+Route::get('tests/{test}/students/{student}', [\App\Http\Controllers\Api\TestResultController::class, "getByTestAndStudent"]);
+Route::post('tests/{test}/students/{student}/submit', [\App\Http\Controllers\Api\TestResultController::class, "store"]);
+Route::get('tests/results/{result}', [\App\Http\Controllers\Api\TestResultController::class, "show"]);
+Route::delete('tests/results/{result}', [\App\Http\Controllers\Api\TestResultController::class, "destroy"]);
+
 
 Route::apiResource('answers', \App\Http\Controllers\Api\AnswerController::class);
 

@@ -12,6 +12,9 @@ class Task extends Model
 {
     use HasFactory;
 
+    public const QUIZ_TYPE = "quiz";
+    public const MONO_TYPE = "mono";
+
     protected $fillable = [
         "test_id",
         "text",
