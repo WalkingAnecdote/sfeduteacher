@@ -150,8 +150,8 @@ export const Users = () => {
     return (
         <>
           <Tabs value={value} onChange={handleChange} aria-label="disabled tabs example">
-            <Tab label="Учителя" />
-            <Tab label="СТуденты" />
+            <Tab label="Преподаватели" />
+            <Tab label="Студенты" />
           </Tabs>
           {value === 0 && (
             <>
