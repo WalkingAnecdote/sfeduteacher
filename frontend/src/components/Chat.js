@@ -63,7 +63,7 @@ export const Chat = () => {
                     <Divider />
                     <List>
                         {users?.filter(user => `${user.user.middle_name} ${user.user.first_name} ${user.user.last_name}`.toLowerCase().includes(filter.toLowerCase()))?.map(user => (
-                            <ListItem button key={user.user.id} onClick={onButtonClick(user.user.id)}>
+                            <ListItem selected={user.user.id === selectedUserId} button key={user.user.id} onClick={onButtonClick(user.user.id)}>
                                 <ListItemIcon>
                                     <Avatar />
                                 </ListItemIcon>
