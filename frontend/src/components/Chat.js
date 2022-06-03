@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Paper, Grid, Divider, TextField, Typography, List, ListItem, ListItemIcon, ListItemText, Avatar, Fab } from '@mui/material';
 import { Send as SendIcon } from '@mui/icons-material';
 
+const getUserFullName = (user) => {
+    return `${user.user.middle_name} ${user.user.first_name} ${user.user.last_name}`
+}
+
 export const Chat = () => {
     const dispatch = useDispatch()
     const sessionUserId = useSelector(state => state.user.id)
@@ -43,7 +47,7 @@ export const Chat = () => {
         dispatch.chats.asyncSendMessage({to_user_id: selectedUserId, message})
         setMessage('')
     }
-
+    // console.log(currentChat)
     return (
         <div>
             <Grid container>
@@ -69,40 +73,21 @@ export const Chat = () => {
                     </List>
                 </Grid>
                 <Grid item xs={9}>
-                    <Typography>KEK</Typography>
+                    <Typography variant='h5' textAlign='center'>{getUserFullName(users.filter(user => user.user.id === selectedUserId)[0])}</Typography>
                     <Divider />
                     <List>
-                        {currentChat?.messages?.map(msg => <Typography key={msg.id}>{msg.message}</Typography>)}
-                        {/* <ListItem key="1">
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" primary="Hey man, What's up ?"></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" secondary="09:30"></ListItemText>
-                                </Grid>
-                            </Grid>
-                        </ListItem>
-                        <ListItem key="2">
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" primary="Hey, Iam Good! What about you ?"></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" secondary="09:31"></ListItemText>
-                                </Grid>
-                            </Grid>
-                        </ListItem>
-                        <ListItem key="3">
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" primary="Cool. i am good, let's catch up!"></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" secondary="10:30"></ListItemText>
-                                </Grid>
-                            </Grid>
-                        </ListItem> */}
+                        {currentChat?.messages?.map(msg => {
+                            const align = msg.from_user_id === sessionUserId ? 'right' : 'left'
+                            return (
+                                <ListItem key={msg.id}>
+                                    <Grid container>
+                                        <Grid item xs={12}>
+                                            <ListItemText align={align} primary={msg.message}></ListItemText>
+                                        </Grid>
+                                    </Grid>
+                                </ListItem>
+                            )
+                        })}
                     </List>
                     <Divider />
                     <Grid container style={{padding: '20px'}}>
