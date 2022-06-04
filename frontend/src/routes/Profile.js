@@ -149,7 +149,7 @@ function DashboardContent() {
                 </ListItemIcon>
                 <ListItemText primary="Чат" />
             </ListItemButton>
-            {user.roles.includes('student') && (
+            {user?.roles.includes('student') && (
               <>
                 <ListItemButton onClick={handleCategory('test')}>
                   <ListItemIcon>
@@ -159,7 +159,7 @@ function DashboardContent() {
                 </ListItemButton>
               </>
             )}
-            {user.roles.includes('teacher') && (
+            {user?.roles.includes('teacher') && (
               <>
                 <ListItemButton onClick={handleCategory('subjects')}>
                   <ListItemIcon>

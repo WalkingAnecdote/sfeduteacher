@@ -4,7 +4,7 @@ import { Paper, Grid, Divider, TextField, Typography, List, ListItem, ListItemIc
 import { Send as SendIcon } from '@mui/icons-material';
 
 const getUserFullName = (user) => {
-    return `${user.user.middle_name} ${user.user.first_name} ${user.user.last_name}`
+    return `${user?.user?.middle_name} ${user?.user?.first_name} ${user?.user?.last_name}`
 }
 
 export const Chat = () => {
@@ -19,7 +19,7 @@ export const Chat = () => {
     const [filter, setFilter] = React.useState('')
 
     const users = React.useMemo(() => {
-        return [...teachersList?.data || [], ...studentsList?.data || []].filter(user => user.user.id !== sessionUserId)
+        return [...teachersList?.data || [], ...studentsList?.data || []].filter(user => user?.user?.id !== sessionUserId)
     }, [sessionUserId, studentsList?.data, teachersList?.data])
 
     React.useEffect(() => {
@@ -47,7 +47,7 @@ export const Chat = () => {
         dispatch.chats.asyncSendMessage({to_user_id: selectedUserId, message})
         setMessage('')
     }
-    // console.log(currentChat)
+    console.log(chats)
     return (
         <div>
             <Grid container>
@@ -62,18 +62,18 @@ export const Chat = () => {
                     </Grid>
                     <Divider />
                     <List>
-                        {users?.filter(user => `${user.user.middle_name} ${user.user.first_name} ${user.user.last_name}`.toLowerCase().includes(filter.toLowerCase()))?.map(user => (
-                            <ListItem selected={user.user.id === selectedUserId} button key={user.user.id} onClick={onButtonClick(user.user.id)}>
+                        {users?.filter(user => `${user?.user?.middle_name} ${user?.user?.first_name} ${user?.user?.last_name}`.toLowerCase().includes(filter.toLowerCase()))?.map(user => (
+                            <ListItem selected={user?.user?.id === selectedUserId} button key={user?.user?.id} onClick={onButtonClick(user?.user?.id)}>
                                 <ListItemIcon>
                                     <Avatar />
                                 </ListItemIcon>
-                                <ListItemText>{`${user.user.middle_name} ${user.user.first_name} ${user.user.last_name}`}</ListItemText>
+                                <ListItemText>{`${user?.user?.middle_name} ${user?.user?.first_name} ${user?.user?.last_name}`}</ListItemText>
                             </ListItem>
                         ))}
                     </List>
                 </Grid>
                 <Grid item xs={9}>
-                    <Typography variant='h5' textAlign='center'>{getUserFullName(users.filter(user => user.user.id === selectedUserId)[0])}</Typography>
+                    <Typography variant='h5' textAlign='center'>{getUserFullName(users.filter(user => user?.user?.id === selectedUserId)[0])}</Typography>
                     <Divider />
                     <List>
                         {currentChat?.messages?.map(msg => {
