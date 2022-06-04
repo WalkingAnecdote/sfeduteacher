@@ -38,7 +38,7 @@ export const Chat = () => {
         if (chats?.chats === null) {
             dispatch.chats.asyncGetAllChats()
         }
-      }, [chats?.chats, dispatch.chats, studentsList])
+      }, [chats?.chats])
 
     const onButtonClick = (user_id) => () => {
         setSelectedUserId(user_id)
@@ -49,8 +49,19 @@ export const Chat = () => {
         dispatch.chats.asyncSendMessage({to_user_id: selectedUserId, message})
         setMessage('')
     }
+
+    React.useEffect(() => {
+        const intervalId = setInterval(
+            () => dispatch.chats.getCurrentChatByUSerId(selectedUserId),
+            5000)
+        return () => {
+            clearInterval(intervalId)
+        }
+    }, [selectedUserId])
+
     return (
         <div>
+            <Typography variant='h4' textAlign='center' style={{ marginBottom: '30px' }}>Чат</Typography>
             <Grid container component={Paper}>
                 <Grid item xs={3}>
                     <Grid item xs={12} style={{padding: '10px'}}>
