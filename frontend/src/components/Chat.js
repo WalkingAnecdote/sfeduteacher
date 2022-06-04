@@ -51,11 +51,6 @@ export const Chat = () => {
     }
     return (
         <div>
-            <Grid container>
-                <Grid item xs={12} >
-                    <Typography variant="h5" className="header-message">Chat</Typography>
-                </Grid>
-            </Grid>
             <Grid container component={Paper}>
                 <Grid item xs={3}>
                     <Grid item xs={12} style={{padding: '10px'}}>
