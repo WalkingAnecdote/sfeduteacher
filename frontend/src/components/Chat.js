@@ -74,31 +74,37 @@ export const Chat = () => {
                     </List>
                 </Grid>
                 <Grid item xs={9}>
-                    <Typography variant='h5' textAlign='center'>{getUserFullName(users.filter(user => user?.user?.id === selectedUserId)[0])}</Typography>
-                    <Divider />
-                    <List>
-                        {currentChat?.messages?.map(msg => {
-                            const align = msg.from_user_id === sessionUserId ? 'right' : 'left'
-                            return (
-                                <ListItem key={msg.id}>
-                                    <Grid container>
-                                        <Grid item xs={12}>
-                                            <ListItemText align={align} primary={msg.message}></ListItemText>
-                                        </Grid>
-                                    </Grid>
-                                </ListItem>
-                            )
-                        })}
-                    </List>
-                    <Divider />
-                    <Grid container style={{padding: '20px'}}>
-                        <Grid item xs={11}>
-                            <TextField id="outlined-basic-email" label="Type Something" value={message} onChange={({target}) => setMessage(target.value)} fullWidth />
-                        </Grid>
-                        <Grid xs={1} align="right">
-                            <Fab color="primary" aria-label="add" onClick={sendMessage}><SendIcon /></Fab>
-                        </Grid>
-                    </Grid>
+                    {selectedUserId ? (
+                        <>
+                            <Typography variant='h5' textAlign='center' style={{margin: '30px 0 30px 0' }}>{getUserFullName(users.filter(user => user?.user?.id === selectedUserId)[0])}</Typography>
+                            <Divider />
+                            <List>
+                                {currentChat?.messages?.map(msg => {
+                                    const align = msg.from_user_id === sessionUserId ? 'right' : 'left'
+                                    return (
+                                        <ListItem key={msg.id}>
+                                            <Grid container>
+                                                <Grid item xs={12}>
+                                                    <ListItemText align={align} primary={msg.message}></ListItemText>
+                                                </Grid>
+                                            </Grid>
+                                        </ListItem>
+                                    )
+                                })}
+                            </List>
+                            <Divider />
+                            <Grid container style={{padding: '20px'}}>
+                                <Grid item xs={10}>
+                                    <TextField id="outlined-basic-email" label="Type Something" value={message} onChange={({target}) => setMessage(target.value)} fullWidth />
+                                </Grid>
+                                <Grid xs={2} align="right">
+                                    <Fab color="primary" aria-label="add" onClick={sendMessage}><SendIcon /></Fab>
+                                </Grid>
+                            </Grid>
+                        </>
+                        ) : (
+                            <Typography variant='h6' textAlign='center' style={{margin: '40px 0 40px 0' }}>Выберите пользователя чтобы открыть чат.</Typography>
+                        )}
                 </Grid>
             </Grid>
         </div>
