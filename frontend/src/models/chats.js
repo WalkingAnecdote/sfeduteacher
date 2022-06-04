@@ -25,7 +25,6 @@ export const chatsModel = {
                 ...state,
                 chats: [...state.chat?.filter(chat => chat.id === payload.id) || [], payload],
                 currentChat: payload
-
             }
         },
         resetState: () => {
@@ -38,16 +37,18 @@ export const chatsModel = {
             for (let key in payload) {
                 form.append(key, payload[key])
             }
-            const chat = rootState?.chats?.chats?.filter(chat => chat?.participants?.some(user => user.id === payload))[0]
-            const subRoute = chat ? `/${chat.id}` : ''
-            const result = await fetch(`${CHATS_URL}/${subRoute}`, {
-                method: 'POST',
-                body: form,
-                headers: {
-                    'Authorization': `Bearer ${rootState.token.access_token}`
-                }
-            }).then(res => res.json())
-			this.pushChat(result)
+            try {
+                const result = await fetch(`${CHATS_URL}`, {
+                    method: 'POST',
+                    body: form,
+                    headers: {
+                        'Authorization': `Bearer ${rootState.token.access_token}`
+                    }
+                }).then(res => res.json())
+			    this.pushChat(result)
+            } catch (err) {
+                console.error(err)
+            }
 		},
         async asyncGetAllChats(payload, rootState) {
             const result = await fetch(`${CHATS_URL}`, {
@@ -67,10 +68,14 @@ export const chatsModel = {
             }).then(res => res.json())
 			this.setCurrentChat(result)
 		},
-        setCurrentChatByUSerId(payload, rootState) {
+        async getCurrentChatByUSerId(payload, rootState) {
             const chat = rootState?.chats?.chats?.filter(chat => chat?.participants?.some(user => user.id === payload))[0]
-            console.log(chat)
-            this.setCurrentChat(chat)
+            if (chat) {
+                this.setCurrentChat(chat)
+                await dispatch.chats.asyncGetChatById(chat.id)
+            } else {
+                this.setCurrentChat(null)
+            }
         }
 	}),
 }

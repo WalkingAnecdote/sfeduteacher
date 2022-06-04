@@ -33,21 +33,22 @@ export const Chat = () => {
           dispatch.users.asyncGetStudentsList()
       }
     }, [studentsList])
+
     React.useEffect(() => {
         if (chats?.chats === null) {
             dispatch.chats.asyncGetAllChats()
         }
       }, [chats?.chats, dispatch.chats, studentsList])
+
     const onButtonClick = (user_id) => () => {
         setSelectedUserId(user_id)
-        dispatch.chats.setCurrentChatByUSerId(user_id)
+        dispatch.chats.getCurrentChatByUSerId(user_id)
     }
 
     const sendMessage = () => {
         dispatch.chats.asyncSendMessage({to_user_id: selectedUserId, message})
         setMessage('')
     }
-    console.log(chats)
     return (
         <div>
             <Grid container>
