@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import {Container, Typography, Box, TextField, CssBaseline, Button, Avatar} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -11,12 +11,13 @@ const theme = createTheme();
 
 const SignInPage = () => {
   const dispatch = useDispatch()
+  const error = useSelector(state => state.token?.error)
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    dispatch.token.resetError()
     dispatch.token.asyncLogin(formData)
   }
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -44,6 +45,7 @@ const SignInPage = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
+              error={Boolean(error)}
               autoFocus
             />
             <TextField
@@ -55,6 +57,7 @@ const SignInPage = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={Boolean(error)}
             />
             <Button
               type="submit"
@@ -65,6 +68,9 @@ const SignInPage = () => {
               Sign In
             </Button>
           </Box>
+          {Boolean(error) && (
+            <Typography color='red'>{Array.isArray(error) ? error[0] : error}</Typography>
+          )}
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
