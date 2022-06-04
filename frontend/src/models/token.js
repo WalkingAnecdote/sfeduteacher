@@ -34,8 +34,17 @@ export const tokenModel = {
             	await dispatch.user.asyncGetUser()
 			}
 		},
-		async asyncLogout() {
+		async asyncResetState() {
 			this.resetState()
+		},
+		async asyncLogout() {
+			await dispatch.token.asyncResetState()
+			await dispatch.chats.asyncResetState()
+			await dispatch.groups.asyncResetState()
+			// await dispatch.semesters.asyncResetState()
+			await dispatch.subjects.asyncResetState()
+			await dispatch.user.asyncResetState()
+			await dispatch.users.asyncResetState()
 		}
 	}),
 }

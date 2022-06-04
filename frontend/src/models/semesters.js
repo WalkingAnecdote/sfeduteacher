@@ -47,5 +47,8 @@ export const semestersModel = {
             }).then(res => res.json())
             await dispatch.users.asyncGetTeachersList()
 		},
+        async asyncResetState() {
+			this.resetState()
+		},
 	}),
 }

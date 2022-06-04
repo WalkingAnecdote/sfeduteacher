@@ -59,5 +59,8 @@ export const groupsModel = {
             }).then(res => res.json())
             await dispatch.groups.asyncGetGroupsList()
 		},
+        async asyncResetState() {
+			this.resetState()
+		},
 	}),
 }

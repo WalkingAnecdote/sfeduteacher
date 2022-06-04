@@ -76,6 +76,9 @@ export const chatsModel = {
             } else {
                 this.setCurrentChat(null)
             }
-        }
+        },
+        async asyncResetState() {
+			this.resetState()
+		},
 	}),
 }

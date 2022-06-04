@@ -59,6 +59,9 @@ export const subjectsModel = {
                 }
             }).then(res => res.json())
             await dispatch.subjects.asyncGetSubjectsList()
-		}
+		},
+        async asyncResetState() {
+			this.resetState()
+		},
 	}),
 }
