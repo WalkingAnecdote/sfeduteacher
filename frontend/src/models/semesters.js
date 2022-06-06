@@ -1,16 +1,16 @@
-import {TEACHERS_URL} from '../api'
+import {GROUPS_URL} from '../api'
 
 const initState =  {
-    teachersList: null
+    semestersList: null
 }
 
 export const semestersModel = {
 	state: initState,
 	reducers: {
-		setTeachersList: (state, payload) => {
+		setSemestersList: (state, payload) => {
 			return {
                 ...state,
-                teachersList: payload
+                semestersList: payload
             }
 		},
         resetState: () => {
@@ -18,35 +18,35 @@ export const semestersModel = {
         }
 	},
 	effects: (dispatch) => ({
-		async asyncGetTeachersList(payload, rootState) {
-            const result = await fetch(TEACHERS_URL, {
+		async asyncGetSemestersList(payload, rootState) {
+            const result = await fetch(`${GROUPS_URL}/${payload}/semesters`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-			this.setTeachersList(result)
+			this.setSemestersList(result)
 		},
-        async asyncCreateTeacher(formData, rootState) {
-            await fetch(TEACHERS_URL, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Authorization': `Bearer ${rootState.token.access_token}`
-                }
-            }).then(res => res.json())
-            await dispatch.users.asyncGetTeachersList()
-		},
-        async asyncUpdateTeacher(payload, rootState) {
-            await fetch(`${TEACHERS_URL}/${payload.id}`, {
-                method: 'POST',
-                body: payload.formData,
-                headers: {
-                    'Authorization': `Bearer ${rootState.token.access_token}`
-                }
-            }).then(res => res.json())
-            await dispatch.users.asyncGetTeachersList()
-		},
+        // async asyncCreateTeacher(formData, rootState) {
+        //     await fetch(TEACHERS_URL, {
+        //         method: 'POST',
+        //         body: formData,
+        //         headers: {
+        //             'Authorization': `Bearer ${rootState.token.access_token}`
+        //         }
+        //     }).then(res => res.json())
+        //     await dispatch.users.asyncGetTeachersList()
+		// },
+        // async asyncUpdateTeacher(payload, rootState) {
+        //     await fetch(`${TEACHERS_URL}/${payload.id}`, {
+        //         method: 'POST',
+        //         body: payload.formData,
+        //         headers: {
+        //             'Authorization': `Bearer ${rootState.token.access_token}`
+        //         }
+        //     }).then(res => res.json())
+        //     await dispatch.users.asyncGetTeachersList()
+		// },
         async asyncResetState() {
 			this.resetState()
 		},
