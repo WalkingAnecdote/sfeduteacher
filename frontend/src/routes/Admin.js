@@ -150,17 +150,17 @@ function DashboardContent() {
                 </ListItemIcon>
                 <ListItemText primary="Пользователи" />
             </ListItemButton>
-            {/* <ListItemButton onClick={handleCategory('semesters')}>
-                <ListItemIcon>
-                    <Layers />
-                </ListItemIcon>
-                <ListItemText primary="Семестры" />
-            </ListItemButton> */}
             <ListItemButton onClick={handleCategory('groups')}>
                 <ListItemIcon>
                     <Layers />
                 </ListItemIcon>
                 <ListItemText primary="Группы" />
+            </ListItemButton>
+            <ListItemButton onClick={handleCategory('semesters')}>
+                <ListItemIcon>
+                    <Layers />
+                </ListItemIcon>
+                <ListItemText primary="Семестры" />
             </ListItemButton>
             <ListItemButton onClick={handleCategory('subjects')}>
                 <ListItemIcon>
