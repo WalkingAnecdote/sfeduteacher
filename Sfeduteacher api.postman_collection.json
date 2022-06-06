@@ -741,6 +741,23 @@
 							"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 60000,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTlmYzBmYmNmZDUwMzBkZjA3NTUzNjAwOWZjMDUxZDczZDcxOTk5NjJjODE5ZGIwM2NkZDk2MTU1MjdjMjljNTk2NTI4ZmE4ODZlZDdmNzYiLCJpYXQiOjE2NTI4NjgyMDkuOTI5NTQ2LCJuYmYiOjE2NTI4NjgyMDkuOTI5NTU4LCJleHAiOjE2NTI5MjgyMDkuOTE3OTIyLCJzdWIiOiI3Iiwic2NvcGVzIjpbXX0.llByGMONA1l3sEECRjVlh-nTOK0ApiV6oIo3MO7UsqF20Sua9ryi52VGvMt9rVeLi6YxZdum11RHXgLta0tbX965BD2EJZvUi6uCD8OG9BPX6h_0Tx0P_hT-npHECxbNt9_R03iKto-E3wlbt3ekCdEbJSsOi5_cHVqHxWqliajgVk-HtGDE0ELdwW9WSHiNHayHH58BwKBfDEQNMK0Tgtl4J4-YGMMQa6B_87WhRxJkmjt7N4eDwnkwlutgA0djcEVvjoYyw7QOk-2Bvy1tfd3Tf9_xlVqxNJJwTJPt2WppkLNqE_Veope5YUFKQ55uGaR3QnTcdbIzIsxd0OSEXchvJnUtLW2JIFtt_7LJ8nk-2MK7fDpCJHZEZMdGjyiz0sSYktR53HTV1gkG97cyDpuCAfAu2255XA9ssowzhjCFD_eHUsVkHIjzdHBMCCBIFuToEPKOD5ftgxuIXvdjPjKASbkWRCpgNnujlgDc5BSQq_8vuqHfvAMPFUHH1ZhQhM21plQn91EuP7pBV_NfS2w-ri8GHtPjZ3eMm5EyRMP1fWx35bIM_CNnpIow24mPSapq4SlzbEguNKwntrxghCsjzHWB6LVGmZLeKDMf9aUKJHLpMHsroOzsc4EA9UcIC6eMeqOrFbByllrrWzqWmwpUvjxTQ6ZW7YkbrbZuEBI\",\n    \"refresh_token\": \"def50200ea269ccd6f885d515cb99ce522156842e3443554224d3cebbaef51fa560c388f8a89213a3bdaedca54dbf47a98b22b1ade336257a3cbac4875e8d114f8aa104e28c0d6d9c87f791e8eaa69611067b803a7e594e9c31164ddc7b6086192b765e1b026dc09e06801e91d8b73ff689e2f7716b4093db3bb877d4d727506723c42f6c985fb4848a1783eb8d29e9475349a465756e1781b25d647486d78a65979bcab5b0068776a225acba93e513f2d175f8fc49f8d919b3f27dea7946769d73d9d94b63dbd9eb77f7ddb3337d14fe62c9521efca216cc5bfa133444f00c14f738241809dcef3907a579548e3bda6d4ba9a393a8bf2b3b7de0bd17c05a1efb0ae9a7b10f741787c950ffc4067d4486527758a09304b7fd9097530c958c3a795cfc84393cfcecf4add0b7b9ecb1c0e108bde70bf8a0f35b6bf9769de2fd4240e09af04e7afa05b137a8558368ceda6f5902e88554f3635eab8837124d9581909\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Delete me",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/delete-me",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"delete-me"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2408,6 +2425,139 @@
 					]
 				},
 				{
+					"name": "Update student profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user[first_name]",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "user[last_name]",
+									"value": "{{register_last_name}}",
+									"type": "text"
+								},
+								{
+									"key": "user[middle_name]",
+									"value": "{{register_middle_name}}",
+									"type": "text"
+								},
+								{
+									"key": "profile[group_id]",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/students/1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"students",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update student profile",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user[first_name]",
+											"value": "Test",
+											"type": "text"
+										},
+										{
+											"key": "user[last_name]",
+											"value": "{{register_last_name}}",
+											"type": "text"
+										},
+										{
+											"key": "user[middle_name]",
+											"value": "{{register_middle_name}}",
+											"type": "text"
+										},
+										{
+											"key": "profile[group_id]",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/students/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"students",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:37:00 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 28 May 2022 09:37:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"user\": {\n        \"id\": 3,\n        \"first_name\": \"Test\",\n        \"last_name\": \"Иванов\",\n        \"middle_name\": \"Иванов\",\n        \"email\": \"student@sfedu.com\",\n        \"email_verified_at\": \"2022-05-22T12:13:02.000000Z\",\n        \"approved\": 0,\n        \"banned\": 0,\n        \"roles\": [\n            \"student\"\n        ],\n        \"created_at\": \"2022-05-22T12:13:02.000000Z\"\n    },\n    \"group\": {\n        \"id\": 2,\n        \"name\": \"Ктбо1\",\n        \"type\": \"master\",\n        \"recruitment_date\": \"2022-09-01\"\n    }\n}"
+						}
+					]
+				},
+				{
 					"name": "Create Student User",
 					"request": {
 						"method": "POST",
@@ -2559,35 +2709,10 @@
 					]
 				},
 				{
-					"name": "Update student profile",
+					"name": "Delete student",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "user[first_name]",
-									"value": "Test",
-									"type": "text"
-								},
-								{
-									"key": "user[last_name]",
-									"value": "{{register_last_name}}",
-									"type": "text"
-								},
-								{
-									"key": "user[middle_name]",
-									"value": "{{register_middle_name}}",
-									"type": "text"
-								},
-								{
-									"key": "profile[group_id]",
-									"value": "2",
-									"type": "text"
-								}
-							]
-						},
 						"url": {
 							"raw": "{{api_route}}/students/1",
 							"host": [
@@ -2599,97 +2724,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "Update student profile",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "user[first_name]",
-											"value": "Test",
-											"type": "text"
-										},
-										{
-											"key": "user[last_name]",
-											"value": "{{register_last_name}}",
-											"type": "text"
-										},
-										{
-											"key": "user[middle_name]",
-											"value": "{{register_middle_name}}",
-											"type": "text"
-										},
-										{
-											"key": "profile[group_id]",
-											"value": "2",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{api_route}}/students/1",
-									"host": [
-										"{{api_route}}"
-									],
-									"path": [
-										"students",
-										"1"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Host",
-									"value": "127.0.0.1:8000"
-								},
-								{
-									"key": "Date",
-									"value": "Sat, 28 May 2022 09:37:00 GMT"
-								},
-								{
-									"key": "Date",
-									"value": "Sat, 28 May 2022 09:37:00 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/8.0.17"
-								},
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "X-RateLimit-Limit",
-									"value": "60"
-								},
-								{
-									"key": "X-RateLimit-Remaining",
-									"value": "59"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"id\": 1,\n    \"user\": {\n        \"id\": 3,\n        \"first_name\": \"Test\",\n        \"last_name\": \"Иванов\",\n        \"middle_name\": \"Иванов\",\n        \"email\": \"student@sfedu.com\",\n        \"email_verified_at\": \"2022-05-22T12:13:02.000000Z\",\n        \"approved\": 0,\n        \"banned\": 0,\n        \"roles\": [\n            \"student\"\n        ],\n        \"created_at\": \"2022-05-22T12:13:02.000000Z\"\n    },\n    \"group\": {\n        \"id\": 2,\n        \"name\": \"Ктбо1\",\n        \"type\": \"master\",\n        \"recruitment_date\": \"2022-09-01\"\n    }\n}"
-						}
-					]
+					"response": []
 				}
 			]
 		},
@@ -3241,6 +3276,24 @@
 							"body": "{\n    \"id\": 2,\n    \"rank\": \"ст.Преподаватель\",\n    \"user\": {\n        \"id\": 13,\n        \"first_name\": \"Test\",\n        \"last_name\": \"Иванов\",\n        \"middle_name\": \"Иванов\",\n        \"email\": \"teacher@mail.ru\",\n        \"email_verified_at\": null,\n        \"approved\": 0,\n        \"banned\": 0,\n        \"roles\": [\n            \"teacher\"\n        ],\n        \"created_at\": \"2022-05-28T10:43:35.000000Z\"\n    }\n}"
 						}
 					]
+				},
+				{
+					"name": "Delete teacher",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/teachers/2",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"teachers",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -4704,6 +4757,1613 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Tests",
+			"item": [
+				{
+					"name": "Tests",
+					"item": [
+						{
+							"name": "Get all tests",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tests",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tests"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get all tests",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{api_route}}/tests",
+											"host": [
+												"{{api_route}}"
+											],
+											"path": [
+												"tests"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 21:50:31 GMT"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 21:50:31 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.0.17"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "54"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"activity_id\": 2,\n        \"title\": \"Тест\",\n        \"description\": \"Описание теста\",\n        \"duration\": 60,\n        \"max_value\": 10\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Get tests by activity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/activities/2/tests",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"activities",
+										"2",
+										"tests"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get tests by activity",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{api_route}}/activities/2/tests",
+											"host": [
+												"{{api_route}}"
+											],
+											"path": [
+												"activities",
+												"2",
+												"tests"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 21:50:22 GMT"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 21:50:22 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.0.17"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "55"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"activity_id\": 2,\n        \"title\": \"Тест\",\n        \"description\": \"Описание теста\",\n        \"duration\": 60,\n        \"max_value\": 10\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Get test",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tests/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tests",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get test",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{api_route}}/tests/1",
+											"host": [
+												"{{api_route}}"
+											],
+											"path": [
+												"tests",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 23:04:51 GMT"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 23:04:51 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.0.17"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "57"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 1,\n    \"activity_id\": 2,\n    \"title\": \"Тест\",\n    \"description\": \"Описание теста\",\n    \"duration\": 60,\n    \"max_value\": 10,\n    \"tasks\": [\n        {\n            \"id\": 1,\n            \"test_id\": 1,\n            \"text\": \"как??\",\n            \"value\": 1,\n            \"correct_answer_id\": null,\n            \"type\": \"quiz\",\n            \"correct_answer\": null,\n            \"question\": {\n                \"id\": 1,\n                \"task_id\": 1,\n                \"text\": \"Вопрос 2\",\n                \"answers\": [\n                    {\n                        \"id\": 1,\n                        \"text\": \"варик 1\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"text\": \"Вариант 2\"\n                    }\n                ],\n                \"correct_answer\": {\n                    \"id\": 2,\n                    \"text\": \"Вариант 2\"\n                }\n            }\n        },\n        {\n            \"id\": 2,\n            \"test_id\": 1,\n            \"text\": \"как??\",\n            \"value\": 1,\n            \"correct_answer_id\": 2,\n            \"type\": \"quiz\",\n            \"correct_answer\": {\n                \"id\": 2,\n                \"text\": \"Вариант 2\"\n            },\n            \"question\": null\n        },\n        {\n            \"id\": 3,\n            \"test_id\": 1,\n            \"text\": \"Как?\",\n            \"value\": 1,\n            \"correct_answer_id\": null,\n            \"type\": \"quiz\",\n            \"correct_answer\": null,\n            \"question\": null\n        },\n        {\n            \"id\": 4,\n            \"test_id\": 1,\n            \"text\": \"Как?\",\n            \"value\": 1,\n            \"correct_answer_id\": null,\n            \"type\": \"quiz\",\n            \"correct_answer\": null,\n            \"question\": null\n        },\n        {\n            \"id\": 5,\n            \"test_id\": 1,\n            \"text\": \"Как?\",\n            \"value\": 1,\n            \"correct_answer_id\": null,\n            \"type\": \"quiz\",\n            \"correct_answer\": null,\n            \"question\": null\n        },\n        {\n            \"id\": 6,\n            \"test_id\": 1,\n            \"text\": \"Как?\",\n            \"value\": 1,\n            \"correct_answer_id\": null,\n            \"type\": \"quiz\",\n            \"correct_answer\": null,\n            \"question\": null\n        },\n        {\n            \"id\": 7,\n            \"test_id\": 1,\n            \"text\": \"Как?\",\n            \"value\": 1,\n            \"correct_answer_id\": null,\n            \"type\": \"quiz\",\n            \"correct_answer\": null,\n            \"question\": null\n        },\n        {\n            \"id\": 8,\n            \"test_id\": 1,\n            \"text\": \"Как?\",\n            \"value\": 1,\n            \"correct_answer_id\": null,\n            \"type\": \"quiz\",\n            \"correct_answer\": null,\n            \"question\": null\n        },\n        {\n            \"id\": 9,\n            \"test_id\": 1,\n            \"text\": \"Как?\",\n            \"value\": 1,\n            \"correct_answer_id\": null,\n            \"type\": \"quiz\",\n            \"correct_answer\": null,\n            \"question\": {\n                \"id\": 2,\n                \"task_id\": 9,\n                \"text\": \"Вопрос 1\",\n                \"answers\": [],\n                \"correct_answer\": {\n                    \"id\": 2,\n                    \"text\": \"Вариант 2\"\n                }\n            }\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Create test",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "activity_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "Тест",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Описание теста",
+											"type": "text"
+										},
+										{
+											"key": "duration",
+											"value": "90",
+											"type": "text"
+										},
+										{
+											"key": "max_value",
+											"value": "10",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/tests",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update test",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tests/1?duration=60",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tests",
+										"1"
+									],
+									"query": [
+										{
+											"key": "duration",
+											"value": "60"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete test",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tests/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tests",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tasks",
+					"item": [
+						{
+							"name": "Get all Tasks",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tasks",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tasks"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get all Tasks",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{api_route}}/tasks",
+											"host": [
+												"{{api_route}}"
+											],
+											"path": [
+												"tasks"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 23:02:29 GMT"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 23:02:29 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.0.17"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "57"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"test_id\": 1,\n        \"text\": \"как??\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"question\": {\n            \"id\": 1,\n            \"task_id\": 1,\n            \"text\": \"Вопрос 2\",\n            \"answers\": [\n                {\n                    \"id\": 1,\n                    \"text\": \"варик 1\"\n                },\n                {\n                    \"id\": 2,\n                    \"text\": \"Вариант 2\"\n                }\n            ],\n            \"correct_answer\": {\n                \"id\": 2,\n                \"text\": \"Вариант 2\"\n            }\n        }\n    },\n    {\n        \"id\": 2,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"question\": null\n    },\n    {\n        \"id\": 3,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"question\": null\n    },\n    {\n        \"id\": 4,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"question\": null\n    },\n    {\n        \"id\": 5,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"question\": null\n    },\n    {\n        \"id\": 6,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"question\": null\n    },\n    {\n        \"id\": 7,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"question\": null\n    },\n    {\n        \"id\": 8,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"question\": null\n    },\n    {\n        \"id\": 9,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"question\": {\n            \"id\": 2,\n            \"task_id\": 9,\n            \"text\": \"Вопрос 1\",\n            \"answers\": [],\n            \"correct_answer\": {\n                \"id\": 2,\n                \"text\": \"Вариант 2\"\n            }\n        }\n    },\n    {\n        \"id\": 10,\n        \"test_id\": 3,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"mono\",\n        \"correct_answer\": null,\n        \"question\": null\n    },\n    {\n        \"id\": 11,\n        \"test_id\": 3,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": 2,\n        \"type\": \"mono\",\n        \"correct_answer\": {\n            \"id\": 2,\n            \"text\": \"Вариант 2\"\n        },\n        \"question\": null\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Get Tasks by Test",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tests/1/tasks",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tests",
+										"1",
+										"tasks"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Tasks by Test",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{api_route}}/tests/1/tasks",
+											"host": [
+												"{{api_route}}"
+											],
+											"path": [
+												"tests",
+												"1",
+												"tasks"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 22:16:38 GMT"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 22:16:38 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.0.17"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "57"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"test_id\": 1,\n        \"text\": \"как??\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"questions\": []\n    },\n    {\n        \"id\": 2,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"questions\": []\n    },\n    {\n        \"id\": 3,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"questions\": []\n    },\n    {\n        \"id\": 4,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"questions\": []\n    },\n    {\n        \"id\": 5,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"questions\": []\n    },\n    {\n        \"id\": 6,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"questions\": []\n    },\n    {\n        \"id\": 7,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"questions\": []\n    },\n    {\n        \"id\": 8,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"questions\": []\n    },\n    {\n        \"id\": 9,\n        \"test_id\": 1,\n        \"text\": \"Как?\",\n        \"value\": 1,\n        \"correct_answer_id\": null,\n        \"type\": \"quiz\",\n        \"correct_answer\": null,\n        \"questions\": []\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "Get Task",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tasks/9",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tasks",
+										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Task",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "test_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "text",
+											"value": "Как?",
+											"type": "text"
+										},
+										{
+											"key": "value",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "mono",
+											"type": "text"
+										},
+										{
+											"key": "correct_answer_id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/tasks",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tasks"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Create Task",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "test_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "text",
+													"value": "Как?",
+													"type": "text"
+												},
+												{
+													"key": "value",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "type",
+													"value": "quiz",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{api_route}}/tasks",
+											"host": [
+												"{{api_route}}"
+											],
+											"path": [
+												"tasks"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 22:10:03 GMT"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 22:10:03 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.0.17"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "57"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 9,\n    \"test_id\": \"1\",\n    \"text\": \"Как?\",\n    \"value\": \"1\",\n    \"correct_answer_id\": null,\n    \"type\": \"quiz\"\n}"
+								},
+								{
+									"name": "Create Task",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "test_id",
+													"value": "3",
+													"type": "text"
+												},
+												{
+													"key": "text",
+													"value": "Как?",
+													"type": "text"
+												},
+												{
+													"key": "value",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "type",
+													"value": "mono",
+													"type": "text"
+												},
+												{
+													"key": "correct_answer_id",
+													"value": "2",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{api_route}}/tasks",
+											"host": [
+												"{{api_route}}"
+											],
+											"path": [
+												"tasks"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 23:01:57 GMT"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 23:01:57 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.0.17"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "58"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 11,\n    \"test_id\": \"3\",\n    \"text\": \"Как?\",\n    \"value\": \"1\",\n    \"correct_answer_id\": \"2\",\n    \"type\": \"mono\",\n    \"correct_answer\": {\n        \"id\": 2,\n        \"text\": \"Вариант 2\"\n    },\n    \"question\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Task",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tasks/2?text=как??&correct_answer_id=2",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tasks",
+										"2"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "как??"
+										},
+										{
+											"key": "correct_answer_id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Task",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tasks/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tasks",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Questions",
+					"item": [
+						{
+							"name": "Get all Questions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/questions",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"questions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Question",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/questions/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"questions",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Question",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "task_id",
+											"value": "9",
+											"type": "text"
+										},
+										{
+											"key": "text",
+											"value": "Вопрос 1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/questions",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"questions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Question",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/questions/1?text=Вопрос 2",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"questions",
+										"1"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "Вопрос 2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Question",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/questions/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"questions",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sync answers to question",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "answers[0]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "answers[1]",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/questions/1/answers",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"questions",
+										"1",
+										"answers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Sync answers to question",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "answers[0]",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "answers[1]",
+													"value": "2",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{api_route}}/questions/1/answers",
+											"host": [
+												"{{api_route}}"
+											],
+											"path": [
+												"questions",
+												"1",
+												"answers"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 23:21:12 GMT"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 23:21:12 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.0.17"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 1,\n    \"task_id\": 1,\n    \"text\": \"Вопрос 2\",\n    \"answers\": [\n        {\n            \"id\": 1,\n            \"text\": \"варик 1\"\n        },\n        {\n            \"id\": 2,\n            \"text\": \"Вариант 2\"\n        }\n    ],\n    \"correct_answer\": null\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Answers",
+					"item": [
+						{
+							"name": "Get all Answers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/answers",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"answers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Answer",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/answers/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"answers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Answer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "text",
+											"value": "Вариант 2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/answers",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"answers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Answer",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/answers/1?text=варик 1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"answers",
+										"1"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "варик 1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update Answer",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{api_route}}/answers/1?text=варик 1",
+											"host": [
+												"{{api_route}}"
+											],
+											"path": [
+												"answers",
+												"1"
+											],
+											"query": [
+												{
+													"key": "text",
+													"value": "варик 1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 22:46:13 GMT"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 02 Jun 2022 22:46:13 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.0.17"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "55"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 1,\n    \"text\": \"варик 1\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete Answer",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/answers/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"answers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get test results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/tests/1/students/1",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"tests",
+								"1",
+								"students",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get test results",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tests/1/students/1",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tests",
+										"1",
+										"students",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Jun 2022 00:28:38 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Jun 2022 00:28:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"test_id\": 1,\n        \"test\": {\n            \"id\": 1,\n            \"activity_id\": 2,\n            \"title\": \"Тест\",\n            \"description\": \"Описание теста\",\n            \"duration\": 60,\n            \"max_value\": 10\n        },\n        \"student_id\": 1,\n        \"start_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"end_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"student_answers\": [\n            {\n                \"task_id\": 1,\n                \"answer_id\": 2,\n                \"text\": \"Вариант 2\",\n                \"value\": 1\n            }\n        ],\n        \"value\": 1\n    },\n    {\n        \"id\": 2,\n        \"test_id\": 1,\n        \"test\": {\n            \"id\": 1,\n            \"activity_id\": 2,\n            \"title\": \"Тест\",\n            \"description\": \"Описание теста\",\n            \"duration\": 60,\n            \"max_value\": 10\n        },\n        \"student_id\": 1,\n        \"start_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"end_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"student_answers\": [\n            {\n                \"task_id\": 1,\n                \"answer_id\": 2,\n                \"text\": \"Вариант 2\",\n                \"value\": 1\n            }\n        ],\n        \"value\": 1\n    },\n    {\n        \"id\": 3,\n        \"test_id\": 1,\n        \"test\": {\n            \"id\": 1,\n            \"activity_id\": 2,\n            \"title\": \"Тест\",\n            \"description\": \"Описание теста\",\n            \"duration\": 60,\n            \"max_value\": 10\n        },\n        \"student_id\": 1,\n        \"start_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"end_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"student_answers\": [\n            {\n                \"task_id\": 1,\n                \"answer_id\": 2,\n                \"text\": \"Вариант 2\",\n                \"value\": 1\n            }\n        ],\n        \"value\": 1\n    },\n    {\n        \"id\": 4,\n        \"test_id\": 1,\n        \"test\": {\n            \"id\": 1,\n            \"activity_id\": 2,\n            \"title\": \"Тест\",\n            \"description\": \"Описание теста\",\n            \"duration\": 60,\n            \"max_value\": 10\n        },\n        \"student_id\": 1,\n        \"start_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"end_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"student_answers\": [\n            {\n                \"task_id\": 1,\n                \"answer_id\": 2,\n                \"text\": \"Вариант 2\",\n                \"value\": 1\n            }\n        ],\n        \"value\": 1\n    },\n    {\n        \"id\": 5,\n        \"test_id\": 1,\n        \"test\": {\n            \"id\": 1,\n            \"activity_id\": 2,\n            \"title\": \"Тест\",\n            \"description\": \"Описание теста\",\n            \"duration\": 60,\n            \"max_value\": 10\n        },\n        \"student_id\": 1,\n        \"start_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"end_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"student_answers\": [\n            {\n                \"task_id\": 1,\n                \"answer_id\": null,\n                \"text\": \"Вариант 2\",\n                \"value\": 1\n            }\n        ],\n        \"value\": 1\n    },\n    {\n        \"id\": 6,\n        \"test_id\": 1,\n        \"test\": {\n            \"id\": 1,\n            \"activity_id\": 2,\n            \"title\": \"Тест\",\n            \"description\": \"Описание теста\",\n            \"duration\": 60,\n            \"max_value\": 10\n        },\n        \"student_id\": 1,\n        \"start_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"end_time\": \"2022-10-10T16:20:00.000000Z\",\n        \"student_answers\": [\n            {\n                \"task_id\": 1,\n                \"answer_id\": 2,\n                \"text\": \"Вариант 2\",\n                \"value\": 1\n            }\n        ],\n        \"value\": 1\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Test result",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/tests/results/2",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"tests",
+								"results",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Test result",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tests/results/2",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tests",
+										"results",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Jun 2022 00:29:41 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Jun 2022 00:29:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"test_id\": 1,\n    \"test\": {\n        \"id\": 1,\n        \"activity_id\": 2,\n        \"title\": \"Тест\",\n        \"description\": \"Описание теста\",\n        \"duration\": 60,\n        \"max_value\": 10\n    },\n    \"student_id\": 1,\n    \"start_time\": \"2022-10-10T16:20:00.000000Z\",\n    \"end_time\": \"2022-10-10T16:20:00.000000Z\",\n    \"student_answers\": [\n        {\n            \"task_id\": 1,\n            \"answer_id\": 2,\n            \"text\": \"Вариант 2\",\n            \"value\": 1\n        }\n    ],\n    \"value\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Submit test answer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "start_time",
+									"value": "2022-10-10 16:20:00",
+									"type": "text"
+								},
+								{
+									"key": "end_time",
+									"value": "2022-10-10 16:20:00",
+									"type": "text"
+								},
+								{
+									"key": "student_answers",
+									"value": "[{\"task_id\":1,\"answer_id\":2,\"text\":\"Вариант 2\"}]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_route}}/tests/1/students/1/submit",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"tests",
+								"1",
+								"students",
+								"1",
+								"submit"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Submit test answer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "start_time",
+											"value": "2022-10-10 16:20:00",
+											"type": "text"
+										},
+										{
+											"key": "end_time",
+											"value": "2022-10-10 16:20:00",
+											"type": "text"
+										},
+										{
+											"key": "student_answers",
+											"value": "[{\"task_id\":1,\"answer_id\":2,\"text\":\"Вариант 2\"}]",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_route}}/tests/1/students/1/submit",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tests",
+										"1",
+										"students",
+										"1",
+										"submit"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Jun 2022 00:27:08 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Jun 2022 00:27:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6,\n    \"test_id\": 1,\n    \"test\": {\n        \"id\": 1,\n        \"activity_id\": 2,\n        \"title\": \"Тест\",\n        \"description\": \"Описание теста\",\n        \"duration\": 60,\n        \"max_value\": 10\n    },\n    \"student_id\": 1,\n    \"start_time\": \"2022-10-10T16:20:00.000000Z\",\n    \"end_time\": \"2022-10-10T16:20:00.000000Z\",\n    \"student_answers\": [\n        {\n            \"task_id\": 1,\n            \"answer_id\": 2,\n            \"text\": \"Вариант 2\",\n            \"value\": 1\n        }\n    ],\n    \"value\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete test result",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_route}}/tests/results/2",
+							"host": [
+								"{{api_route}}"
+							],
+							"path": [
+								"tests",
+								"results",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete test result",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_route}}/tests/results/2",
+									"host": [
+										"{{api_route}}"
+									],
+									"path": [
+										"tests",
+										"results",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Jun 2022 00:30:19 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 Jun 2022 00:30:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.0.17"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "56"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "true"
+						}
+					]
+				}
+			]
 		}
 	],
 	"variable": [
@@ -4734,6 +6394,10 @@
 		{
 			"key": "register_user_type_teacher",
 			"value": "teacher"
+		},
+		{
+			"key": "auth_token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNjViZjhlMzJhNTA5NDAyZTEyZTQ0MGNmMzI2MTIzNzdjNDI0MjhhNDVmNDVkNjg4OTU4NGNiOTMyNDJhMWI4NzVhOWI5MjM4YmQ5ODU1ZDAiLCJpYXQiOjE2NTI4NjgwMTcuNTQ3MjA2LCJuYmYiOjE2NTI4NjgwMTcuNTQ3MjI2LCJleHAiOjE2NTI5MjgwMTcuNTMyMDk5LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.kBWygu-7uJCmf193QnWe2FED2o7151Ewhzaw9a-WXOBz6MfuQGvdL9qOoAy3G4ys8ncp93mV_-T9ZDRpXZ0RvHDSyePYvBwN3tHsaGrChLV1kWPxgetV1RJgH5diCDLghxQioOTwaFTAcXi4zBIEvKpUHywVyLMcCkdO04dVBXeWuue0ITtSujbr5uyL9y3nk0HTHiJFuE63av5fHpo0LOwiYE-oa9ocTqZgc7uqzgEPxGOTA-eJTbIF46z5mDBXv8PbfrC-rirNtNlyzSIy1lZiWYzgx1AlLGa2IkU9-L07F8nz6jnxeMQEYEFGGxayepHdZBCYwDcFoQ86B7FxKjmrPGny8E0dhxTcO639G5bCMp_xR9d6emhITb1hCOP98vnIrDbmlhL1ZWIryEm62vErpfkLHic91yUyBDh1tfZErMk2ymHMlCqDvxOhecmdG__Flw77LAK6h1TcXLWuRIg2X796pNJELYxF9H4-dTKyanFbLOt-kxAaoxJnUp0TclvZF2HRFLfr2zqkjRnc3P4aJWRieMQ00kG4QrhTgmvE4Rz4Lrm0AyDTJrsPNwNLlP2faA7Jcw6-Pv8ShEFyUT4febLG7qwOR2HdZFIr6lkvKOMp7tHhApWhBRitFDkf7UIPzZSWrtfsdejTajhJ1laudzCcfu4SiyZr9M0jhAo"
 		}
 	]
 }

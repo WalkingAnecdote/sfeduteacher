@@ -22,5 +22,8 @@ export const userModel = {
             }).then(res => res.json())
 			this.setState(result)
 		},
+		async asyncResetState() {
+			this.resetState()
+		},
 	}),
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import * as React from 'react';
 import {useSelector} from 'react-redux'
 import {
     useNavigate,
@@ -12,7 +12,7 @@ export const useRedirect = () => {
     const access_token = useSelector(state => state.token.access_token)
     const user = useSelector(state => state.user)
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (access_token !== null) {
             if (user !== null && user.roles.includes('admin')) {
                 navigate('/admin', { replace: true });

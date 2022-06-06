@@ -78,6 +78,12 @@ export const Users = () => {
     const [open, setOpen] = React.useState(false)
     const [entityID, setEntityID] = React.useState(null)
     const [modalMode, setModalMode] = React.useState('add')
+
+    const [selectedTabIndex, setSelectedTabIndex] = React.useState(0);
+    const handleChange = (event, newValue) => {
+      setSelectedTabIndex(newValue);
+    };
+
     const onEditClick = (id) => () => {
       setModalMode('edit')
       setEntityID(id)
@@ -91,14 +97,15 @@ export const Users = () => {
     const handleSubmit = React.useCallback((event) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
+
       if (modalMode === 'add') {
-        if (value === 0) {
+        if (selectedTabIndex === 0) {
           dispatch.users.asyncCreateTeacher(formData)
-        } else if (value === 1) {
+        } else if (selectedTabIndex === 1) {
           dispatch.users.asyncCreateStudent(formData)
         }
       } else {
-        const currentEntity = value === 0
+        const currentEntity = selectedTabIndex === 0
           ? teachersList?.data?.find(ent => ent.id === entityID)
           : studentsList?.data?.find(ent => ent.id === entityID)
         const checkboxKeys = ['user[approved]', 'user[banned]']
@@ -119,14 +126,14 @@ export const Users = () => {
         keysToRemove.forEach(key => {
           formData.delete(key)
         })
-        if (value === 0) {
+        if (selectedTabIndex === 0) {
           dispatch.users.asyncUpdateTeacher({id: entityID, formData})
-        } else if (value === 1) {
+        } else if (selectedTabIndex === 1) {
           dispatch.users.asyncUpdateStudent({id: entityID, formData})
         }
       }
       setOpen(false)
-    }, [modalMode, entityID])
+    }, [modalMode, entityID, selectedTabIndex])
     // Fired on page render.
     React.useEffect(() => {
         if (teachersList === null) {
@@ -139,21 +146,22 @@ export const Users = () => {
           dispatch.users.asyncGetStudentsList()
       }
   }, [studentsList])
-  
-    const [value, setValue] = React.useState(0);
-
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
-    console.log(studentsList?.data?.find(ent => ent.id === entityID))
+    
+    const onDeleteClick = (id) => () => {
+      if (selectedTabIndex === 0) {
+        dispatch.users.asyncDeleteTeacher(id)
+      } else if (selectedTabIndex === 1) {
+        dispatch.users.asyncDeleteStudent(id)
+      }
+    }
 
     return (
         <>
-          <Tabs value={value} onChange={handleChange} aria-label="disabled tabs example">
+          <Tabs value={selectedTabIndex} onChange={handleChange} aria-label="disabled tabs example">
             <Tab label="Преподаватели" />
             <Tab label="Студенты" />
           </Tabs>
-          {value === 0 && (
+          {selectedTabIndex === 0 && (
             <>
               <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -184,12 +192,14 @@ export const Users = () => {
                       <TableCell align="center">{profile.user.approved}</TableCell>
                       <TableCell align="center">{profile.user.banned}</TableCell>
                       <TableCell align="center">
-                      <IconButton aria-label="edit" onClick={onEditClick(profile.id)}>
-                        <Create />
-                      </IconButton>
-                      {/* <IconButton aria-label="delete" onClick={onDeleteClick(profile.id)}>
-                        <Delete />
-                      </IconButton> */}
+                        <IconButton aria-label="edit" onClick={onEditClick(profile.id)}>
+                          <Create />
+                        </IconButton>
+                      </TableCell>
+                      <TableCell>
+                        <IconButton aria-label="delete" onClick={onDeleteClick(profile.id)}>
+                          <Delete />
+                        </IconButton>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -254,7 +264,7 @@ export const Users = () => {
             </BaseModal>
           </>
           )}
-          {value === 1 && (
+          {selectedTabIndex === 1 && (
               <>
               <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -285,9 +295,14 @@ export const Users = () => {
                       <TableCell align="center">{profile.user.approved}</TableCell>
                       <TableCell align="center">{profile.user.banned}</TableCell>
                       <TableCell align="center">
-                      <IconButton aria-label="edit" onClick={onEditClick(profile.id)}>
-                        <Create />
-                      </IconButton>
+                        <IconButton aria-label="edit" onClick={onEditClick(profile.id)}>
+                          <Create />
+                        </IconButton>
+                      </TableCell>
+                      <TableCell>
+                        <IconButton aria-label="delete" onClick={onDeleteClick(profile?.id)}>
+                          <Delete />
+                        </IconButton>
                       </TableCell>
                     </TableRow>
                   ))}
