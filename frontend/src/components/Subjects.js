@@ -5,12 +5,6 @@ import { Edit, Delete, Add } from '@mui/icons-material';
 import { BaseModal } from './Modal'
 
 
-const initialModalData = {
-  name: '',
-  type: '',
-  recruitment_date: ''
-}
-
 export const Subjects = () => {
     // Get data from the store.
     const dispatch = useDispatch()
@@ -119,7 +113,7 @@ export const Subjects = () => {
                 >
                   {teachersList?.data?.map((teacehr) => (
                     <MenuItem key={teacehr.user.email} value={teacehr.id}>
-                      {`${teacehr.user.first_name} ${teacehr.user.middle_name} ${teacehr.user.last_name}`}
+                      {`${teacehr.user.middle_name} ${teacehr.user.first_name} ${teacehr.user.last_name}`}
                     </MenuItem>
                   ))}
                 </TextField>
