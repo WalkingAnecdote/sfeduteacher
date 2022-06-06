@@ -9,6 +9,7 @@ export const Semesters = () => {
     const dispatch = useDispatch()
     const groupsList = useSelector(state => state.groups.groupsList)
     const semestersList = useSelector(state => state.semesters.semestersList)
+    const subjectsBySemester = useSelector(state => state.semesters.subjectsBySemester)
     const [selectedGroup, setSelectedGroup] = React.useState(null)
     const [semesterModal, setSemesterModal] = React.useState(false)
     const [selectedSemester, setSelectedSemester] = React.useState(null)
@@ -32,6 +33,12 @@ export const Semesters = () => {
             dispatch.semesters.asyncGetSemestersList(selectedGroup.id)
           }
     }, [dispatch.semesters, selectedGroup])
+
+    React.useEffect(() => {
+      if (selectedSemester !== null && Number.isInteger(selectedSemester.id)) {
+            dispatch.semesters.asyncGetSubjectsBySemester(selectedSemester.id)
+          }
+    }, [dispatch.semesters, selectedSemester])
 
     return (
         <>
@@ -119,7 +126,7 @@ export const Semesters = () => {
                       ))}
                     </List>
                   ) : (
-                    <Typography>Семестры для группы пока не созданы.</Typography>
+                    <Typography textAlign="center">Семестры для группы пока не созданы.</Typography>
                   )}
                   <BaseModal open={semesterModal} setOpen={setSemesterModal}>
                     <Box component="form" onSubmit={handleSubmitSemester} noValidate sx={{ mt: 1 }}>
@@ -145,6 +152,36 @@ export const Semesters = () => {
                 </>
             ))}
         </>
+        {selectedGroup !== null && selectedSemester !== null && (
+          <>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', m: 1 }}>
+            Предметы в семестре: 
+            <Fab color="primary" aria-label="add" onClick={() => true}>
+              <Add />
+            </Fab>
+          </Box>
+            {subjectsBySemester?.data?.length ? (
+              <List sx={{ bgcolor: 'background.paper' }}>
+                {subjectsBySemester?.map((subject) => (
+                  <ListItem
+                    key={subject.name + subject.id}
+                    secondaryAction={
+                      <IconButton aria-label="delete" onClick={() => false}>
+                        <Delete />
+                      </IconButton>
+                    }
+                  >
+                    <ListItemButton>
+                      <ListItemText primary={subject.name} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <Typography textAlign='center'>К выбранному семестру пока не прикреплены предметы.</Typography>
+            )}
+          </>
+        )}
       </>
     )
 }
