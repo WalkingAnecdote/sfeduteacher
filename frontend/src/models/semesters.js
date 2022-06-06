@@ -27,26 +27,25 @@ export const semestersModel = {
             }).then(res => res.json())
 			this.setSemestersList(result)
 		},
-        // async asyncCreateTeacher(formData, rootState) {
-        //     await fetch(TEACHERS_URL, {
-        //         method: 'POST',
-        //         body: formData,
-        //         headers: {
-        //             'Authorization': `Bearer ${rootState.token.access_token}`
-        //         }
-        //     }).then(res => res.json())
-        //     await dispatch.users.asyncGetTeachersList()
-		// },
-        // async asyncUpdateTeacher(payload, rootState) {
-        //     await fetch(`${TEACHERS_URL}/${payload.id}`, {
-        //         method: 'POST',
-        //         body: payload.formData,
-        //         headers: {
-        //             'Authorization': `Bearer ${rootState.token.access_token}`
-        //         }
-        //     }).then(res => res.json())
-        //     await dispatch.users.asyncGetTeachersList()
-		// },
+        async asyncDeleteSemester(payload, rootState) {
+            await fetch(`${GROUPS_URL}/${payload.groupId}/semesters/${payload.semesterId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json()).catch((err) => err.json())
+            await dispatch.semesters.asyncGetSemestersList(payload.groupId)
+		},
+        async asyncCreateSemester(payload, rootState) {
+            await fetch(`${GROUPS_URL}/${payload.groupId}/semesters`, {
+                method: 'POST',
+                body: payload.formData,
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.semesters.asyncGetSemestersList(payload.groupId)
+		},
         async asyncResetState() {
 			this.resetState()
 		},
