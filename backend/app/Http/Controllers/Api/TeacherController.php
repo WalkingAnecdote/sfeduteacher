@@ -13,6 +13,7 @@ use App\Models\TeacherProfile;
 use App\Repositories\TeacherRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class TeacherController
@@ -63,12 +64,15 @@ class TeacherController
     {
         $input = $request->input();
 
+        if(isset($input["user"]["password"])) {
+            $input["user"]["password"] = Hash::make($input["user"]["password"]);
+        }
         $this->userRepository->updateById($teacher->user->id, $input['user'] ?? []);
         return response()->json(new TeacherProfileResource($this->teacherRepository->updateById($teacher->id, $input['profile'] ?? [])));
     }
 
     public function destroy(TeacherProfile $teacher): JsonResponse
     {
-        return response()->json((new UserRepository)->deleteById($teacher->user_id));
+        return response()->json((new UserRepository)->deleteById($teacher?->user?->id));
     }
 }

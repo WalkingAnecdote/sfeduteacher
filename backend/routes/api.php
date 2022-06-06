@@ -22,6 +22,7 @@ Route::apiResource('groups', \App\Http\Controllers\Api\GroupController::class);
 Route::apiResource('subjects', \App\Http\Controllers\Api\SubjectController::class);
 Route::get('semesters/{semester}/subjects', [\App\Http\Controllers\Api\SubjectController::class, "getSubjectsBySemester"])
     ->name('groups.semesters.list');
+Route::get('subjects/teacher/{teacher}', [\App\Http\Controllers\Api\SubjectController::class, "getSubjectsByTeacher"]);
 Route::post('semesters/{semester}/subjects/attach', [\App\Http\Controllers\Api\SemesterController::class, "addSubjects"])
     ->name('semesters.subjects.attach');
 Route::post('semesters/{semester}/subjects/detach', [\App\Http\Controllers\Api\SemesterController::class, "removeSubjects"])

@@ -12,6 +12,7 @@ use App\Http\Resources\SubjectsWithMarksResource;
 use App\Models\Semester;
 use App\Models\StudentProfile;
 use App\Models\Subject;
+use App\Models\TeacherProfile;
 use App\Repositories\SubjectRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,6 +43,10 @@ class SubjectController extends Controller
     public function getSubjectsBySemester(Semester $semester): JsonResponse
     {
         return response()->json(new SubjectsPaginateResource($semester->subjects()->paginate()));
+    }
+    public function getSubjectsByTeacher(TeacherProfile $teacher): JsonResponse
+    {
+        return response()->json(new SubjectsPaginateResource($teacher->subjects()->paginate()));
     }
 
     public function getSubjectsBySemesterWithMarks(Semester $semester): JsonResponse
