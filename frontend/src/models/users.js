@@ -32,7 +32,11 @@ export const usersModel = {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-			this.setTeachersList(result)
+            const parsedResult = {
+                ...result,
+                data: result?.data?.filter(user => user?.user)
+            }
+			this.setTeachersList(parsedResult)
 		},
         async asyncCreateTeacher(formData, rootState) {
             await fetch(TEACHERS_URL, {
@@ -61,7 +65,11 @@ export const usersModel = {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-			this.setStudentsList(result)
+            const parsedResult = {
+                ...result,
+                data: result?.data?.filter(user => user?.user)
+            }
+			this.setStudentsList(parsedResult)
             await dispatch.groups.asyncGetGroupsList()
 		},
         async asyncCreateStudent(formData, rootState) {
