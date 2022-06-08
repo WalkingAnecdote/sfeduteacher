@@ -62,6 +62,16 @@ export const semestersModel = {
             }).then(res => res.json())
             this.setSubjectsBySemester(result)
 		},
+        async asyncAppendSubjectToSemester(payload, rootState) {
+            await fetch(`${SEMESTERS_URL}/${payload.semesterId}/subjects/attach`, {
+                method: 'POST',
+                body: payload.formData,
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.semesters.asyncGetSubjectsBySemester(payload.semesterId)
+		},
         async asyncResetState() {
 			this.resetState()
 		},

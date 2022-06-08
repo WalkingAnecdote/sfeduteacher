@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, OutlinedInput, InputAdornment, Box, Fab, Typography, List, ListItem, ListItemText, ListItemButton, TextField, Button } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, OutlinedInput, InputAdornment, Box, Fab, Typography, List, ListItem, ListItemText, ListItemButton, TextField, Button, MenuItem } from '@mui/material';
 import { Close, Add, Delete } from '@mui/icons-material';
 import { BaseModal } from './Modal'
 
@@ -10,9 +10,12 @@ export const Semesters = () => {
     const groupsList = useSelector(state => state.groups.groupsList)
     const semestersList = useSelector(state => state.semesters.semestersList)
     const subjectsBySemester = useSelector(state => state.semesters.subjectsBySemester)
+    const subjectsList = useSelector(state => state.subjects.subjectsList)
     const [selectedGroup, setSelectedGroup] = React.useState(null)
     const [semesterModal, setSemesterModal] = React.useState(false)
     const [selectedSemester, setSelectedSemester] = React.useState(null)
+    const [subjectModal, setSubjectModal] = React.useState(false)
+    console.log(subjectsBySemester)
     const handleSubmitSemester = (event) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
@@ -20,6 +23,18 @@ export const Semesters = () => {
       dispatch.semesters.asyncCreateSemester({groupId: selectedGroup.id, formData })
 
       setSemesterModal(false)
+    }
+    const handleSubmitSubject = (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+
+      dispatch.semesters.asyncAppendSubjectToSemester({
+        semesterId: selectedSemester.id,
+        groupId: selectedGroup.id,
+        formData
+      })
+
+      setSubjectModal(false)
     }
 
     React.useEffect(() => {
@@ -39,6 +54,12 @@ export const Semesters = () => {
             dispatch.semesters.asyncGetSubjectsBySemester(selectedSemester.id)
           }
     }, [dispatch.semesters, selectedSemester])
+
+    React.useEffect(() => {
+      if (subjectsList === null) {
+            dispatch.subjects.asyncGetSubjectsList()
+          }
+    }, [dispatch.subjects, subjectsList])
 
     return (
         <>
@@ -156,13 +177,13 @@ export const Semesters = () => {
           <>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', m: 1 }}>
             Предметы в семестре: 
-            <Fab color="primary" aria-label="add" onClick={() => true}>
+            <Fab color="primary" aria-label="add" onClick={() => setSubjectModal(true)}>
               <Add />
             </Fab>
           </Box>
             {subjectsBySemester?.data?.length ? (
               <List sx={{ bgcolor: 'background.paper' }}>
-                {subjectsBySemester?.map((subject) => (
+                {subjectsBySemester?.data?.map((subject) => (
                   <ListItem
                     key={subject.name + subject.id}
                     secondaryAction={
@@ -180,6 +201,33 @@ export const Semesters = () => {
             ) : (
               <Typography textAlign='center'>К выбранному семестру пока не прикреплены предметы.</Typography>
             )}
+            <BaseModal open={subjectModal} setOpen={setSubjectModal}>
+              <Box component="form" onSubmit={handleSubmitSubject} noValidate sx={{ mt: 1 }}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  label='Группа'
+                  name='subjects'
+                  select
+                  autoFocus
+                >
+                  {subjectsList?.data?.filter(subject => !subjectsBySemester?.data?.map(subj => subj.id).includes(subject.id)).map(subject => (
+                      <MenuItem key={subject.id} value={subject.id}>
+                        {subject.name}
+                      </MenuItem>
+                  ))}
+                </TextField>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Добавить предмет к семестру
+                </Button>
+              </Box>
+            </BaseModal>
           </>
         )}
       </>
