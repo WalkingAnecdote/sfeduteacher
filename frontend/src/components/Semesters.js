@@ -30,11 +30,21 @@ export const Semesters = () => {
 
       dispatch.semesters.asyncAppendSubjectToSemester({
         semesterId: selectedSemester.id,
-        groupId: selectedGroup.id,
         formData
       })
 
       setSubjectModal(false)
+    }
+
+    const handleDetachSubject = (subjectId) => () => {
+      const formData = new FormData();
+
+      formData.append('subjects', subjectId)
+
+      dispatch.semesters.asyncDetachSubjectFromSemester({
+        semesterId: selectedSemester.id,
+        formData
+      })
     }
 
     React.useEffect(() => {
@@ -187,7 +197,7 @@ export const Semesters = () => {
                   <ListItem
                     key={subject.name + subject.id}
                     secondaryAction={
-                      <IconButton aria-label="delete" onClick={() => false}>
+                      <IconButton aria-label="delete" onClick={handleDetachSubject(subject.id)}>
                         <Delete />
                       </IconButton>
                     }
