@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Exceptions\ValidationError;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource as UserResource;
+use App\Http\Resources\UserWithProfileResource;
 use App\Models\StudentProfile;
 use App\Models\TeacherProfile;
 use App\Models\User;
@@ -194,7 +195,7 @@ class UserAuthApiController extends Controller
 
     public function me(Request $request)
     {
-        return response()->json(new UserResource(User::find($request->user()->id)));
+        return response()->json(new UserWithProfileResource(User::find($request->user()->id)));
     }
 
     public function deleteMe(Request $request)

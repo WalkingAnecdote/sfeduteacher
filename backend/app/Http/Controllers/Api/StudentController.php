@@ -14,6 +14,7 @@ use App\Models\StudentProfile;
 use App\Repositories\StudentRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class StudentController
@@ -73,12 +74,16 @@ class StudentController
     {
         $input = $request->input();
 
+        if(isset($input["user"]["password"])) {
+            $input["user"]["password"] = Hash::make($input["user"]["password"]);
+        }
+
         $this->userRepository->updateById($student->user->id, $input['user']?? []);
         return response()->json(new StudentProfileResource($this->studentRepository->updateById($student->id, $input['profile']?? [])));
     }
 
     public function destroy(StudentProfile $student): JsonResponse
     {
-        return response()->json((new UserRepository)->deleteById($student->user_id));
+        return response()->json((new UserRepository)->deleteById($student?->user?->id));
     }
 }
