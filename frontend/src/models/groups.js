@@ -1,16 +1,23 @@
 import {GROUPS_URL} from '../api'
 
 const initState =  {
-    groupsList: null
+    groupsList: null,
+    group: null
 }
 
 export const groupsModel = {
 	state: initState,
 	reducers: {
-		setTeachersList: (state, payload) => {
+		setGroupsList: (state, payload) => {
 			return {
                 ...state,
                 groupsList: payload
+            }
+		},
+        setGroup: (state, payload) => {
+			return {
+                ...state,
+                group: payload
             }
 		},
         resetState: () => {
@@ -25,7 +32,7 @@ export const groupsModel = {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-			this.setTeachersList(result)
+			this.setGroupsList(result)
 		},
         async asyncCreateGroup(formData, rootState) {
             await fetch(GROUPS_URL, {
@@ -58,6 +65,15 @@ export const groupsModel = {
                 }
             }).then(res => res.json())
             await dispatch.groups.asyncGetGroupsList()
+		},
+        async asyncGetGroupById(payload, rootState) {
+            const result = await fetch(`${GROUPS_URL}/${payload}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            this.setGroup(result)
 		},
         async asyncResetState() {
 			this.resetState()
