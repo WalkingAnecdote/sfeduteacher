@@ -22,7 +22,7 @@ class Subject extends Model
         return $this->belongsTo(TeacherProfile::class);
     }
 
-    public function semester()
+    public function semesters()
     {
         return $this->belongsToMany(Semester::class, 'semester_subject');
     }

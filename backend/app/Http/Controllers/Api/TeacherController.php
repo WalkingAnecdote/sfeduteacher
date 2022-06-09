@@ -73,6 +73,8 @@ class TeacherController
 
     public function destroy(TeacherProfile $teacher): JsonResponse
     {
-        return response()->json((new UserRepository)->deleteById($teacher?->user?->id));
+        (new UserRepository)->deleteById($teacher?->user?->id);
+        (new TeacherRepository)->deleteById($teacher->id);
+        return response()->json(true);
     }
 }

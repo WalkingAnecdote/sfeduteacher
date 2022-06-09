@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Group\StoreRequest;
 use App\Http\Requests\Group\UpdateRequest;
 use App\Http\Resources\GroupResource;
-use App\Http\Resources\GroupsPaginateResource;
 use App\Http\Resources\GroupsResource;
 use App\Models\Group;
 use App\Repositories\GroupRepository;
@@ -27,7 +26,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return response()->json(new GroupsPaginateResource($this->groupRepository->paginate()));
+        return response()->json(new GroupsResource($this->groupRepository->get()));
     }
 
     /**

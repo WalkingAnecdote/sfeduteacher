@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\StoreRequest;
 use App\Http\Requests\Subject\UpdateRequest;
 use App\Http\Resources\SubjectResource;
-use App\Http\Resources\SubjectsPaginateResource;
 use App\Http\Resources\SubjectsResource;
 use App\Http\Resources\SubjectsWithMarksResource;
 use App\Models\Semester;
@@ -15,8 +14,6 @@ use App\Models\Subject;
 use App\Models\TeacherProfile;
 use App\Repositories\SubjectRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class SubjectController extends Controller
 {
@@ -31,7 +28,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return response()->json(new SubjectsPaginateResource($this->subjectRepository->paginate()));
+        return response()->json(new SubjectsResource($this->subjectRepository->get()));
     }
 
     /**
@@ -42,11 +39,11 @@ class SubjectController extends Controller
      */
     public function getSubjectsBySemester(Semester $semester): JsonResponse
     {
-        return response()->json(new SubjectsPaginateResource($semester->subjects()->paginate()));
+        return response()->json(new SubjectsResource($semester->subjects()->get()));
     }
     public function getSubjectsByTeacher(TeacherProfile $teacher): JsonResponse
     {
-        return response()->json(new SubjectsPaginateResource($teacher->subjects()->paginate()));
+        return response()->json(new SubjectsResource($teacher->subjects()->get()));
     }
 
     public function getSubjectsBySemesterWithMarks(Semester $semester): JsonResponse

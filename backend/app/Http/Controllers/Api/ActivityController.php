@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Activity\StoreRequest;
 use App\Http\Requests\Activity\UpdateRequest;
-use App\Http\Resources\ActivitiesPaginateResource;
+use App\Http\Resources\ActivitiesResource;
 use App\Http\Resources\ActivityResource;
 use App\Http\Resources\ActivityWithMarksResource;
-use App\Http\Resources\LessonsPaginateResource;
 use App\Http\Resources\MarkResource;
 use App\Http\Resources\MarksResource;
 use App\Models\Activity;
@@ -32,7 +31,7 @@ class ActivityController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json(new ActivitiesPaginateResource($this->activityRepository->paginate()));
+        return response()->json(new ActivitiesResource($this->activityRepository->get()));
     }
 
     /**
@@ -41,9 +40,9 @@ class ActivityController extends Controller
      */
     public function getActivitiesByLesson(Lesson $lesson): JsonResponse
     {
-        return response()->json(new ActivitiesPaginateResource($this->activityRepository
+        return response()->json(new ActivitiesResource($this->activityRepository
             ->where('lesson_id', $lesson->id)
-            ->paginate()));
+            ->get()));
     }
 
     /**

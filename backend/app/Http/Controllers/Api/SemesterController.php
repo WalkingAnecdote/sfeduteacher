@@ -7,11 +7,11 @@ use App\Http\Requests\Semester\AddSubjectsRequest;
 use App\Http\Requests\Semester\RemoveSubjectsRequest;
 use App\Http\Requests\Semester\StoreRequest;
 use App\Http\Requests\Semester\UpdateRequest;
-use App\Http\Resources\SemestersPaginateResource;
 use App\Http\Resources\SemestersResource;
 use App\Http\Resources\SemesterResource;
 use App\Models\Group;
 use App\Models\Semester;
+use App\Models\Subject;
 use App\Repositories\GroupRepository;
 use App\Repositories\SemesterRepository;
 use Illuminate\Http\JsonResponse;
@@ -33,7 +33,13 @@ class SemesterController extends Controller
     public function index(Group $group)
     {
         return response()->json(
-            new SemestersPaginateResource($group->semesters()->paginate())
+            new SemestersResource($group->semesters()->get())
+        );
+    }
+    public function getSemestersBySubject(Subject $subject)
+    {
+        return response()->json(
+            new SemestersResource($subject->semesters()->get())
         );
     }
 

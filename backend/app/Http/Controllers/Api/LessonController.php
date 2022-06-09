@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Lesson\StoreRequest;
 use App\Http\Requests\Lesson\UpdateRequest;
 use App\Http\Resources\LessonResource;
-use App\Http\Resources\LessonsPaginateResource;
 use App\Http\Resources\LessonsResource;
-use App\Http\Resources\LessonsWithMarksPaginateResource;
+use App\Http\Resources\LessonsWithMarksArrayResource;
 use App\Models\Lesson;
 use App\Models\Semester;
 use App\Models\Subject;
@@ -30,7 +29,7 @@ class LessonController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json(new LessonsPaginateResource($this->lessonRepository->paginate()));
+        return response()->json(new LessonsResource($this->lessonRepository->get()));
     }
 
     /**
@@ -40,17 +39,17 @@ class LessonController extends Controller
      */
     public function getLessonsBySemesterAndSubject(Semester $semester, Subject $subject): JsonResponse
     {
-        return response()->json(new LessonsPaginateResource($this->lessonRepository
+        return response()->json(new LessonsResource($this->lessonRepository
             ->where('semester_id', $semester->id)
             ->where('subject_id', $subject->id)
-            ->paginate()));
+            ->get()));
     }
     public function getLessonsBySemesterAndSubjectWithMarks(Semester $semester, Subject $subject): JsonResponse
     {
-        return response()->json(new LessonsWithMarksPaginateResource($this->lessonRepository
+        return response()->json(new LessonsWithMarksArrayResource($this->lessonRepository
             ->where('semester_id', $semester->id)
             ->where('subject_id', $subject->id)
-            ->paginate()));
+            ->get()));
     }
 
     /**
