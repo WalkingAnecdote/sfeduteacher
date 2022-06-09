@@ -1,16 +1,23 @@
-import {TEACHERS_URL} from '../api'
+import {GROUPS_URL, SEMESTERS_URL} from '../api'
 
 const initState =  {
-    teachersList: null
+    semestersList: null,
+    subjectsBySemester: null
 }
 
 export const semestersModel = {
 	state: initState,
 	reducers: {
-		setTeachersList: (state, payload) => {
+		setSemestersList: (state, payload) => {
 			return {
                 ...state,
-                teachersList: payload
+                semestersList: payload
+            }
+		},
+        setSubjectsBySemester: (state, payload) => {
+			return {
+                ...state,
+                subjectsBySemester: payload
             }
 		},
         resetState: () => {
@@ -18,34 +25,62 @@ export const semestersModel = {
         }
 	},
 	effects: (dispatch) => ({
-		async asyncGetTeachersList(payload, rootState) {
-            const result = await fetch(TEACHERS_URL, {
+		async asyncGetSemestersList(payload, rootState) {
+            const result = await fetch(`${GROUPS_URL}/${payload}/semesters`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-			this.setTeachersList(result)
+			this.setSemestersList(result)
 		},
-        async asyncCreateTeacher(formData, rootState) {
-            await fetch(TEACHERS_URL, {
-                method: 'POST',
-                body: formData,
+        async asyncDeleteSemester(payload, rootState) {
+            await fetch(`${GROUPS_URL}/${payload.groupId}/semesters/${payload.semesterId}`, {
+                method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
-            }).then(res => res.json())
-            await dispatch.users.asyncGetTeachersList()
+            }).then(res => res.json()).catch((err) => err.json())
+            await dispatch.semesters.asyncGetSemestersList(payload.groupId)
 		},
-        async asyncUpdateTeacher(payload, rootState) {
-            await fetch(`${TEACHERS_URL}/${payload.id}`, {
+        async asyncCreateSemester(payload, rootState) {
+            await fetch(`${GROUPS_URL}/${payload.groupId}/semesters`, {
                 method: 'POST',
                 body: payload.formData,
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            await dispatch.users.asyncGetTeachersList()
+            await dispatch.semesters.asyncGetSemestersList(payload.groupId)
+		},
+        async asyncGetSubjectsBySemester(payload, rootState) {
+            const result = await fetch(`${SEMESTERS_URL}/${payload}/subjects`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            this.setSubjectsBySemester(result)
+		},
+        async asyncAppendSubjectToSemester(payload, rootState) {
+            await fetch(`${SEMESTERS_URL}/${payload.semesterId}/subjects/attach`, {
+                method: 'POST',
+                body: payload.formData,
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.semesters.asyncGetSubjectsBySemester(payload.semesterId)
+		},
+        async asyncDetachSubjectFromSemester(payload, rootState) {
+            await fetch(`${SEMESTERS_URL}/${payload.semesterId}/subjects/detach`, {
+                method: 'POST',
+                body: payload.formData,
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.semesters.asyncGetSubjectsBySemester(payload.semesterId)
 		},
         async asyncResetState() {
 			this.resetState()
