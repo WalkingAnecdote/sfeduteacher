@@ -107,7 +107,7 @@ export const Users = () => {
       } else {
         const currentEntity = selectedTabIndex === 0
           ? teachersList?.data?.find(ent => ent.id === entityID)
-          : studentsList?.data?.find(ent => ent.id === entityID)
+          : studentsList?.find(ent => ent.id === entityID)
         const checkboxKeys = ['user[approved]', 'user[banned]']
         checkboxKeys.forEach((key) => {
           const val = formData.get(key)
@@ -280,7 +280,7 @@ export const Users = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {studentsList?.data?.map((profile) => (
+                  {studentsList?.map((profile) => (
                     <TableRow
                       key={profile.user.email}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -318,7 +318,7 @@ export const Users = () => {
               <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               {userFields.map((field) => {
                   const isCheckbox = field.type === 'checkbox'
-                  const valueFromList = studentsList?.data?.find(ent => ent.id === entityID)?.user?.[field.label]
+                  const valueFromList = studentsList?.find(ent => ent.id === entityID)?.user?.[field.label]
                   return isCheckbox
                     ? (
                       <FormControlLabel
@@ -341,7 +341,7 @@ export const Users = () => {
                         type={field.type}
                         label={mapKeysToHumanWords(field.label)}
                         name={field.name}
-                        defaultValue={isCheckbox ? undefined : studentsList?.data?.find(ent => ent.id === entityID)?.user?.[field.label]}
+                        defaultValue={isCheckbox ? undefined : studentsList?.find(ent => ent.id === entityID)?.user?.[field.label]}
                         autoFocus
                       />
                     )
@@ -353,10 +353,10 @@ export const Users = () => {
                   label='Группа'
                   name='profile[group_id]'
                   select
-                  defaultValue={studentsList?.data?.find(ent => ent.id === entityID)?.group?.id}
+                  defaultValue={studentsList?.find(ent => ent.id === entityID)?.group?.id}
                   autoFocus
                 >
-                {groupsList?.data?.map(group => (
+                {groupsList?.map(group => (
                     <MenuItem key={group.id} value={group.id}>
                       {group.name}
                     </MenuItem>

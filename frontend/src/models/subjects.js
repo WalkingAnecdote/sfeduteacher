@@ -1,7 +1,8 @@
 import {SUBJECTS_URL} from '../api'
 
 const initState =  {
-    subjectsList: null
+    subjectsList: null,
+    teacherSubjects: null
 }
 
 export const subjectsModel = {

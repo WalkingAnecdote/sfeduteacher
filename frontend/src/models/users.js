@@ -65,11 +65,7 @@ export const usersModel = {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            const parsedResult = {
-                ...result,
-                data: result?.data?.filter(user => user?.user)
-            }
-			this.setStudentsList(parsedResult)
+			this.setStudentsList(result.filter(user => user.user))
             await dispatch.groups.asyncGetGroupsList()
 		},
         async asyncCreateStudent(formData, rootState) {

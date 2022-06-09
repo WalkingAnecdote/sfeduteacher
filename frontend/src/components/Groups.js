@@ -78,7 +78,7 @@ export const Groups = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {groupsList?.data?.map((group) => (
+              {groupsList?.map((group) => (
                 <TableRow
                   key={group.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -115,7 +115,7 @@ export const Groups = () => {
               required
               fullWidth
               label='Название'
-              defaultValue={modalMode === 'add' ? '' : groupsList?.data?.find(ent => ent.id === entityID)?.name }
+              defaultValue={modalMode === 'add' ? '' : groupsList?.find(ent => ent.id === entityID)?.name }
               name='name'
               autoFocus
             />
@@ -126,7 +126,7 @@ export const Groups = () => {
                 fullWidth
                 label='Тип'
                 select
-                defaultValue={modalMode === 'add' ? '' : groupsList?.data?.find(ent => ent.id === entityID)?.type }
+                defaultValue={modalMode === 'add' ? '' : groupsList?.find(ent => ent.id === entityID)?.type }
                 name='type'
                 autoFocus
               >
@@ -142,7 +142,7 @@ export const Groups = () => {
               label="Дата набора"
               type="date"
               name='recruitment_date'
-              defaultValue={modalMode === 'add' ? '' : groupsList?.data?.find(ent => ent.id === entityID)?.recruitment_date }
+              defaultValue={modalMode === 'add' ? '' : groupsList?.find(ent => ent.id === entityID)?.recruitment_date }
               sx={{ width: 220 }}
               InputLabelProps={{
                 shrink: true,
