@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { format } from 'date-fns'
+import { format, compareAsc } from 'date-fns'
 import { List, ListItem, ListItemButton, ListItemText, OutlinedInput, InputAdornment, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Fab, Box, TextField, Button,MenuItem, Typography  } from '@mui/material';
 import { Edit, Delete, Add, Close } from '@mui/icons-material';
 import { BaseModal } from './Modal'
@@ -280,7 +280,7 @@ export const TeacherSubjects = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {lessonsBySemester?.map((lesson) => (
+                      {lessonsBySemester?.sort((a, b) => compareAsc(new Date(a?.date), new Date(b?.date))).map((lesson) => (
                         <TableRow
                           key={lesson.id}
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
