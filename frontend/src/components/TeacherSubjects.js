@@ -68,7 +68,7 @@ export const TeacherSubjects = () => {
       formData.append('teacher_id', user?.profile?.id)
       formData.append('semester_id', selectedSemester?.id)
       formData.append('subject_id', selectedSubject?.id)
-      const date = format(new Date(formData.get('date')), 'yyyy-MM-dd H:mm:ss')
+      const date = format(new Date(formData.get('date')), 'yyyy-MM-dd HH:mm:ss')
       formData.delete('date')
       formData.append('date', date)
       if (modalMode === 'add') {
@@ -352,7 +352,7 @@ export const TeacherSubjects = () => {
                     type="datetime-local"
                     name='date'
                     sx={{ width: 220 }}
-                    defaultValue={modalMode === 'edit' ? format(new Date((lessonsBySemester?.find(lesson => lesson?.id === entityID)?.date)), "yyyy-MM-dd'T'HH:mm") : undefined}
+                    defaultValue={modalMode === 'edit' && lessonsBySemester?.find(lesson => lesson?.id === entityID)?.date ? format(new Date((lessonsBySemester?.find(lesson => lesson?.id === entityID)?.date)), "yyyy-MM-dd'T'HH:mm") : undefined}
                     InputLabelProps={{
                       shrink: true,
                     }}
