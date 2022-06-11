@@ -6,5 +6,6 @@ import { subjectsModel } from "./subjects";
 import { chatsModel } from "./chats";
 import { semestersModel } from './semesters'
 import { lessonsModel } from "./lessons";
+import { activitiesModel } from "./activities";
 
-export {tokenModel, userModel, usersModel, groupsModel, subjectsModel, chatsModel, semestersModel, lessonsModel}
+export {tokenModel, userModel, usersModel, groupsModel, subjectsModel, chatsModel, semestersModel, lessonsModel, activitiesModel}

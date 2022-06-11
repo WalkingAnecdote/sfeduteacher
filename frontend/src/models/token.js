@@ -46,6 +46,7 @@ export const tokenModel = {
 			await dispatch.token.asyncResetState()
 			await dispatch.user.asyncResetState()
 			await dispatch.users.asyncResetState()
+			await dispatch.activities.asyncResetState()
 		}
 	}),
 }

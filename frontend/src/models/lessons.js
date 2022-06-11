@@ -4,6 +4,15 @@ const initState =  {
     lessonsBySemester: null,
 }
 
+// Стандартная активность - посещение
+const createDefaultActivity = (lessonId) => {
+    const formData = new FormData()
+    formData.append('description', 'Посещение')
+    formData.append('max_mark', 1)
+    formData.append('lesson_id', lessonId)
+    return formData
+}
+
 export const lessonsModel = {
 	state: initState,
 	reducers: {
@@ -28,7 +37,7 @@ export const lessonsModel = {
 			this.setLessonsBySemester(result)
 		},
         async asyncCreateLesson(formData, rootState) {
-            await fetch(LESSONS_URL, {
+            const lesson = await fetch(LESSONS_URL, {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -39,7 +48,8 @@ export const lessonsModel = {
                 semesterId: formData.get('semester_id'),
                 subjectId: formData.get('subject_id')
             }
-            dispatch.lessons.asyncGetLessonsBySemester(params)
+            await dispatch.activities.asyncCreateActivityForLesson(createDefaultActivity(lesson.id))
+            await dispatch.lessons.asyncGetLessonsBySemester(params)
 		},
         async asyncUpdateLesson(payload, rootState) {
             const query = new URLSearchParams()
