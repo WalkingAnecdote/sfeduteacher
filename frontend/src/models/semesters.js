@@ -1,8 +1,9 @@
-import {GROUPS_URL, SEMESTERS_URL} from '../api'
+import {GROUPS_URL, SEMESTERS_URL, SUBJECTS_URL} from '../api'
 
 const initState =  {
     semestersList: null,
-    subjectsBySemester: null
+    subjectsBySemester: null,
+    semestersBySubject: null,
 }
 
 export const semestersModel = {
@@ -18,6 +19,12 @@ export const semestersModel = {
 			return {
                 ...state,
                 subjectsBySemester: payload
+            }
+		},
+        setSemestersBySubject: (state, payload) => {
+			return {
+                ...state,
+                semestersBySubject: payload
             }
 		},
         resetState: () => {
@@ -61,6 +68,15 @@ export const semestersModel = {
                 }
             }).then(res => res.json())
             this.setSubjectsBySemester(result)
+		},
+        async asyncGetSemestersBySubject(payload, rootState) {
+            const result = await fetch(`${SUBJECTS_URL}/${payload}/semesters`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            this.setSemestersBySubject(result)
 		},
         async asyncAppendSubjectToSemester(payload, rootState) {
             await fetch(`${SEMESTERS_URL}/${payload.semesterId}/subjects/attach`, {
