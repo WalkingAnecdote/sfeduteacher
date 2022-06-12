@@ -1,17 +1,17 @@
-import {ACTIVITIES_URL} from '../api'
+import {ACTIVITIES_URL, LESSONS_URL} from '../api'
 
 const initState =  {
-    // groupsList: null,
+    activitiesByLesson: null,
     // group: null
 }
 
 export const activitiesModel = {
 	state: initState,
 	reducers: {
-		setGroupsList: (state, payload) => {
+		setActivitiesByLesson: (state, payload) => {
 			return {
                 ...state,
-                groupsList: payload
+                activitiesByLesson: payload
             }
 		},
         resetState: () => {
@@ -19,15 +19,15 @@ export const activitiesModel = {
         }
 	},
 	effects: (dispatch) => ({
-		// async asyncGetGroupsList(payload, rootState) {
-        //     const result = await fetch(ACTIVITIES_URL, {
-        //         method: 'GET',
-        //         headers: {
-        //             'Authorization': `Bearer ${rootState.token.access_token}`
-        //         }
-        //     }).then(res => res.json())
-		// 	this.setGroupsList(result)
-		// },
+		async asyncGetActivitiesByLesson(payload, rootState) {
+            const result = await fetch(`${LESSONS_URL}/${payload}/activities`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+			this.setActivitiesByLesson(result)
+		},
         async asyncCreateActivityForLesson(formData, rootState) {
             await fetch(ACTIVITIES_URL, {
                 method: 'POST',

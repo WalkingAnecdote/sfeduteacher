@@ -9,8 +9,10 @@ export const Rating = () => {
     const teacherSubjects = useSelector(state => state.subjects.teacherSubjects)
     const semestersBySubject = useSelector(state => state.semesters.semestersBySubject)
     const lessonsBySemester = useSelector(state => state.lessons.lessonsBySemester)
+    const activitiesByLesson = useSelector(state => state.activities.activitiesByLesson)
     const [selectedSubject, setSelectedSubject] = React.useState(null)
     const [selectedSemester, setSelectedSemester] = React.useState(null)
+    const [selectedLesson, setSelectedLesson] = React.useState(null)
 
     React.useEffect(() => {
         if (teacherSubjects === null && user !== null) {
@@ -30,12 +32,19 @@ export const Rating = () => {
         }
     }, [dispatch.lessons, selectedSemester, selectedSubject])
 
+    React.useEffect(() => {
+        if (selectedLesson !== null) {
+            dispatch.activities.asyncGetActivitiesByLesson(selectedLesson.id)
+        }
+    }, [dispatch.activities, selectedLesson])
+
     const breadScumsTitle = React.useMemo(() => {
         const subjectPart = selectedSubject ? selectedSubject.name + ' / ' : ''
         const semesterPart = selectedSemester?.number ? selectedSemester.number + ' / ' : ''
-        const groupPart = selectedSemester?.group?.name ? selectedSemester.group.name : ''
-        return subjectPart + semesterPart + groupPart
-    }, [selectedSemester?.group?.name, selectedSemester?.number, selectedSubject])
+        const groupPart = selectedSemester?.group?.name ? selectedSemester.group.name + ' / ' : ''
+        const lessonPart = selectedLesson?.theme ? selectedLesson.theme : ''
+        return subjectPart + semesterPart + groupPart + lessonPart
+    }, [selectedLesson?.theme, selectedSemester?.group?.name, selectedSemester?.number, selectedSubject])
 
     return (
         <>
@@ -51,6 +60,7 @@ export const Rating = () => {
                             onClick={() => {
                                 setSelectedSubject(null)
                                 setSelectedSemester(null)
+                                setSelectedLesson(null)
                             }}
                         >
                             <Close />
@@ -66,7 +76,6 @@ export const Rating = () => {
                     fullWidth
                     label='Предмет'
                     select
-                    name='teacher_id'
                     value={selectedSubject?.name}
                     onChange={({target}) => setSelectedSubject(target.value)}
                     autoFocus
@@ -85,7 +94,6 @@ export const Rating = () => {
                     fullWidth
                     label='Семестр'
                     select
-                    name='teacher_id'
                     value={`${selectedSemester?.number} ${selectedSemester?.group?.name}`}
                     onChange={({target}) => setSelectedSemester(target.value)}
                     autoFocus
@@ -97,11 +105,35 @@ export const Rating = () => {
                     ))}
                 </TextField>
             )}
-            {selectedSemester !== null && selectedSubject !== null && lessonsBySemester !== null && (
+            {selectedSemester !== null && selectedSubject !== null && lessonsBySemester !== null && selectedLesson === null && (
                 lessonsBySemester?.length ? (
-                    <Typography textAlign="center">Есть занятия</Typography>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        label='Занятие'
+                        select
+                        value={selectedLesson?.theme}
+                        onChange={({target}) => setSelectedLesson(target.value)}
+                        autoFocus
+                    >
+                        {lessonsBySemester?.map(lessons => (
+                            <MenuItem key={`${lessons?.theme}${lessons.id}`} value={lessons}>
+                                {lessons.theme}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                 ) : (
                     <Typography textAlign="center">Нет занятий</Typography>
+                )
+            )}
+            {selectedLesson !== null && activitiesByLesson !== null && (
+                activitiesByLesson.length ? (
+                    activitiesByLesson.map(activity => (
+                        <Typography key={`${activity.id}${activity.description}`} textAlign="center">{activity.description}</Typography>
+                    ))
+                ) : (
+                    <Typography textAlign="center">Нет активностей</Typography>
                 )
             )}
         </>
