@@ -8,7 +8,7 @@ import {
 import {
     ChevronLeft, People, Chat as ChatIcon, Menu
 } from '@mui/icons-material';
-import { Copyright, Chat, UserProfile, TeacherSubjects } from '../components';
+import { Copyright, Chat, UserProfile, TeacherSubjects, Rating } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -68,6 +68,8 @@ function switchContent(category) {
           return <UserProfile />
         case 'subjects':
           return <TeacherSubjects />
+        case 'rating':
+          return <Rating />
         default:
             return <Typography>Данный раздел сайта в находится в активной фазе разработки.</Typography>;
     }
