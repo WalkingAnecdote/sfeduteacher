@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Typography, OutlinedInput, InputAdornment, IconButton, TextField, MenuItem } from '@mui/material'
-import { Close } from '@mui/icons-material'
+import { List, ListItem, ListItemButton, ListItemText, Box, Button, Fab, Typography, OutlinedInput, InputAdornment, IconButton, TextField, MenuItem } from '@mui/material'
+import { Close, ArrowBack, Add, Delete, Edit } from '@mui/icons-material'
+import { BaseModal } from './Modal'
 
 export const Rating = () => {
     const dispatch = useDispatch()
@@ -13,6 +14,37 @@ export const Rating = () => {
     const [selectedSubject, setSelectedSubject] = React.useState(null)
     const [selectedSemester, setSelectedSemester] = React.useState(null)
     const [selectedLesson, setSelectedLesson] = React.useState(null)
+    const [edittingEntityId, setEdittingEntityId] = React.useState(null)
+    const [open, setOpen] = React.useState(false)
+    const [modalMode, setModalMode] = React.useState('add')
+
+    const handleSubmit = React.useCallback((event) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        if (selectedLesson !== null && modalMode === 'add') {
+            formData.append('lesson_id', selectedLesson?.id)
+            dispatch.activities.asyncCreateActivityForLesson(formData)
+        } else if (selectedLesson !== null && modalMode === 'edit') {
+          const params = {
+            description: formData.get('description')
+          }
+          dispatch.activities.asyncUpdateActivity({
+            lessonId: selectedLesson?.id,
+            activityId: edittingEntityId,
+            params
+          })
+        }
+        setOpen(false)
+    }, [dispatch.activities, edittingEntityId, modalMode, selectedLesson])
+
+    const deleteActivity = (activityId) => () => {
+        if (selectedLesson !== null) {
+            dispatch.activities.asyncDeleteActivity({
+                lessonId: selectedLesson?.id,
+                activityId
+            })
+        }
+    }
 
     React.useEffect(() => {
         if (teacherSubjects === null && user !== null) {
@@ -54,18 +86,38 @@ export const Rating = () => {
                     value={breadScumsTitle}
                     fullWidth
                     endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={() => {
-                                setSelectedSubject(null)
-                                setSelectedSemester(null)
-                                setSelectedLesson(null)
-                            }}
-                        >
-                            <Close />
-                        </IconButton>
-                    </InputAdornment>
+                    <>
+                        {(selectedLesson !== null || selectedSemester !== null || selectedSubject !== null) && (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() => {
+                                        if (selectedLesson !== null) {
+                                            setSelectedLesson(null)
+                                        } else if (selectedSemester !== null) {
+                                            setSelectedSemester(null)
+                                        } else if (selectedSubject !== null) {
+                                            setSelectedSubject(null)
+                                        }
+                                    }}
+                                >
+                                    <ArrowBack />
+                                </IconButton>
+                            </InputAdornment>
+                        )}
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={() => {
+                                    setSelectedSubject(null)
+                                    setSelectedSemester(null)
+                                    setSelectedLesson(null)
+                                }}
+                            >
+                                <Close />
+                            </IconButton>
+                        </InputAdornment>
+                    </>
                     }
                 />
             )}
@@ -128,13 +180,98 @@ export const Rating = () => {
                 )
             )}
             {selectedLesson !== null && activitiesByLesson !== null && (
-                activitiesByLesson.length ? (
-                    activitiesByLesson.map(activity => (
-                        <Typography key={`${activity.id}${activity.description}`} textAlign="center">{activity.description}</Typography>
-                    ))
-                ) : (
-                    <Typography textAlign="center">Нет активностей</Typography>
-                )
+                <>
+                    {activitiesByLesson.length ? (
+                        <List sx={{ bgcolor: 'background.paper' }}>
+                            {activitiesByLesson.map(activity => (
+                                <ListItem
+                                    key={`${activity.id}${activity.description}`}
+                                    secondaryAction={
+                                        <>
+                                            <IconButton
+                                                aria-label="edit"
+                                                onClick={() => {
+                                                    setModalMode('edit')
+                                                    setEdittingEntityId(activity?.id)
+                                                    setOpen(true)
+                                                }}
+                                            >
+                                                <Edit />
+                                            </IconButton>
+                                            <IconButton aria-label="delete" onClick={deleteActivity(activity?.id)}>
+                                                <Delete />
+                                            </IconButton>
+                                        </>
+                                      }
+                                >
+                                    <ListItemButton onClick={() => console.log('kek')}>
+                                        <ListItemText primary={activity.description} />
+                                    </ListItemButton>
+                                </ListItem>
+                            ))}
+                        </List>
+                    ) : (
+                        <Typography textAlign="center">Нет активностей</Typography>
+                    )}
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', m: 1 }}>
+                        <Fab
+                            color="primary"
+                            aria-label="add"
+                            onClick={() => {
+                                setModalMode('add')
+                                setOpen(true)
+                            }}
+                        >
+                            <Add />
+                        </Fab>
+                    </Box>
+                    <BaseModal open={open} setOpen={setOpen}>
+                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                            {modalMode === 'add' &&
+                                <>
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label='Описание'
+                                        name='description'
+                                        autoFocus
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label='Максимальный балл'
+                                        name='max_mark'
+                                        type='number'
+                                        autoFocus
+                                    />
+                                </>
+                            }
+                            {modalMode === 'edit' && 
+                                <>
+                                    <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    defaultValue={activitiesByLesson?.find(ent => ent.id === edittingEntityId)?.description}
+                                    label='Описание'
+                                    name='description'
+                                    autoFocus
+                                    />
+                                </>
+                            }
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                                >
+                                {modalMode === 'add' ? 'Создать сущность' : 'Обновить сущность'}
+                            </Button>
+                        </Box>
+                        </BaseModal>
+                </>
             )}
         </>
     )

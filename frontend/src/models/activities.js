@@ -36,7 +36,29 @@ export const activitiesModel = {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            // await dispatch.groups.asyncGetGroupsList()
+            await dispatch.activities.asyncGetActivitiesByLesson(formData.get('lesson_id'))
+		},
+        async asyncDeleteActivity(payload, rootState) {
+            await fetch(`${ACTIVITIES_URL}/${payload.activityId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.activities.asyncGetActivitiesByLesson(payload.lessonId)
+		},
+        async asyncUpdateActivity(payload, rootState) {
+            const query = new URLSearchParams()
+            for (let key in payload.params) {
+                query.append(key, payload.params[key])
+            }
+            await fetch(`${ACTIVITIES_URL}/${payload.activityId}?${query.toString()}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.activities.asyncGetActivitiesByLesson(payload.lessonId)
 		},
         async asyncResetState() {
 			this.resetState()
