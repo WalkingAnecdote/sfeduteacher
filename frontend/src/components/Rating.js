@@ -11,9 +11,12 @@ export const Rating = () => {
     const semestersBySubject = useSelector(state => state.semesters.semestersBySubject)
     const lessonsBySemester = useSelector(state => state.lessons.lessonsBySemester)
     const activitiesByLesson = useSelector(state => state.activities.activitiesByLesson)
+    const activityWithMarks = useSelector(state => state.activities.activityWithMarks)
+    const studentsByGroup = useSelector(state => state.users.studentsByGroup)
     const [selectedSubject, setSelectedSubject] = React.useState(null)
     const [selectedSemester, setSelectedSemester] = React.useState(null)
     const [selectedLesson, setSelectedLesson] = React.useState(null)
+    const [selectedActivity, setSelectedActivity] = React.useState(null)
     const [edittingEntityId, setEdittingEntityId] = React.useState(null)
     const [open, setOpen] = React.useState(false)
     const [modalMode, setModalMode] = React.useState('add')
@@ -70,13 +73,26 @@ export const Rating = () => {
         }
     }, [dispatch.activities, selectedLesson])
 
+    React.useEffect(() => {
+        if (selectedActivity !== null) {
+            dispatch.activities.asyncGetActivityWithMarks(selectedActivity.id)
+        }
+    }, [dispatch.activities, selectedActivity])
+
+    React.useEffect(() => {
+        if (selectedActivity !== null && selectedSemester !== null) {
+            dispatch.users.asyncGetStudentsByGroup(selectedSemester?.group?.id)
+        }
+    }, [dispatch.users, selectedActivity, selectedSemester])
+
     const breadScumsTitle = React.useMemo(() => {
         const subjectPart = selectedSubject ? selectedSubject.name + ' / ' : ''
         const semesterPart = selectedSemester?.number ? selectedSemester.number + ' / ' : ''
         const groupPart = selectedSemester?.group?.name ? selectedSemester.group.name + ' / ' : ''
-        const lessonPart = selectedLesson?.theme ? selectedLesson.theme : ''
-        return subjectPart + semesterPart + groupPart + lessonPart
-    }, [selectedLesson?.theme, selectedSemester?.group?.name, selectedSemester?.number, selectedSubject])
+        const lessonPart = selectedLesson?.theme ? selectedLesson.theme + ' / ' : ''
+        const activityPart = selectedActivity?.description ? selectedActivity.description : ''
+        return subjectPart + semesterPart + groupPart + lessonPart + activityPart
+    }, [selectedActivity?.description, selectedLesson?.theme, selectedSemester?.group?.name, selectedSemester?.number, selectedSubject])
 
     return (
         <>
@@ -92,7 +108,9 @@ export const Rating = () => {
                                 <IconButton
                                     aria-label="toggle password visibility"
                                     onClick={() => {
-                                        if (selectedLesson !== null) {
+                                        if (selectedActivity !== null) {
+                                            setSelectedActivity(null)
+                                        } else if (selectedLesson !== null) {
                                             setSelectedLesson(null)
                                         } else if (selectedSemester !== null) {
                                             setSelectedSemester(null)
@@ -179,7 +197,7 @@ export const Rating = () => {
                     <Typography textAlign="center">Нет занятий</Typography>
                 )
             )}
-            {selectedLesson !== null && activitiesByLesson !== null && (
+            {selectedLesson !== null && selectedActivity === null && activitiesByLesson !== null && (
                 <>
                     {activitiesByLesson.length ? (
                         <List sx={{ bgcolor: 'background.paper' }}>
@@ -204,7 +222,7 @@ export const Rating = () => {
                                         </>
                                       }
                                 >
-                                    <ListItemButton onClick={() => console.log('kek')}>
+                                    <ListItemButton onClick={() => setSelectedActivity(activity)}>
                                         <ListItemText primary={activity.description} />
                                     </ListItemButton>
                                 </ListItem>
@@ -271,6 +289,16 @@ export const Rating = () => {
                             </Button>
                         </Box>
                         </BaseModal>
+                </>
+            )}
+            {selectedActivity !== null && activityWithMarks !== null && studentsByGroup !== null && (
+                <>
+                {activityWithMarks?.marks?.length ? (
+                    <Typography textAlign="center">Студенты с оценкой:</Typography>
+                ) : null}
+                {activityWithMarks?.marks?.length < studentsByGroup?.length && (
+                    <Typography textAlign="center">Студенты без оценки:</Typography>
+                )}
                 </>
             )}
         </>
