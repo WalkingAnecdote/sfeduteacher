@@ -67,14 +67,27 @@ export const activitiesModel = {
             await dispatch.activities.asyncGetActivitiesByLesson(payload.lessonId)
 		},
         async asyncAddMarkForActivity(payload, rootState) {
-            await fetch(`${ACTIVITIES_URL}/${payload.activityId}/student/${payload.studentId}`, {
+            await fetch(`${ACTIVITIES_URL}/${payload.activityId}/students/${payload.studentId}/mark`, {
                 method: 'POST',
                 body: payload.formData,
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            await dispatch.activities.asyncGetActivitiesByLesson(payload.lessonId)
+            await dispatch.activities.asyncGetActivityWithMarks(payload.activityId)
+		},
+        async asyncUpdateMarkForActivity(payload, rootState) {
+            const query = new URLSearchParams()
+            for (let key in payload.params) {
+                query.append(key, payload.params[key])
+            }
+            await fetch(`${ACTIVITIES_URL}/${payload.activityId}/students/${payload.studentId}/mark?${query.toString()}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            await dispatch.activities.asyncGetActivityWithMarks(payload.activityId)
 		},
         async asyncGetActivityWithMarks(payload, rootState) {
             const result = await fetch(`${ACTIVITIES_URL}/${payload}/marks`, {

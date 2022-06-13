@@ -18,6 +18,8 @@ export const Rating = () => {
     const [selectedLesson, setSelectedLesson] = React.useState(null)
     const [selectedActivity, setSelectedActivity] = React.useState(null)
     const [edittingEntityId, setEdittingEntityId] = React.useState(null)
+    const [selectedStudent, setSelectedStudent] = React.useState(null)
+    const [selectedMark, setSelectedMark] = React.useState(null)
     const [open, setOpen] = React.useState(false)
     const [modalMode, setModalMode] = React.useState('add')
 
@@ -39,6 +41,39 @@ export const Rating = () => {
         }
         setOpen(false)
     }, [dispatch.activities, edittingEntityId, modalMode, selectedLesson])
+
+    const handleSubmitMark = React.useCallback((event) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        if (selectedLesson !== null && selectedActivity !== null && selectedStudent !== null) {
+            const value = formData.get('value')
+            if (value > selectedActivity?.max_mark) {
+                formData.delete('value')
+                formData.append('value', selectedActivity?.max_mark)
+            }
+            if (modalMode === 'add') {
+                dispatch.activities.asyncAddMarkForActivity({
+                    activityId: selectedActivity.id,
+                    studentId: selectedStudent.id,
+                    lessonId: selectedLesson.id,
+                    formData
+                })
+            } else if (modalMode === 'edit') {
+              const params = {
+                value: formData.get('value')
+              }
+              dispatch.activities.asyncUpdateMarkForActivity({
+                activityId: selectedActivity.id,
+                studentId: selectedStudent.id,
+                lessonId: selectedLesson.id,
+                params
+              })
+            }
+        }
+        setOpen(false)
+        setSelectedStudent(null)
+        setSelectedMark(null)
+    }, [dispatch.activities, modalMode, selectedActivity, selectedLesson, selectedStudent])
 
     const deleteActivity = (activityId) => () => {
         if (selectedLesson !== null) {
@@ -84,6 +119,22 @@ export const Rating = () => {
             dispatch.users.asyncGetStudentsByGroup(selectedSemester?.group?.id)
         }
     }, [dispatch.users, selectedActivity, selectedSemester])
+
+    const findStudentById = (studentId) => {
+        const student = studentsByGroup?.find(student => student?.id === studentId)
+        return `${student.user.middle_name} ${student.user.first_name} ${student.user.last_name}`
+    }
+
+    const studentsWithoutMark = React.useMemo(() => {
+        if (studentsByGroup !== null) {
+            if (activityWithMarks?.marks) {
+                const markedStudentsIds = activityWithMarks.marks.map(mark => mark.student_id)
+                return studentsByGroup.filter(student => !markedStudentsIds.includes(student.id))
+            }
+            return studentsByGroup
+        }
+        return []
+    }, [activityWithMarks?.marks, studentsByGroup])
 
     const breadScumsTitle = React.useMemo(() => {
         const subjectPart = selectedSubject ? selectedSubject.name + ' / ' : ''
@@ -288,17 +339,111 @@ export const Rating = () => {
                                 {modalMode === 'add' ? 'Создать сущность' : 'Обновить сущность'}
                             </Button>
                         </Box>
-                        </BaseModal>
+                    </BaseModal>
                 </>
             )}
             {selectedActivity !== null && activityWithMarks !== null && studentsByGroup !== null && (
                 <>
                 {activityWithMarks?.marks?.length ? (
-                    <Typography textAlign="center">Студенты с оценкой:</Typography>
+                    <>
+                        <Typography textAlign="center">Студенты с оценкой:</Typography>
+                        {activityWithMarks?.marks?.map(mark => (
+                            <ListItem
+                                key={`${mark?.id}${mark?.activity_id}`}
+                                secondaryAction={
+                                    <>
+                                        <IconButton
+                                            aria-label="edit"
+                                            onClick={() => {
+                                                setSelectedMark(mark)
+                                                setSelectedStudent({id: mark?.student_id})
+                                                setModalMode('edit')
+                                                setOpen(true)
+                                            }}
+                                        >
+                                            <Edit />
+                                        </IconButton>
+                                        {/* <IconButton
+                                            aria-label="delete"
+                                            // onClick={deleteActivity(activity?.id)}
+                                        >
+                                            <Delete />
+                                        </IconButton> */}
+                                    </>
+                                    }
+                            >
+                                <ListItemText primary={`${findStudentById(mark?.student_id)}, оценка: ${mark?.value}`} />
+                            </ListItem>
+                        ))}
+                    </>
                 ) : null}
                 {activityWithMarks?.marks?.length < studentsByGroup?.length && (
-                    <Typography textAlign="center">Студенты без оценки:</Typography>
+                    <>
+                        <Typography textAlign="center">Студенты без оценки:</Typography>
+                        {studentsWithoutMark.map(student => (
+                            <ListItem
+                                key={`${student?.id}${student?.user?.id}`}
+                                secondaryAction={
+                                    <>
+                                        <IconButton
+                                            aria-label="add"
+                                            onClick={() => {
+                                                setSelectedStudent(student)
+                                                setModalMode('add')
+                                                setOpen(true)
+                                            }}
+                                        >
+                                            <Add />
+                                        </IconButton>
+                                    </>
+                                    }
+                            >
+                                <ListItemText primary={`${student?.user?.middle_name} ${student?.user?.first_name} ${student?.user?.last_name}`} />
+                            </ListItem>
+                        ))}
+                    </>
                 )}
+                <BaseModal open={open} setOpen={setOpen}>
+                    <Box component="form" onSubmit={handleSubmitMark} noValidate sx={{ mt: 1 }}>
+                        {modalMode === 'add' &&
+                            <>
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    label='Балл'
+                                    name='value'
+                                    autoFocus
+                                    type='number'
+                                    inputProps={{ min: 0, max: selectedActivity?.max_mark || 1, step: 1 }}
+                                />
+                            </>
+                        }
+                        {modalMode === 'edit' && 
+                            <>
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    defaultValue={selectedMark?.value}
+                                    type='number'
+                                    inputProps={{ min: 0, max: selectedActivity?.max_mark || 1, step: 1 }}
+                                    label='Балл'
+                                    name='value'
+                                    autoFocus
+                                />
+                            </>
+                        }
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            >
+                            {modalMode === 'add' ? 'Создать оценку' : 'Обновить оценку'}
+                        </Button>
+                    </Box>
+                </BaseModal>
                 </>
             )}
         </>

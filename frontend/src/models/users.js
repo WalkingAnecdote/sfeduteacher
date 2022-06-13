@@ -120,7 +120,7 @@ export const usersModel = {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-			this.setStudentsByGroup(result)
+			this.setStudentsByGroup(result?.filter(user => user?.user))
 		},
         async asyncResetState() {
 			this.resetState()
