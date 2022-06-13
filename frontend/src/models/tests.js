@@ -25,15 +25,15 @@ export const testsModel = {
         }
 	},
 	effects: (dispatch) => ({
-		async asyncCreateTest(formData, rootState) {
+		async asyncCreateTest(payload, rootState) {
             await fetch(TESTS_URL, {
                 method: 'POST',
-                body: formData,
+                body: payload.formData,
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            await dispatch.tests.asyncGetAllTest()
+            await dispatch.tests.asyncGetTestsByActivity(payload.activityId)
 		},
         async asyncUpdateTest(payload, rootState) {
             const query = new URLSearchParams()
@@ -46,7 +46,7 @@ export const testsModel = {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            await dispatch.tests.asyncGetAllTest()
+            await dispatch.tests.asyncGetTestsByActivity(payload.activityId)
 		},
         async asyncDeleteTest(testId, rootState) {
             await fetch(`${TESTS_URL}/${testId}`, {
@@ -82,7 +82,7 @@ export const testsModel = {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            this.setTest(result)
+            this.setTests(result)
 		},
         async asyncResetState() {
 			this.resetState()

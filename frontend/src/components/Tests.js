@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { OutlinedInput, InputAdornment, IconButton, Typography, TextField, MenuItem } from '@mui/material'
-import { ArrowBack, Close } from '@mui/icons-material'
+import { List, ListItem, ListItemText, OutlinedInput, InputAdornment, IconButton, Typography, TextField, MenuItem, Box, Button, Fab } from '@mui/material'
+import { ArrowBack, Close, Add, Delete, Edit } from '@mui/icons-material'
+import { BaseModal } from './Modal'
 
 export const Tests = () => {
     const dispatch = useDispatch()
@@ -17,6 +18,35 @@ export const Tests = () => {
     const [selectedSemester, setSelectedSemester] = React.useState(null)
     const [selectedLesson, setSelectedLesson] = React.useState(null)
     const [selectedActivity, setSelectedActivity] = React.useState(null)
+    const [open, setOpen] = React.useState(false)
+    const [modalMode, setModalMode] = React.useState('add')
+    const [edittingEntity, setEdittingEntity] = React.useState(null)
+
+    const handleSubmitTest = (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        if (selectedActivity !== null && modalMode === 'add') {
+            formData.append('activity_id', selectedActivity.id)
+            dispatch.tests.asyncCreateTest({
+                activityId: selectedActivity?.id,
+                formData
+            })
+        } else if (selectedActivity !== null && edittingEntity !== null && modalMode === 'edit') {
+          const params = {
+            title: formData.get('title'),
+            description: formData.get('description'),
+            duration: formData.get('duration'),
+            max_value: formData.get('max_value')
+          }
+          dispatch.tests.asyncUpdateTest({
+            testId: edittingEntity?.id,
+            activityId: selectedActivity?.id,
+            params
+          })
+        }
+        setEdittingEntity(null)
+        setOpen(false)
+    }
 
     React.useEffect(() => {
         if (teacherSubjects === null && user !== null) {
@@ -69,7 +99,6 @@ export const Tests = () => {
         return subjectPart + semesterPart + groupPart + lessonPart + activityPart
     }, [selectedActivity?.description, selectedLesson?.theme, selectedSemester?.group?.name, selectedSemester?.number, selectedSubject])
     
-    console.log(tests)
     return (
         <>
             <Typography variant='h4' textAlign='center' style={{ marginBottom: '30px' }}>{tests?.length ? 'Список тестов' : "Нет тестов"}</Typography>
@@ -196,12 +225,143 @@ export const Tests = () => {
                     <Typography textAlign="center">Нет активностей</Typography>
                 )
             )}
-            {tests?.length ? (
-                tests.map(test => (
-                    <></>
-                ))
-            ) : (
-                <Typography textAlign="center">Нет тестов</Typography>
+            {selectedActivity !== null && tests !== null && (
+                <>
+                    {tests?.length ? (
+                        <List sx={{ bgcolor: 'background.paper' }}>
+                        {tests.map(test => (
+                            <ListItem
+                                key={`${test.id}test`}
+                                secondaryAction={
+                                    <>
+                                        <IconButton
+                                            aria-label="edit"
+                                            onClick={() => {
+                                                setModalMode('edit')
+                                                setEdittingEntity(test)
+                                                setOpen(true)
+                                            }}
+                                        >
+                                            <Edit />
+                                        </IconButton>
+                                        <IconButton aria-label="delete" onClick={() => dispatch.tests.asyncDeleteTest(test.id)}>
+                                            <Delete />
+                                        </IconButton>
+                                    </>
+                                }
+                            >
+                                <ListItemText primary={test.title} />
+                            </ListItem>
+                        ))}
+                        </List>
+                    ) : (
+                        <Typography textAlign="center">Нет тестов</Typography>
+                    )}
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', m: 1 }}>
+                        <Fab
+                            color="primary"
+                            aria-label="add"
+                            onClick={() => {
+                                setModalMode('add')
+                                setOpen(true)
+                            }}
+                        >
+                            <Add />
+                        </Fab>
+                    </Box>
+                    <BaseModal open={open} setOpen={setOpen}>
+                        <Box component="form" onSubmit={handleSubmitTest} noValidate sx={{ mt: 1 }}>
+                            {modalMode === 'add' &&
+                                <>
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label='Название'
+                                        name='title'
+                                        autoFocus
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label='Описание'
+                                        name='description'
+                                        autoFocus
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label='Продолжительность (мин)'
+                                        name='duration'
+                                        autoFocus
+                                        type='number'
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label='Максимум баллов'
+                                        name='max_value'
+                                        autoFocus
+                                        type='number'
+                                    />
+                                </>
+                            }
+                            {modalMode === 'edit' && 
+                                <>
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label='Название'
+                                        name='title'
+                                        autoFocus
+                                        defaultValue={edittingEntity?.title}
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label='Описание'
+                                        name='description'
+                                        autoFocus
+                                        defaultValue={edittingEntity?.description}
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label='Продолжительность (мин)'
+                                        name='duration'
+                                        autoFocus
+                                        type='number'
+                                        defaultValue={edittingEntity?.duration}
+                                    />
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label='Максимум баллов'
+                                        name='max_value'
+                                        autoFocus
+                                        type='number'
+                                        defaultValue={edittingEntity?.max_value}
+                                    />
+                                </>
+                            }
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                                >
+                                {modalMode === 'add' ? 'Создать тест' : 'Обновить тест'}
+                            </Button>
+                        </Box>
+                    </BaseModal>
+                </>
             )}
         </>
     )
