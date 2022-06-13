@@ -101,7 +101,7 @@ export const Tests = () => {
     
     return (
         <>
-            <Typography variant='h4' textAlign='center' style={{ marginBottom: '30px' }}>{tests?.length ? 'Список тестов' : "Нет тестов"}</Typography>
+            <Typography variant='h4' textAlign='center' style={{ marginBottom: '30px' }}>Тесты</Typography>
             {(selectedSubject !== null || selectedSemester !== null) && (
                 <OutlinedInput
                     type='text'
