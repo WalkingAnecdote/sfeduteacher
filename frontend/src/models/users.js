@@ -1,8 +1,9 @@
-import {TEACHERS_URL, STUDENTS_URL} from '../api'
+import {TEACHERS_URL, STUDENTS_URL, GROUPS_URL} from '../api'
 
 const initState =  {
     teachersList: null,
-    studentsList: null
+    studentsList: null,
+    studentsByGroup: null
 }
 
 export const usersModel = {
@@ -20,6 +21,12 @@ export const usersModel = {
                 studentsList: payload
             }
 		},
+        setStudentsByGroup: (state, payload) => {
+            return {
+                ...state,
+                studentsByGroup: payload
+            }
+        },
         resetState: () => {
             return initState
         }
@@ -105,6 +112,15 @@ export const usersModel = {
                 }
             }).then(res => res.json())
             await dispatch.users.asyncGetTeachersList()
+		},
+        async asyncGetStudentsByGroup(payload, rootState) {
+            const result = await fetch(`${GROUPS_URL}/${payload}/students`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+			this.setStudentsByGroup(result)
 		},
         async asyncResetState() {
 			this.resetState()
