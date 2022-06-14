@@ -34,6 +34,9 @@ Route::get('semesters/{semester}/students/{student}/subjects/marks', [\App\Http\
 Route::apiResource('semesters', \App\Http\Controllers\Api\SemesterController::class);
 Route::get('subjects/{subject}/semesters', [\App\Http\Controllers\Api\SemesterController::class, "getSemestersBySubject"]);
 
+Route::apiResource('posts', \App\Http\Controllers\Api\PostController::class);
+Route::get('subject/{subject}/posts', [\App\Http\Controllers\Api\PostController::class, "getBySubject"]);
+
 
 
 Route::get('groups/{group}/semesters', [\App\Http\Controllers\Api\SemesterController::class, "index"])
