@@ -28,6 +28,7 @@ export const UserProfile = () => {
             dispatch.groups.asyncGetGroupById(user?.profile?.group_id)
         }
     }, [dispatch.groups, group, isStudent, user?.profile?.group_id])
+
     return (
         <>
             <Typography variant='h4' textAlign='center' style={{ marginBottom: '30px' }}>{title}</Typography>
@@ -37,7 +38,7 @@ export const UserProfile = () => {
                 <TextField label="Отчество" defaultValue={user?.last_name} style={{ marginBottom: '20px'}} disabled fullWidth/>
                 <TextField label="Почта" defaultValue={user?.email} disabled style={{ marginBottom: '20px'}} fullWidth/>
                 {isTeacher && <TextField label="Дожность"  defaultValue={user?.profile?.rank || 'Должность не задана'} disabled fullWidth/>}
-                {isStudent && <TextField label="Группа" defaultValue={group.name} disabled fullWidth/>}
+                {isStudent && <TextField label="Группа" defaultValue={group?.name} disabled fullWidth/>}
             </Paper>
         </>
     )

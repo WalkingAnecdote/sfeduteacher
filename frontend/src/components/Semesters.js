@@ -15,7 +15,6 @@ export const Semesters = () => {
     const [semesterModal, setSemesterModal] = React.useState(false)
     const [selectedSemester, setSelectedSemester] = React.useState(null)
     const [subjectModal, setSubjectModal] = React.useState(false)
-    console.log(subjectsBySemester)
     const handleSubmitSemester = (event) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
@@ -99,7 +98,7 @@ export const Semesters = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {groupsList?.data?.map((group) => (
+                  {groupsList?.map((group) => (
                     <TableRow
                       key={group.id}
                       style={{ cursor: 'pointer' }}
@@ -139,9 +138,9 @@ export const Semesters = () => {
                       <Add />
                     </Fab>
                   </Box>
-                  {semestersList?.data?.length ? (
+                  {semestersList?.length ? (
                     <List sx={{ bgcolor: 'background.paper' }}>
-                      {semestersList?.data.sort((a, b) => a.number - b.number).map((semester) => (
+                      {semestersList.sort((a, b) => a.number - b.number).map((semester) => (
                         <ListItem
                           key={semester.number}
                           secondaryAction={
@@ -191,9 +190,9 @@ export const Semesters = () => {
               <Add />
             </Fab>
           </Box>
-            {subjectsBySemester?.data?.length ? (
+            {subjectsBySemester?.length ? (
               <List sx={{ bgcolor: 'background.paper' }}>
-                {subjectsBySemester?.data?.map((subject) => (
+                {subjectsBySemester?.map((subject) => (
                   <ListItem
                     key={subject.name + subject.id}
                     secondaryAction={
@@ -222,7 +221,7 @@ export const Semesters = () => {
                   select
                   autoFocus
                 >
-                  {subjectsList?.data?.filter(subject => !subjectsBySemester?.data?.map(subj => subj.id).includes(subject.id)).map(subject => (
+                  {subjectsList?.filter(subject => !subjectsBySemester?.map(subj => subj.id).includes(subject.id)).map(subject => (
                       <MenuItem key={subject.id} value={subject.id}>
                         {subject.name}
                       </MenuItem>

@@ -19,26 +19,26 @@ export const Chat = () => {
     const [filter, setFilter] = React.useState('')
 
     const users = React.useMemo(() => {
-        return [...teachersList?.data || [], ...studentsList?.data || []].filter(user => user?.user?.id !== sessionUserId)
-    }, [sessionUserId, studentsList?.data, teachersList?.data])
+        return [...teachersList?.data || [], ...studentsList || []].filter(user => user?.user?.id !== sessionUserId)
+    }, [sessionUserId, studentsList, teachersList?.data])
 
     React.useEffect(() => {
         if (teachersList === null) {
             dispatch.users.asyncGetTeachersList()
         }
-    }, [teachersList])
+    }, [dispatch.users, teachersList])
 
     React.useEffect(() => {
       if (studentsList === null) {
           dispatch.users.asyncGetStudentsList()
       }
-    }, [studentsList])
+    }, [dispatch.users, studentsList])
 
     React.useEffect(() => {
         if (chats?.chats === null) {
             dispatch.chats.asyncGetAllChats()
         }
-      }, [chats?.chats])
+      }, [chats?.chats, dispatch.chats])
 
     const onButtonClick = (user_id) => () => {
         setSelectedUserId(user_id)
@@ -57,7 +57,7 @@ export const Chat = () => {
         return () => {
             clearInterval(intervalId)
         }
-    }, [selectedUserId])
+    }, [dispatch.chats, selectedUserId])
 
     return (
         <div>

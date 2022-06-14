@@ -38,13 +38,16 @@ export const tokenModel = {
 			this.resetState()
 		},
 		async asyncLogout() {
-			await dispatch.token.asyncResetState()
 			await dispatch.chats.asyncResetState()
 			await dispatch.groups.asyncResetState()
-			// await dispatch.semesters.asyncResetState()
+			await dispatch.lessons.asyncResetState()
+			await dispatch.semesters.asyncResetState()
 			await dispatch.subjects.asyncResetState()
+			await dispatch.token.asyncResetState()
 			await dispatch.user.asyncResetState()
 			await dispatch.users.asyncResetState()
+			await dispatch.activities.asyncResetState()
+			await dispatch.tests.asyncResetState()
 		}
 	}),
 }

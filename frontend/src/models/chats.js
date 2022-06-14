@@ -20,13 +20,6 @@ export const chatsModel = {
                 chats: payload
             }
 		},
-        pushChat: (state, payload) => {
-            return {
-                ...state,
-                chats: [...state.chat?.filter(chat => chat.id === payload.id) || [], payload],
-                currentChat: payload
-            }
-        },
         resetState: () => {
             return initState
         }
@@ -38,14 +31,15 @@ export const chatsModel = {
                 form.append(key, payload[key])
             }
             try {
-                const result = await fetch(`${CHATS_URL}`, {
+                const chat = await fetch(`${CHATS_URL}`, {
                     method: 'POST',
                     body: form,
                     headers: {
                         'Authorization': `Bearer ${rootState.token.access_token}`
                     }
                 }).then(res => res.json())
-			    this.pushChat(result)
+                this.setCurrentChat(chat)
+			    dispatch.chats.asyncGetAllChats()
             } catch (err) {
                 console.error(err)
             }
@@ -70,6 +64,7 @@ export const chatsModel = {
 		},
         async getCurrentChatByUSerId(payload, rootState) {
             const chat = rootState?.chats?.chats?.filter(chat => chat?.participants?.some(user => user.id === payload))[0]
+            console.log(chat)
             if (chat) {
                 this.setCurrentChat(chat)
                 await dispatch.chats.asyncGetChatById(chat.id)

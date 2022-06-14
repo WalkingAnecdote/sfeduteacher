@@ -58,7 +58,7 @@ export const Subjects = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {subjectsList?.data?.map((subj) => (
+              {subjectsList?.map((subj) => (
                 <TableRow
                   key={subj.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -124,7 +124,7 @@ export const Subjects = () => {
                   margin="normal"
                   required
                   fullWidth
-                  defaultValue={subjectsList?.data?.find(ent => ent.id === entityID)?.name}
+                  defaultValue={subjectsList?.find(ent => ent.id === entityID)?.name}
                   label='Название'
                   name='name'
                   autoFocus
@@ -136,7 +136,7 @@ export const Subjects = () => {
                     label='Преподаватель'
                     select
                     name='teacher_id'
-                    defaultValue={subjectsList?.data?.find(ent => ent.id === entityID)?.teacher.id}
+                    defaultValue={subjectsList?.find(ent => ent.id === entityID)?.teacher.id}
                     autoFocus
                   >
                     {teachersList?.data?.map((teacehr) => (
