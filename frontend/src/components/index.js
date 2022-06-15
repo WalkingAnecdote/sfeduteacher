@@ -9,5 +9,6 @@ import { UserProfile } from './UserProfile'
 import { TeacherSubjects } from './TeacherSubjects'
 import { Rating } from './Rating'
 import { Tests } from './Tests'
+import { StudentsTests } from './StudentsTests'
 
-export { Copyright, Users, BaseModal, Semesters, Groups, Subjects, Chat, UserProfile, TeacherSubjects, Rating, Tests }
+export { Copyright, Users, BaseModal, Semesters, Groups, Subjects, Chat, UserProfile, TeacherSubjects, Rating, Tests, StudentsTests }
