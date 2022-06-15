@@ -106,6 +106,17 @@ export const testsModel = {
             }).then(res => res.json())
             this.setTests(result)
 		},
+        async asyncSubmitTestAnswer(payload, rootState) {
+            const result = await fetch(`${TESTS_URL}/${payload.testId}/students/${payload.studentId}/submit`, {
+                method: 'POST',
+                body: payload.formData,
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            console.log(result)
+            // await dispatch.tests.asyncGetTestsByActivity(payload.activityId)
+		},
         // Tasks
         async asyncGetTasksByTests(testId, rootState) {
             const result = await fetch(`${TESTS_URL}/${testId}/tasks`, {
@@ -221,6 +232,44 @@ export const testsModel = {
                 params: { correct_answer_id: correct_answer.id},
                 taskId: task.id,
                 testId: payload.testId
+            })
+		},
+        async asyncCreateStudentAnswersAndSubmitTest(payload, rootState) {
+            // const formData = new FormData()
+            const answers = []
+            for (let entity of payload.formData.entries()) {
+                if (entity[0].includes('task_id')) {
+                    if (entity[1].includes(';')) {
+                        const [, task_id] = entity[0].split('=')
+                        const answerPart = entity[1].split(';')
+                        const [, answer_id] = answerPart[0].split('=')
+                        const [, text] = answerPart[1].split('=')
+                        answers.push({
+                            task_id,
+                            answer_id,
+                            text
+                        })
+                        payload.formData.delete(entity[0])
+                    } else {
+                        const [, task_id] = entity[0].split('=')
+                        const formData = new FormData()
+                        formData.append('text', entity[1])
+                        const answer = await dispatch.tests.asyncCreateAnswer(formData)
+                        answers.push({
+                            task_id,
+                            answer_id: answer.id,
+                            text: answer.text
+                        })
+                        payload.formData.delete(entity[0])
+                    }
+                }
+            }
+            payload.formData.append('student_answers', JSON.stringify(answers))
+
+            await dispatch.tests.asyncSubmitTestAnswer({
+                testId: payload.testId,
+                studentId: payload.studentId,
+                formData: payload.formData
             })
 		},
         async asyncResetState() {
