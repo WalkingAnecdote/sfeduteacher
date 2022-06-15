@@ -5,7 +5,7 @@ const initState =  {
     test: null,
     tasksByTest: null,
     task: null,
-    createdCorrectAnswer: null
+    testResults: null
 }
 
 export const testsModel = {
@@ -35,10 +35,10 @@ export const testsModel = {
                 task: payload
             }
         },
-        setCreatedCorrectAnswer: (state, payload) => {
+        setTestReults: (state, payload) => {
             return {
                 ...state,
-                createdCorrectAnswer: payload
+                testResults: payload
             }
         },
         resetState: () => {
@@ -107,15 +107,27 @@ export const testsModel = {
             this.setTests(result)
 		},
         async asyncSubmitTestAnswer(payload, rootState) {
-            const result = await fetch(`${TESTS_URL}/${payload.testId}/students/${payload.studentId}/submit`, {
+            await fetch(`${TESTS_URL}/${payload.testId}/students/${payload.studentId}/submit`, {
                 method: 'POST',
                 body: payload.formData,
                 headers: {
                     'Authorization': `Bearer ${rootState.token.access_token}`
                 }
             }).then(res => res.json())
-            console.log(result)
-            // await dispatch.tests.asyncGetTestsByActivity(payload.activityId)
+
+            await dispatch.tests.asyncGetTestResultsByStudent({
+                testId: payload.testId,
+                studentId: payload.studentId
+            })
+		},
+        async asyncGetTestResultsByStudent(payload, rootState) {
+            const result = await fetch(`${TESTS_URL}/${payload.testId}/students/${payload.studentId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${rootState.token.access_token}`
+                }
+            }).then(res => res.json())
+            this.setTestReults(result)
 		},
         // Tasks
         async asyncGetTasksByTests(testId, rootState) {
@@ -235,7 +247,6 @@ export const testsModel = {
             })
 		},
         async asyncCreateStudentAnswersAndSubmitTest(payload, rootState) {
-            // const formData = new FormData()
             const answers = []
             for (let entity of payload.formData.entries()) {
                 if (entity[0].includes('task_id')) {

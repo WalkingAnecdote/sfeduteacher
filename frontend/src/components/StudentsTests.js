@@ -15,6 +15,7 @@ export const StudentsTests = () => {
     const subjectsBySemester = useSelector(state => state.semesters.subjectsBySemester)
     const lessonsBySemester = useSelector(state => state.lessons.lessonsBySemester)
     const activitiesByLesson = useSelector(state => state.activities.activitiesByLesson)
+    const testResults = useSelector(state => state.tests.testResults)
     const tests = useSelector(state => state.tests.tests)
     const test = useSelector(state => state.tests.test)
     const [selectedSemester, setSelectedSemester] = React.useState(null)
@@ -61,15 +62,27 @@ export const StudentsTests = () => {
     React.useEffect(() => {
         if (selectedTest !== null) {
             dispatch.tests.asyncGetTest(selectedTest.id)
+            dispatch.tests.asyncGetTestResultsByStudent({
+                testId: selectedTest.id,
+                studentId: user?.profile?.id
+            })
         }
-    }, [dispatch.tests, selectedTest])
+    }, [dispatch.tests, selectedTest, user?.profile?.id])
 
-    React.useEffect(() => {
-        if (test !== null) {
+    const isTestAlreadyPassed = React.useMemo(() => {
+        return test !== null && testResults !== null && testResults.some(res => res.test_id === test.id)
+    }, [test, testResults])
+
+
+    const onStartTestPress = React.useCallback((test) => () => {
+        setSelectedTest(test)
+        if (!isTestAlreadyPassed) {
             setOpen(true)
             setStartTime(new Date())
+        } else {
+            setOpen(true)
         }
-    }, [test])
+    }, [isTestAlreadyPassed])
 
     const handleSubmitTest = (event) => {
         event.preventDefault();
@@ -240,7 +253,12 @@ export const StudentsTests = () => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small" onClick={() => setSelectedTest(test)}>Начать тестирование</Button>
+                            <Button
+                                size="small"
+                                onClick={onStartTestPress(test)}
+                            >
+                                {isTestAlreadyPassed ? 'Посмотреть результат' : 'Начать тестирование'}
+                            </Button>
                         </CardActions>
                     </Card>
                 ))
@@ -251,25 +269,36 @@ export const StudentsTests = () => {
             {selectedTest !== null && test !== null && (
                 <BaseModal open={open} setOpen={setOpen} outerStyle={{ width: '70%', height: '70%' }}>
                     <Box component="form" onSubmit={handleSubmitTest} noValidate sx={{ mt: 1 }}>
-                        <Typography>Время начала теста: {startTime.toString()}</Typography>
-                        <Typography>Времени осталось: </Typography>
-                        {test.tasks?.map((task => {
-                            if (task.type === 'mono') {
-                                return <RenderMonoTask key={task.id} {...task} />
-                            } else if (task.type === 'quiz') {
-                                return <RenderQuizTask key={task.id} {...task} />
-                            } else {
-                                return null
-                            }
-                        }))}
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                            >
-                            Отправить ответы
-                        </Button>
+                        {isTestAlreadyPassed ? (
+                            <>
+                                <Typography>Время начала теста: {format(new Date(testResults[0].start_time), 'yyyy-MM-dd HH:mm:ss')}</Typography>
+                                <Typography>Время окончания теста: {format(new Date(testResults[0].end_time), 'yyyy-MM-dd HH:mm:ss')}</Typography>
+                                <Typography variant='h6' textAlign='center'>Результат прохождения теста: "{testResults[0].test.title}"</Typography>
+                                <Typography>Вы набрали {testResults[0].value} балла(ов) из {testResults[0].test.max_value}</Typography>
+                            </>
+                        ) : (
+                            <>
+                                <Typography>Время начала теста: {format(startTime, 'yyyy-MM-dd HH:mm:ss')}</Typography>
+                                <Typography>Времени осталось: </Typography>
+                                {test.tasks?.map((task => {
+                                    if (task.type === 'mono') {
+                                        return <RenderMonoTask key={task.id} {...task} />
+                                    } else if (task.type === 'quiz') {
+                                        return <RenderQuizTask key={task.id} {...task} />
+                                    } else {
+                                        return null
+                                    }
+                                }))}
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                    >
+                                    Отправить ответы
+                                </Button>
+                            </>
+                        )}
                     </Box>
                 </BaseModal>
             )}
