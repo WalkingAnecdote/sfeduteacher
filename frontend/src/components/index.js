@@ -10,5 +10,6 @@ import { TeacherSubjects } from './TeacherSubjects'
 import { Rating } from './Rating'
 import { Tests } from './Tests'
 import { StudentsTests } from './StudentsTests'
+import { News } from './News'
 
-export { Copyright, Users, BaseModal, Semesters, Groups, Subjects, Chat, UserProfile, TeacherSubjects, Rating, Tests, StudentsTests }
+export { Copyright, Users, BaseModal, Semesters, Groups, Subjects, Chat, UserProfile, TeacherSubjects, Rating, Tests, StudentsTests, News }

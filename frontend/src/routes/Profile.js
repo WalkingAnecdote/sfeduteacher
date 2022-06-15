@@ -8,7 +8,7 @@ import {
 import {
     ChevronLeft, People, Chat as ChatIcon, Menu
 } from '@mui/icons-material';
-import { Copyright, Chat, UserProfile, TeacherSubjects, Rating, Tests, StudentsTests } from '../components';
+import { Copyright, Chat, UserProfile, TeacherSubjects, Rating, Tests, StudentsTests, News } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -74,6 +74,8 @@ function switchContent(category) {
           return <Tests />
         case 'studentTest':
           return <StudentsTests />
+        case 'news':
+          return <News />
         default:
             return <Typography>Данный раздел сайта в находится в активной фазе разработки.</Typography>;
     }
@@ -167,6 +169,12 @@ function DashboardContent() {
                   </ListItemIcon>
                   <ListItemText primary="Тесты" />
                 </ListItemButton>
+                <ListItemButton onClick={handleCategory('news')}>
+                  <ListItemIcon>
+                      <ChatIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Новости" />
+              </ListItemButton>
               </>
             )}
             {user?.roles.includes('teacher') && (
@@ -188,6 +196,12 @@ function DashboardContent() {
                       <ChatIcon />
                   </ListItemIcon>
                   <ListItemText primary="Тесты" />
+              </ListItemButton>
+              <ListItemButton onClick={handleCategory('news')}>
+                  <ListItemIcon>
+                      <ChatIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Новости" />
               </ListItemButton>
             </>
             )}
