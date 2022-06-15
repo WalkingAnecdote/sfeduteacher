@@ -260,7 +260,6 @@ export const testsModel = {
                             answer_id,
                             text
                         })
-                        payload.formData.delete(entity[0])
                     } else {
                         const [, task_id] = entity[0].split('=')
                         const formData = new FormData()
@@ -271,7 +270,6 @@ export const testsModel = {
                             answer_id: answer.id,
                             text: answer.text
                         })
-                        payload.formData.delete(entity[0])
                     }
                 }
             }
