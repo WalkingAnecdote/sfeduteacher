@@ -13,7 +13,7 @@ const style = {
   p: 4,
 };
 
-export const BaseModal = ({children, open, setOpen}) => {
+export const BaseModal = ({children, open, setOpen, outerStyle}) => {
   const handleClose = () => setOpen(false);
 
   return (
@@ -24,7 +24,7 @@ export const BaseModal = ({children, open, setOpen}) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={{...style, ...outerStyle}}>
             {children}
         </Box>
       </Modal>
